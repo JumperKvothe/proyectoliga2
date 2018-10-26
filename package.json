@@ -1,0 +1,22 @@
+{
+  "name": "liga",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JumperKvothe/proyectoliga2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JumperKvothe/proyectoliga2/issues"
+  },
+  "homepage": "https://github.com/JumperKvothe/proyectoliga2#readme",
+  "dependencies": {
+    "electron": "^3.0.6"
+  }
+}
