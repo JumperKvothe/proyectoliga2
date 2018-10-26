@@ -18,6 +18,7 @@
   "homepage": "https://github.com/JumperKvothe/proyectoliga2#readme",
   "dependencies": {
     "bootstrap": "^4.1.3",
-    "electron": "^3.0.6"
+    "electron": "^3.0.6",
+    "jquery": "^3.3.1"
   }
 }
