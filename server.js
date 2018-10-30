@@ -8,8 +8,17 @@ const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 leagueJs.Summoner
 	.gettingByName('JumperKvothe')
 	.then(data => {
-		'use strict';
-		console.log(data);
+        'use strict';
+        
+        console.log(data);
+        //Prueba de coger un dato (Funciona). Para probar todo usar ' node server.js '
+        const ids = data.id;
+        console.log(ids);
+        
+        document.getElementById("Nombre").innerHTML = data.name;
+        /* Nombre = $(data.name).val();
+        console.log(Nombre); */
+        
 	})
 	.catch(err => {
 		'use strict';
@@ -25,4 +34,6 @@ leagueJs.Summoner
 	.catch(err => {
 		'use strict';
 		console.log(err);
-	});
+    });
+    
+    //Página donde está la API y cómo usarla: https://github.com/Colorfulstan/LeagueJS
