@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
     var data = {};
     var api_key = 'RGAPI-7b11a6e1-f401-4611-a45a-b74aac374c63';
     var s_toSearch= 'JumperKvothe';
-    var URL = 'https://euw1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + s_toSearch;
+    var URL = 'https://euw1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + s_toSearch + '?api_key=' + api_key;
 
         async.waterfall([
             function(callback) {
