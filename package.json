@@ -2,7 +2,7 @@
   "name": "liga",
   "version": "1.0.0",
   "description": "",
-  "main": "reqriot.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
@@ -23,7 +23,7 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "jquery": "^3.3.1",
-    "leagueapi": "^0.4.21",
+    "leaguejs": "^1.10.1",
     "request": "^2.88.0",
     "riot-games-api-nodejs": "^1.0.7"
   }
