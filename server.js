@@ -21,7 +21,9 @@ leagueJs.Summoner
 			/* $("#nombre").innerHTML = data.name; */
 			/* $("#nombre").html(data.name); */
 			/* $("#nombre").text("data.name"); */
-			$("#nombre").val("data.name");
+			const nombre = data.name;
+			console.log(nombre);
+			$("#nombre").html(nombre);
         });
         /* Nombre = $(data.name).val();
         console.log(Nombre); */
