@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta charset="utf-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Pruebas AJAX</title>
+ 
+<script type="text/javascript" language="javascript">
+
+var READY_STATE_UNINITIALIZED=0; 
+var READY_STATE_LOADING=1; 
+var READY_STATE_LOADED=2;
+var READY_STATE_INTERACTIVE=3; 
+var READY_STATE_COMPLETE=4;
+ 
+var peticion_http;
+ 
+function cargaContenido(url, metodo, funcion) {
+  peticion_http = inicializa_xhr();
+ 
+  if(peticion_http) {
+    peticion_http.onreadystatechange = funcion;
+    peticion_http.open(metodo, url, true);
+    peticion_http.send(null);
+  }
+}
+ 
+function inicializa_xhr() {
+  if(window.XMLHttpRequest) {
+    return new XMLHttpRequest();
+  }
+  else if(window.ActiveXObject) {
+    return new ActiveXObject("Microsoft.XMLHTTP");
+  }
+}
+ 
+function muestraContenido() {
+  if(peticion_http.readyState == READY_STATE_COMPLETE) {
+    if(peticion_http.status == 200) {
+      document.getElementById("prueba").innerHTML=peticion_http.responseText;
+      //alert(peticion_http.responseText);
+    }
+  }
+}
+ 
+function descargaArchivo() {
+  cargaContenido("../php/prueba.php", "GET", muestraContenido);
+}
+
+var cont=0;
+function contador () {
+  cont++;
+  document.getElementById("coin").innerHTML= cont;
+}
+
+function inicio(){
+  setInterval('contador()',10);
+  descargaArchivo();
+  setInterval('saludo()',1000);
+}
+
+var c = 0;
+var w = "hola";
+var l = 0;
+function saludo(){
+
+      if (c < 6){
+        if (c == 0){
+          w = "¡";
+          c++;
+        }else if(c == 1){
+          w += "H";
+          c++;
+        }else if(c == 2){
+          w += "o";
+          c++;
+        }else if(c == 3){
+          w += "l";
+          c++;
+        }else if(c == 4){
+          w += "a";
+          c++;
+        }else{
+          w += "!";
+          c++;
+        }
+      }else{
+        if (w.length == 6){
+          w = w.slice(0,-1);
+        }else if (w.length == 5){
+          w = w.slice(0,-1);
+        }else if (w.length == 4){
+          w = w.slice(0,-1);
+        }else if (w.length == 3){
+          w = w.slice(0,-1);
+        }else if (w.length == 2){
+          w = w.slice(0,-1);
+        }else if (w.length == 1){
+          w = w.slice(0,-1);
+        }else{
+          w = "¡";
+          c = 1;
+        }
+      }
+    document.getElementById("saludo").innerHTML = w + "<br><br>" + w.length;
+    }
+    
+ 
+</script>
+ 
+</head>
+<body onLoad="inicio()">
+
+  <h1 id="coin"></h1>
+  <p id="prueba"></p>
+  <h1 id="saludo"></h1>
+
+
+</body>
+</html>
