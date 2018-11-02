@@ -24,6 +24,7 @@
     "jquery": "^3.3.1",
     "leaguejs": "^1.10.1",
     "request": "^2.88.0",
-    "riot-games-api-nodejs": "^1.0.7"
+    "riot-games-api-nodejs": "^1.0.7",
+    "socket.io": "^2.1.1"
   }
 }
