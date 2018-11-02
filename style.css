@@ -28,7 +28,7 @@
   h5,
   h6 {
     font-family: "Archivo Narrow", sans-serif;
-    color: #000000;
+    color: #fffefe;
     line-height: 1.3;
     font-weight: 700; }
   
@@ -54,7 +54,6 @@
     .elo {
       max-height: 192px;
       max-width: 192px;
-      background-image: url(img/core-img/bronce.png);
     }
   
   ul,
@@ -328,7 +327,7 @@
 
 .single-hero-slide {
   width: 100%;
-  height: 950px;
+  height: 716px;
   position: relative;
   z-index: 1;
   padding: 0 30px;
