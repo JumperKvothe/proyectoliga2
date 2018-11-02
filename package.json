@@ -23,6 +23,7 @@
     "express-handlebars": "^3.0.0",
     "jquery": "^3.3.1",
     "leaguejs": "^1.10.1",
+    "lobby.js": "^0.2.0",
     "request": "^2.88.0",
     "socket.io": "^2.1.1"
   }
