@@ -41,24 +41,8 @@ function crearSala() {
     console.log(datosA[0], datosA[1], datosA)
 }
 
-function openDialog() {
+function crearPartidaLoL() {
 
-    $('#overlay').fadeIn('fast', function () {
-        $('#popup').css('display', 'block');
-        $('#popup').animate({
-            'left': '30%'
-        }, 500);
-    });
-}
-
-function closeDialog(id) {
-
-    $('#' + id).css('position', 'absolute');
-    $('#' + id).animate({
-        'left': '-100%'
-    }, 500, function () {
-        $('#' + id).css('position', 'fixed');
-        $('#' + id).css('left', '100%');
-        $('#overlay').fadeOut('fast');
-    });
+        $(".colas").append('<option class="1" value="1"> 1 contra 1</option>')
+        $(".colas").append('<option class="2" value="2"> 5 contra 5</option>')
 }
