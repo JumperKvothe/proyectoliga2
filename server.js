@@ -7,7 +7,7 @@ const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 
 
 leagueJs.Summoner
-	.gettingByName('danireySvQ')
+	.gettingByName('JumperKvothe')
 	.then(data => {
         'use strict';
         
@@ -36,5 +36,18 @@ leagueJs.Summoner
 		'use strict';
 		console.log(err);
     });
-    
+	
+leagueJs.League
+	.gettingLeagueForSummonerId(22177292, 'euw')	
+	.then(data => {
+		'use strict';
+		console.log(data);
+		/* $( document ).ready(function() {
+			$(".nombre").html(data.name);
+        }); */
+	})
+	.catch(err => {
+		'use strict';
+		console.log(err);
+    });
     //Página donde está la API y cómo usarla: https://github.com/Colorfulstan/LeagueJS

@@ -1,6 +1,7 @@
 //Variables Globales
 nombre = "paco"
-let puntos = 500
+var puntos = 1000
+var datos = Array()
 
 //Funciones generales
 
@@ -20,10 +21,12 @@ function goto1vs1() {
 //Funciones index
 
 function guardarDatos() {
-    nombre = ("#name").html
+    //nombre = ("#name").html
     //puntos = ("#points").html
     puntos = 700
-    console.log(puntos)
+    datos[0] = nombre
+    datos[1] = puntos
+    localStorage.setItem("datos", JSON.stringify(datos));
 }
 
 //Funciones goto1vs1
@@ -33,7 +36,9 @@ function crearSala() {
     $("#right").append('<div style="border: 1px solid white;"><p>EEE</p></div>')
     $("#left").append('<div style="border: 1px solid white;"><p>EEE</p></div><br>')
     $("#crear").hide()
-    console.log(nombre, puntos)
+    //console.log(nombre, puntos)
+    var datosA = JSON.parse(localStorage.getItem("datos"));
+    console.log(datosA[0], datosA[1], datosA)
 }
 
 function crearPartidaLoL() {
