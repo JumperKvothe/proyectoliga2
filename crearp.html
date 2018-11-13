@@ -48,9 +48,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slides-content text-center">
-                            <div><img src="img/core-img/lol.jpg" class="lol" alt="League of Legends" onclick="crearPartidaLoL()"></div>
+                            <div><img src="img/core-img/lol.jpg" class="lol" alt="League of Legends" onclick="crearPartidaLoL()">
+                            </div>
                             <br><br>
-                            <select class="colas" name="colas" style="visibility: hidden"></select>
+                            <select name="colas" class="colas" required>
+                            <option value="0" selected disabled>Elige un juego</option>
+                            </select>
                         </div>
                     </div>
                 </div>
