@@ -18,6 +18,16 @@ function goto1vs1() {
     window.location.href = "1vs1.html"
 }
 
+function copyToClipboard(element) {
+
+    var clipboardText = $(element).val();
+    var textArea = document.createElement( "textarea" );
+    textArea.value = clipboardText;
+    document.body.appendChild( textArea ); 
+    textArea.select(); 
+    document.body.removeChild( textArea );
+ }
+
 //Funciones index
 
 function guardarDatos() {

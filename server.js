@@ -38,10 +38,11 @@ leagueJs.Summoner
     });
 	
 leagueJs.League
-	.gettingLeagueForSummonerId(22177292, 'euw')	
+	.gettingPositionsForSummonerId(76669236, 'euw')	
 	.then(data => {
 		'use strict';
 		console.log(data);
+		console.log(data[1].tier, data[1].rank, data[1].wins)
 		/* $( document ).ready(function() {
 			$(".nombre").html(data.name);
         }); */
@@ -49,5 +50,6 @@ leagueJs.League
 	.catch(err => {
 		'use strict';
 		console.log(err);
-    });
+	});
+	
     //Página donde está la API y cómo usarla: https://github.com/Colorfulstan/LeagueJS
