@@ -7,7 +7,7 @@ var con = mysql.createConnection({
   database: "formulario"
 });
 
-function db(number){
+function dbprueba(number){
 
   switch (number){
     //Update cola1vs1 a 1 mientras un usuario busca rival
@@ -21,7 +21,8 @@ function updateColaInd(){
   con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
-      var sql = "UPDATE jugadores SET colaind = 1 WHERE user LIKE '" + loluser + "'";
+      loluser="danireySvQ";
+      var sql = "UPDATE jugadores SET colaind = 1 WHERE loluser LIKE '" + loluser + "'";
       con.query(sql, function (err, result) {
           if (err) throw err;
           console.log(result.affectedRows + " record(s) updated");
