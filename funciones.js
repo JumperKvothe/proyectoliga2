@@ -42,7 +42,8 @@ function crearSala() {
 }
 
 function crearPartidaLoL() {
-
+        
+        $(".colas").append('<option value="0" selected disabled>Elige una cola</option>')
         $(".colas").append('<option class="1" value="1"> 1 contra 1</option>')
         $(".colas").append('<option class="2" value="2"> 5 contra 5</option>')
 }
