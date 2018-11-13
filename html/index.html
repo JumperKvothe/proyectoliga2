@@ -3,18 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Crear partida</title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Título -->
-    <title>Crear partida</title>
+    <title>Liga Élite</title>
 
     <!-- Icono web -->
-    <link rel="icon" href="img/core-img/icono.png">
+    <link rel="icon" href="../img/core-img/icono.png">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
+
+
 </head>
 
 <body>
+
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <div class="liga-main-menu">
@@ -22,7 +28,7 @@
                 <div class="container">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between">
-                        <a onclick="gotoindex()" class="nav-brand"><img src="img/core-img/logoelite.png" alt=""></a>
+                        <a onclick="gotoindex()" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
                         <div class="classy-menu">
                             <div class="classynav">
                                 <ul>
@@ -42,18 +48,16 @@
         <!-- Single Hero Slide -->
         <div class="single-hero-slide d-flex align-items-center justify-content-center">
             <!-- Slide Img -->
-            <div class="slide-img bg-img" style="background-image: url(img/core-img/img1.jpg);"></div>
+            <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
             <!-- Slide Content -->
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slides-content text-center">
-                            <div><img src="img/core-img/lol.jpg" class="lol" alt="League of Legends" onclick="crearPartidaLoL()">
-                            </div>
-                            <br><br>
-                            <select name="colas" class="colas" required>
-                            <option value="0" selected disabled>Elige un juego</option>
-                            </select>
+                            <h6 data-delay="0ms">1000</h6>
+                            <h2 class="nombre" data-delay="0ms"><span></span></h2>
+                            <a data-delay="0ms" onclick="gotomodojuego()" class="btn oneMusic-btn mt-50">Jugar <i class="fa fa-angle-double-right"></i></a>
+                            <!-- data-animation="fadeInUp" -->
                         </div>
                     </div>
                 </div>
@@ -71,19 +75,22 @@
     <!-- jQuery-3.3.1 js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- jQuery-2.2.4 js -->
-    <script src="node_modules/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="node_modules/js/bootstrap/popper.min.js"></script>
+    <script src="../node_modules/js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="node_modules/js/bootstrap/bootstrap.min.js"></script>
+    <script src="../node_modules/js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="node_modules/js/plugins/plugins.js"></script>
+    <script src="../node_modules/js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="node_modules/js/active.js"></script>
-    <script src="funciones.js"></script>
+    <script src="../node_modules/js/active.js"></script>
+    <script src="../js/funciones.js"></script>
+    <!-- server -->
+    <script type="text/javascript" src="../js/server.js"></script>
     <script>
         if (window.module) module = window.module;
     </script>
+
 </body>
 
 </html>

@@ -1,8 +1,8 @@
 // setting default platformId to be used if you don't specify it on the endpoint method
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
-process.env.LEAGUE_API_KEY = 'RGAPI-6baa8f2c-fb7e-417e-a644-ccf455842bfe'
+process.env.LEAGUE_API_KEY = 'RGAPI-1755a9f6-5254-420d-a560-96b575de8123'
 
-const LeagueJs = require('./node_modules/leaguejs/lib/LeagueJS.js');
+const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 
 

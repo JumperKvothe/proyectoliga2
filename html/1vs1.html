@@ -2,28 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Título -->
-    <title>Mi Lobby</title>
+    <meta name="description" content="">
+    <title>Lobbies</title>    
 
     <!-- Icono web -->
-    <link rel="icon" href="img/core-img/icono.png">
+    <link rel="icon" href="../img/core-img/icono.png">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="loader.scss">
-
-    
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-        <!-- ##### Header Area Start ##### -->
-        <header class="header-area">
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
             <div class="liga-main-menu">
                 <div class="classy-nav-container">
                     <div class="container">
                         <!-- Menu -->
                         <nav class="classy-navbar justify-content-between">
     
-                                <a onclick="gotoindex()" class="nav-brand"><img src="img/core-img/logoelite.png" alt=""></a>
+                                <a onclick="gotoindex()" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
     
                             <div class="classy-menu">
         
@@ -41,19 +38,15 @@
         </header>
 
         <div class="single-hero-slide d-flex align-items-center justify-content-center">
-        <div class="slide-img bg-img" style="background-image: url(img/core-img/img1.jpg);"></div>
+        <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
             <div class="container-fluid" style="max-height: 75%">
-                <div>                        
-                    <div style="border: 1px solid white; background-color: lightgrey;"><br>
-                        <span>Nombre</span><span style="float:right">x Puntos</span><br><hr>
-                        <span>Nombre2</span><span style="float:right">y Puntos</span><br><hr>
-                        <form>
-                            <p style="text-align: center">      
-                                <button>Genera tu Clave</button>                          
-                                <input type="text" id="copy1" value="1234-5678-9900" disabled>
-                                <button type=button onclick="copyToClipboard('#copy1')">Copialo</button>
-                            </p>
-                        </form>
+                <div class="row">
+                    <div id="left" class="col-sm-6 centrar"><br>
+                    </div>
+                    <div id="right" class="col-sm-6 centrar">
+                        <div class="hero-slides-content text-center">
+                            <button id="crear" onclick="crearSala()" class="btn oneMusic-btn mt-50">Crear <i class="fa fa-angle-double-right"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,8 +55,8 @@
      <!-- jQuery-3.3.1 js -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <!-- jQuery-2.2.4 js -->
-     <script src="node_modules/js/jquery/jquery-2.2.4.min.js"></script>  
-    <script src="funciones.js"></script>
+     <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>  
+    <script src="../js/funciones.js"></script>
     <script>if (window.module) module = window.module;</script>
 </body>
 </html>
