@@ -2,6 +2,7 @@
 nombre = "paco"
 var puntos = 1000
 var datos = Array()
+var loluser
 
 //Funciones generales
 
@@ -10,7 +11,7 @@ function gotoindex() {
 }
 
 function gotomodojuego() {
-    window.location.href = "../html/modojuego.html"
+    //window.location.href = "../html/modojuego.html"
     guardarDatos()
 }
 
@@ -38,6 +39,11 @@ function guardarDatos() {
     datos[1] = puntos
     localStorage.setItem("datos", JSON.stringify(datos));
 }
+
+/* function addName(){
+    loluser = (".name").text
+    console.log(loluser)
+} */
 
 //Funciones goto1vs1
 

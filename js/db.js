@@ -12,10 +12,6 @@ var con = mysql.createConnection({
   console.log("Connected!");
 }); */
 
-
-
-
-
 //Ejemplo Insert
 con.connect(function(err) {
     if (err) throw err;

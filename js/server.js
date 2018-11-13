@@ -18,6 +18,8 @@ leagueJs.Summoner
         
         $( document ).ready(function() {
 			$(".nombre").html(data.name);
+			loluser = data.name
+			console.log(loluser)
         });
         
 	})
