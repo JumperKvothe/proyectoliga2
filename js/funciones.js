@@ -6,16 +6,16 @@ var datos = Array()
 //Funciones generales
 
 function gotoindex() {
-    window.location.href = "index.html"
+    window.location.href = "../html/index.html"
 }
 
 function gotomodojuego() {
-    window.location.href = "modojuego.html"
+    window.location.href = "../html/modojuego.html"
     guardarDatos()
 }
 
 function goto1vs1() {
-    window.location.href = "1vs1.html"
+    window.location.href = "../html/1vs1.html"
 }
 
 function copyToClipboard(element) {
