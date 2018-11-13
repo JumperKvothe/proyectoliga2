@@ -7,31 +7,24 @@ var con = mysql.createConnection({
   database: "formulario"
 });
 
-/* con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-}); */
+function db(number){
 
-//Ejemplo Insert
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = "INSERT INTO jugadores (user, loluser, puntos, centro, colaind)"
-    + " VALUES ('danireySvQ', 'danireySvQ', 1000, 'ELITE MADRID', 0)";
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      /* console.log("Result: " + result); */
-      console.log("1 record inserted");
-    });
-  });  
+  switch (number){
+    //Update cola1vs1 a 1 mientras un usuario busca rival
+    case 1:
+    updateColaInd()
+  }
+}
 
 //Update cola1vs1 a 1 mientras un usuario busca rival
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = "UPDATE jugadores SET colaind = 1 WHERE user LIKE '" + nombre + "'";
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log(result.affectedRows + " record(s) updated");
-    });
-});
+function updateColaInd(){
+  con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+      var sql = "UPDATE jugadores SET colaind = 1 WHERE user LIKE '" + loluser + "'";
+      con.query(sql, function (err, result) {
+          if (err) throw err;
+          console.log(result.affectedRows + " record(s) updated");
+      });
+  });
+}
