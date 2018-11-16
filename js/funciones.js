@@ -11,8 +11,8 @@ function gotoindex() {
 }
 
 function gotomodojuego() {
-    //window.location.href = "../html/modojuego.html"
-    guardarDatos()
+    window.location.href = "../html/modojuego.html"
+    //guardarDatos()
 }
 
 function goto1vs1() {
