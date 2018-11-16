@@ -4,14 +4,26 @@
   "description": "",
   "main": "./js/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build"
+
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JumperKvothe/proyectoliga2.git"
   },
-  "author": "",
+  "author": "Enrique",
+  "license": "MIT",
   "license": "ISC",
+  "build": {
+    "appId":true,
+    "asar": true,
+    "win": {
+      "target": "NSIS",
+      "icon": "build/favicon.ico"
+    }
+  },
   "bugs": {
     "url": "https://github.com/JumperKvothe/proyectoliga2/issues"
   },
@@ -26,5 +38,9 @@
     "mysql": "^2.16.0",
     "request": "^2.88.0",
     "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "electron-builder": "^20.36.2"
   }
+
 }
