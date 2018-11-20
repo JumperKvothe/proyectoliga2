@@ -8,7 +8,7 @@ let win
 
 function createWindow()
     {
-        win = new BrowserWindow ({width: 800, height: 600, webPreferences: {devTools: false}})
+        win = new BrowserWindow ({width: 800, height: 600, webPreferences: {devTools: true}})
         win.loadURL(url.format({
             pathname: path.join(__dirname,'../html/index.html'),
             protocol: 'file',

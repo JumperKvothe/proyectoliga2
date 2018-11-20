@@ -16,8 +16,8 @@ function gotomodojuego() {
 }
 
 function goto1vs1() {
-    window.location.href = "../html/1vs1.html"
-    funcionesdb(1);
+    /* window.location.href = "../html/1vs1.html" */
+    funcionesdb(2);
 }
 
 function copyToClipboard(element) {
