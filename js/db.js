@@ -7,34 +7,58 @@ var con = mysql.createConnection({
   database: "formulario"
 });
 
-function funcionesdb(number){
+function funcionesdb(number) {
 
-  switch (number){
+  switch (number) {
     //Update cola1vs1 a 1 mientras un usuario busca rival
     case 1:
-    updateColaInd()
-    //Comprobar cada x tiempo la gente que está esperando rival en 1vs1 y emparejarlos
+      updateColaInd()
+      //Comprobar cada x tiempo la gente que está esperando rival en 1vs1 y emparejarlos
     case 2:
-    setInterval(function(){matchMakingInd();}, 60000)
+      setInterval(function () {
+        matchMakingInd();
+      }, 60000)
   }
 }
 
 //Update cola1vs1 a 1 mientras un usuario busca rival
-function updateColaInd(){
-  con.connect(function(err) {
+function updateColaInd() {
+  con.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected!");
+    //No olvidar \/
+    loluser = "danireySvQ";
+    var sql = "UPDATE jugadores SET colaind = 1 WHERE loluser LIKE '" + loluser + "'";
+    con.query(sql, function (err, result) {
       if (err) throw err;
-      console.log("Connected!");
-      //No olvidar \/
-      loluser="danireySvQ";
-      var sql = "UPDATE jugadores SET colaind = 1 WHERE loluser LIKE '" + loluser + "'";
-      con.query(sql, function (err, result) {
-          if (err) throw err;
-          console.log(result.affectedRows + " record(s) updated");
-      });
+      console.log(result.affectedRows + " record(s) updated");
+    });
   });
 }
 
 //Comprobar cada x tiempo la gente que está esperando rival en 1vs1 y emparejarlos
-function matchMakingInd(){
-
+function matchMakingInd() {
+  con.connect(function (err) {
+    if (err) throw err;
+    var sql = "SELECT puntos, loluser FROM JUGADORES WHERE colaind=1 ORDER BY puntos";
+    con.query(sql, function (err, result) {
+      var njug = result.affectedRows;
+      if (err) throw err;
+      for (i = 0; i <= njug; i++) {
+        var sql2 = "UPDATE jugadores SET colaind = 0 WHERE loluser LIKE '" + result.loluser[i] + "'";
+        con.query(sql2, function (err, result) {
+          if (err) throw err;
+        });
+        i++;
+        var sql3 = "UPDATE jugadores SET colaind = 0 WHERE loluser LIKE '" + result.loluser[i] + "'";
+        con.query(sql3, function (err, result) {
+          if (err) throw err;
+        });
+        var sql4 = "INSERT INTO 1vs1 (inv1, inv2) VALUES ('" + result.loluser[i - 1] + "', '" + result.loluser[i] + "')";
+        con.query(sql4, function (err, result) {
+          if (err) throw err;
+        });
+      }
+    });
+  });
 }
