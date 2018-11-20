@@ -36,5 +36,13 @@ function updateColaInd(){
 
 //Comprobar cada x tiempo la gente que está esperando rival en 1vs1 y emparejarlos
 function matchMakingInd(){
-
+  con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    var sql = "";
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log(result.affectedRows + " record(s) updated");
+    });
+  });
 }
