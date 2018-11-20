@@ -7,7 +7,7 @@ var con = mysql.createConnection({
   database: "formulario"
 });
 
-function dbprueba(number){
+function funcionesdb(number){
 
   switch (number){
     //Update cola1vs1 a 1 mientras un usuario busca rival

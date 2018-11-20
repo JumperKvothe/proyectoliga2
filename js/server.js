@@ -19,7 +19,6 @@ leagueJs.Summoner
         $( document ).ready(function() {
 			$(".nombre").html(data.name);
 			loluser = data.name;
-			dbprueba(1);
         });
         
 	})
