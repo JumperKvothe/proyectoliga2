@@ -5,7 +5,6 @@ process.env.LEAGUE_API_KEY = 'RGAPI-bf61a41d-fbf1-411f-aaf2-3fd56e9ee12e'
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 
-
 leagueJs.Summoner
 	.gettingByName('JumperKvothe')
 	.then(data => {
