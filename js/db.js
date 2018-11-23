@@ -45,20 +45,16 @@ function matchMakingInd() {
   var sql = "SELECT puntos, loluser FROM jugadores WHERE colaind=1 ORDER BY puntos";
   con.query(sql, function (err, result) {
     njug = result.length
-    console.log(result);
-    console.log(njug);
     if (njug % 2 != 0) {
       njug - 1
     }
     for (i = 0; i < njug; i++) {
       jug1 = result[i].loluser
-      console.log(jug1)
       if (i != njug - 1) {
         i++;
         jug2 = result[i].loluser
-        console.log(jug2)
         setValue(jug1, jug2);
-      }      
+      }
     }
     if (err) throw err;
 
@@ -78,6 +74,35 @@ function matchMakingInd() {
     var sql4 = "INSERT INTO 1vs1 (inv1, inv2) VALUES ('" + jug1 + "', '" + jug2 + "')";
     con.query(sql4, function (err, result) {
       if (err) throw err;
+    });
+  }
+}
+
+
+function añadirjug() {
+  var njug, pts = 0;
+  var jug, centro = "";
+  var sql = "SELECT * FROM jugadores ORDER BY puntos DESC";
+  con.query(sql, function (err, result) {
+    njug = result.length
+
+    for (i = 0; i < njug; i++) {
+      jug = result[i].loluser
+      pts = result[i].puntos
+      centro = result[i].centro
+      setValue2(jug, pts, centro, i);
+    }
+    if (err) throw err;
+  });
+
+  function setValue2(valor1, valor2, valor3, valor4) {
+    jug = valor1;
+    pts = valor2;
+    centro = valor3;
+    i = valor4;
+    $(".juga").append(function () {
+      return '<tr class="odd"><th scope="row">' + (i + 1) + '</th><td>' + jug + '</td><td>' +
+        pts + '</td><td>' + centro + '</td></tr>';
     });
   }
 }

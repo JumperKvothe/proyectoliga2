@@ -3,18 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Crear partida</title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Título -->
-    <title>Crear partida</title>
+    <title>Clasificación</title>
 
     <!-- Icono web -->
     <link rel="icon" href="../img/core-img/icono.png">
 
     <!-- Estilos -->
     <link rel="stylesheet" href="../style.css">
+
+
 </head>
 
-<body>
+<body onload="añadirjug()">
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <div class="liga-main-menu">
@@ -22,8 +27,11 @@
                 <div class="container">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between">
+
                         <a onclick="gotoindex()" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
+
                         <div class="classy-menu">
+
                             <div class="classynav">
                                 <ul>
                                     <li><a onclick="gotoindex()">Principal</a></li>
@@ -49,12 +57,26 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slides-content text-center">
-                            <div><img src="../img/core-img/lol.jpg" class="lol" alt="League of Legends" onclick="crearPartidaLoL()">
-                            </div>
-                            <br><br>
-                            <select name="colas" class="colas" required>
-                            <option value="0" selected disabled>Elige un juego</option>
-                            </select>
+                            <div id="page">
+                                <table summary="a summary of recent major volcanic eruptions in the Pacific Northwest">
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4">Clasificación de jugadores de la Liga Élite</td>
+                                        </tr>
+                                    </tfoot>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Posición</th>
+                                            <th scope="col">Jugadores</th>
+                                            <th scope="col">Puntos</th>
+                                            <th scope="col">Centros</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="juga">
+                                    </tbody>
+                                </table>
+
+                            </div><!-- // #page -->
                         </div>
                     </div>
                 </div>
@@ -81,7 +103,11 @@
     <script src="../node_modules/js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="../node_modules/js/active.js"></script>
+    <!-- funciones js -->
     <script src="../js/funciones.js"></script>
+    <!--  db js -->
+    <script src="../js/db.js"></script>
+    <script src="../js/pruebatournament.js"></script>
     <script>
         if (window.module) module = window.module;
     </script>
