@@ -69,18 +69,17 @@ function crearPartidaLoL() {
     $(".colas").append('<option class="2" value="2"> 5 contra 5</option>')
 }
 
-function conCuenta()
-{
-    $("button").click(function(){
-        $.ajax({
-            url: 'http://elitegamingcenter.com/servicio/checklogin',
-            data: '',
-            type: "POST",
-            dataType: "json", 
-            success: function(data, status){
-                alert("JSON: " + data + "\nStatus: " + status);
-
-            }
+$(document).on('ready',function(){       
+    $('#btn-ingresar').click(function(){
+        var url = "http://elitegamingcenter.com/servicio/checklogin";
+        $.ajax({                        
+           type: "POST",                 
+           url: url,                     
+           data: $("#formulario").serialize(), 
+           success: function(data)             
+           {
+             $('#resp').html(data);               
+           }
+       });
     });
-    }); 
-}
+});
