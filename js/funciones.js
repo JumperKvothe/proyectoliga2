@@ -69,7 +69,7 @@ function crearPartidaLoL() {
     $(".colas").append('<option class="2" value="2"> 5 contra 5</option>')
 }
 
-$(document).on('ready',function(){       
+/* $(document).on('ready',function(){       
     $('#btn-ingresar').click(function(){
         var url = "http://elitegamingcenter.com/servicio/checklogin";
         $.ajax({                        
@@ -81,5 +81,17 @@ $(document).on('ready',function(){
              $('#resp').html(data);               
            }
        });
+    });
+}); */
+
+$(document).on('ready',function(){
+    $(document).on('click', '#btn-ingresar', function(){
+        var json = $("#formulario").serialize();
+        $.ajax({
+            type: "POST",
+            url: "http://elitegamingcenter.com/servicio/checklogin",
+            data: json,
+            success: function(data){}
+        })
     });
 });
