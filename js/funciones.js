@@ -101,7 +101,7 @@ function onloadinicio(){
 
 }
 
-//Verificar la cuenta del lol
+//Pasos para verificar la cuenta de lol
 function verificarlol(){
 
 }
