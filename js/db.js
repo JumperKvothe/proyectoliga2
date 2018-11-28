@@ -145,6 +145,15 @@ function comprobarCuentas(){
 function crearRegistro(eliteuser, centro){
   var sql = "INSERT INTO jugadores (eliteuser, centro) VALUES ('" + eliteuser + "', '" + centro + "')";
     con.query(sql4, function (err, result) {
+    })
+  }
+  
+function addnom (nombre)
+{
+  loluser = nombre;
+  //Hay que coger el Elite User
+  var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + eliteuser + "'";
+    con.query(sql, function (err, result) {
       if (err) throw err;
     });
 }
