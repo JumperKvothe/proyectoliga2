@@ -50,7 +50,7 @@ leagueJs.League
 	});
 
 leagueJs.ThirdPartyCode
-	.verifying('eliteforwin', 76669236, 'euw')
+	.verifying('VivaElite', 76669236, 'euw')
 	.then(data => {
 		'use strict';
 		console.log(data);

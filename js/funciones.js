@@ -57,12 +57,12 @@ function crearSala() {
     console.log(datosA[0], datosA[1], datosA)
 }
 
-function crearPartidaLoL() {
+/* function crearPartidaLoL() {
 
     $(".colas").append('<option value="0" selected disabled>Elige una cola</option>')
     $(".colas").append('<option class="1" value="1"> 1 contra 1</option>')
     $(".colas").append('<option class="2" value="2"> 5 contra 5</option>')
-}
+} */
 
 $(document).on('ready',function(){
     $(document).on('click', '#btn-ingresar', function(){
@@ -96,3 +96,21 @@ function yaverificado(boolean, nombre){
       $("#verlol").hide
     }
 }
+
+/* function verificarlol(){
+    leagueJs.ThirdPartyCode
+	.verifying('VivaElite', 76669236, 'euw')
+	.then(data => {
+		'use strict';
+		console.log(data);
+		if (data){
+			loluser = (".name").text
+			console.log(loluser)
+			addnom(loluser);
+		}
+	})
+	.catch(err => {
+		'use strict';
+		console.log(err);
+	});
+} */

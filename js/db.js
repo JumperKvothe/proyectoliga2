@@ -151,9 +151,11 @@ function crearRegistro(eliteuser, centro){
 function addnom (nombre)
 {
   loluser = nombre;
+  eliteuser = "Enrique"
   //Hay que coger el Elite User
   var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + eliteuser + "'";
     con.query(sql, function (err, result) {
       if (err) throw err;
+      
     });
 }
