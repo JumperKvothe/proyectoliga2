@@ -6,6 +6,10 @@ var loluser
 
 //Funciones generales
 
+function gotoinicio() {
+    window.location.href = ".../html/inicio.html"
+}
+
 function gotoindex() {
     window.location.href = "../html/index.html"
 }
