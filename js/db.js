@@ -15,13 +15,21 @@ function funcionesdb(num) {
     case 1:
       updateColaInd()
       break
-      //Comprobar cada x tiempo la gente que está esperando rival en 1vs1 y emparejarlos
+    //Comprobar cada x tiempo la gente que está esperando rival en 1vs1 y emparejarlos
     case 2:
       /* setInterval(function () {
         matchMakingInd();
       }, 1000) */
-      matchMakingInd();
+      matchMakingInd()
       break
+    case 3:
+      anadirJug()
+      break;
+    /*Comprobar si el jugador conectado tiene asignada una cuenta de league of legends para mostrar su 
+    usuario o para darle la opción de verificar su cuenta*/ 
+    case 4:
+      comprobarCuentas()
+      break;
   }
 }
 
@@ -79,7 +87,7 @@ function matchMakingInd() {
 }
 
 
-function añadirjug() {
+function anadirJug() {
   var njug, pts = 0;
   var jug, centro = "";
   var sql = "SELECT * FROM jugadores ORDER BY puntos DESC";
@@ -90,12 +98,12 @@ function añadirjug() {
       jug = result[i].loluser
       pts = result[i].puntos
       centro = result[i].centro
-      setValue2(jug, pts, centro, i);
+      setValue(jug, pts, centro, i);
     }
     if (err) throw err;
   });
 
-  function setValue2(valor1, valor2, valor3, valor4) {
+  function setValue(valor1, valor2, valor3, valor4) {
     jug = valor1;
     pts = valor2;
     centro = valor3;
@@ -107,6 +115,39 @@ function añadirjug() {
   }
 }
 
+function comprobarCuentas(){
+  if (err) throw err;
+  console.log("Connected!");
+  var verificado;
+  //No olvidar \/
+  eliteuser = "danireySvQ";
+  // \/
+  centro = "ELITE SEVILLA";
+  var sql = "SELECT loluser FROM jugadores WHERE eliteuser LIKE = '" + eliteuser + "'";
+  con.query(sql, function (err, result) {
+    if (loluser = "" || loluser == null){
+      verificado = false;
+      //
+    }else{
+      $("#loluser").text(result)
+      $("#verlol").hide
+      verificado = true;
+    }
+    if (err) {
+      throw err;
+      verificado = false;
+      crearRegistro(eliteuser, centro)
+    }
+  });
+
+}
+
+function crearRegistro(eliteuser, centro){
+  var sql = "INSERT INTO jugadores (eliteuser, centro) VALUES ('" + eliteuser + "', '" + centro + "')";
+    con.query(sql4, function (err, result) {
+    })
+  }
+  
 function addnom (nombre)
 {
   loluser = nombre;
