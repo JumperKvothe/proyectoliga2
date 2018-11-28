@@ -27,7 +27,9 @@ function funcionesdb(num) {
       break;
     //Comprobar si al pulsar la imagen del lol el usuario está verificado o no
     case 4:
+      console.time('comprobarLol')
       comprobarLol()
+      console.timeEnd('comprobarLol')
       break;
   }
 }
