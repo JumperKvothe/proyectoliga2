@@ -32,6 +32,11 @@ function funcionesdb(num) {
   }
 }
 
+/* funcion sacar nombre  
+  GET de nombreelite sacamos en una consulta el nomlol
+    llamamos a la funcion de funcionesdb.js donde usaremos el league.js 
+    a partir de su nombre para ponerlo en el index */
+
 //Update cola1vs1 a 1 mientras un usuario busca rival
 function updateColaInd() {
   if (err) throw err;
@@ -84,7 +89,6 @@ function matchMakingInd() {
     });
   }
 }
-
 
 function anadirJug() {
   var njug, pts = 0;
