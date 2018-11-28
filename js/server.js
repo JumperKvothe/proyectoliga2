@@ -49,8 +49,8 @@ leagueJs.League
 		console.log(err);
 	});
 
-leagueJs.ThirdPartyCode
-	.verifying('eliteforwin', 76669236, 'euw')
+/* leagueJs.ThirdPartyCode
+	.verifying('VivaElite', 76669236, 'euw')
 	.then(data => {
 		'use strict';
 		console.log(data);
@@ -63,6 +63,6 @@ leagueJs.ThirdPartyCode
 	.catch(err => {
 		'use strict';
 		console.log(err);
-	});
+	}); */
 
     //Página donde está la API y cómo usarla: https://github.com/Colorfulstan/LeagueJS

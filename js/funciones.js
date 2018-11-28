@@ -83,5 +83,19 @@ function onloadinicio(){
 
 //Verificar la cuenta del lol
 function verificarlol(){
-
+    leagueJs.ThirdPartyCode
+	.verifying('VivaElite', 76669236, 'euw')
+	.then(data => {
+		'use strict';
+		console.log(data);
+		if (data){
+			loluser = (".name").text
+			console.log(loluser)
+			addnom(loluser);
+		}
+	})
+	.catch(err => {
+		'use strict';
+		console.log(err);
+	});
 }
