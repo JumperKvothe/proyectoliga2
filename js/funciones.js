@@ -95,3 +95,13 @@ $(document).on('ready',function(){
         })
     });
 });
+
+//Comprobar si el usuario tiene verificada sus cuentas para poner su user o poner que está por verificar
+function onloadinicio(){
+
+}
+
+//Verificar la cuenta del lol
+function verificarlol(){
+
+}
