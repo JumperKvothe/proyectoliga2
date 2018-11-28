@@ -25,10 +25,9 @@ function funcionesdb(num) {
     case 3:
       anadirJug()
       break;
-    /*Comprobar si el jugador conectado tiene asignada una cuenta de league of legends para mostrar su 
-    usuario o para darle la opción de verificar su cuenta*/ 
+    //Comprobar si al pulsar la imagen del lol el usuario está verificado o no
     case 4:
-      comprobarCuentas()
+      comprobarLol()
       break;
   }
 }
@@ -115,27 +114,28 @@ function anadirJug() {
   }
 }
 
-function comprobarCuentas(){
-  if (err) throw err;
-  console.log("Connected!");
+function comprobarLol(){
   var verificado;
   //No olvidar \/
-  eliteuser = "danireySvQ";
+  var eliteuser = "danireySvQ";
   // \/
-  centro = "ELITE SEVILLA";
-  var sql = "SELECT loluser FROM jugadores WHERE eliteuser LIKE = '" + eliteuser + "'";
+  var centro = "ELITE SEVILLA";
+  var sql = "SELECT loluser FROM jugadores WHERE eliteuser LIKE '" + eliteuser + "'";
   con.query(sql, function (err, result) {
-    if (loluser = "" || loluser == null){
+    console.log(result)
+    var r = result[0].loluser
+    console.log(r)
+    if (r == "" || r == null){
       verificado = false;
-      //
+      console.log("false amigo")
     }else{
-      $("#loluser").text(result)
-      $("#verlol").hide
-      verificado = true;
+      yaverificado(true, r)
+      console.log("true amigo")
     }
     if (err) {
       throw err;
       verificado = false;
+      console.log("error cabesa")
       crearRegistro(eliteuser, centro)
     }
   });
@@ -146,7 +146,7 @@ function crearRegistro(eliteuser, centro){
   var sql = "INSERT INTO jugadores (eliteuser, centro) VALUES ('" + eliteuser + "', '" + centro + "')";
     con.query(sql4, function (err, result) {
     })
-  }
+}
   
 function addnom (nombre)
 {

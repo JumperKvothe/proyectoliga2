@@ -85,3 +85,14 @@ function onloadinicio(){
 function verificarlol(){
 
 }
+
+//
+function yaverificado(boolean, nombre){
+    if(boolean){
+
+    }else{
+      $("#loluser").html(nombre)
+      //$(".nombre").html(data.name);
+      $("#verlol").hide
+    }
+}
