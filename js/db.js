@@ -106,3 +106,13 @@ function añadirjug() {
     });
   }
 }
+
+function addnom (nombre)
+{
+  loluser = nombre;
+  //Hay que coger el Elite User
+  var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + eliteuser + "'";
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+    });
+}

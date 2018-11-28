@@ -45,11 +45,6 @@ function guardarDatos() {
     localStorage.setItem("datos", JSON.stringify(datos));
 }
 
-/* function addName(){
-    loluser = (".name").text
-    console.log(loluser)
-} */
-
 //Funciones goto1vs1
 
 function crearSala() {
@@ -68,21 +63,6 @@ function crearPartidaLoL() {
     $(".colas").append('<option class="1" value="1"> 1 contra 1</option>')
     $(".colas").append('<option class="2" value="2"> 5 contra 5</option>')
 }
-
-/* $(document).on('ready',function(){       
-    $('#btn-ingresar').click(function(){
-        var url = "http://elitegamingcenter.com/servicio/checklogin";
-        $.ajax({                        
-           type: "POST",                 
-           url: url,                     
-           data: $("#formulario").serialize(), 
-           success: function(data)             
-           {
-             $('#resp').html(data);               
-           }
-       });
-    });
-}); */
 
 $(document).on('ready',function(){
     $(document).on('click', '#btn-ingresar', function(){
