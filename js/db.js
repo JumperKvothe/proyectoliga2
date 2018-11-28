@@ -115,7 +115,6 @@ function anadirJug() {
 }
 
 function comprobarLol(){
-  var verificado;
   //No olvidar \/
   var eliteuser = "danireySvQ";
   // \/
@@ -126,15 +125,15 @@ function comprobarLol(){
     var r = result[0].loluser
     console.log(r)
     if (r == "" || r == null){
-      verificado = false;
+      yaverificado(false)      
       console.log("false amigo")
     }else{
-      yaverificado(true, r)
+      yaverificado(true)
       console.log("true amigo")
     }
     if (err) {
-      throw err;
-      verificado = false;
+      //throw err;
+      yaverificado(false)
       console.log("error cabesa")
       crearRegistro(eliteuser, centro)
     }

@@ -87,13 +87,11 @@ function verificarlol(){
 }
 
 //
-function yaverificado(boolean, nombre){
+function yaverificado(boolean){
     if(boolean){
-
+        gotoindex()
     }else{
-      $("#loluser").html(nombre)
-      //$(".nombre").html(data.name);
-      $("#verlol").hide
+
     }
 }
 
