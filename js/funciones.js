@@ -1,3 +1,9 @@
+process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
+process.env.LEAGUE_API_KEY = 'RGAPI-0814f46a-da91-4e7e-9368-9a33805acaf3'
+
+const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
+const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
+
 //Variables Globales
 nombre = "paco"
 var puntos = 1000
@@ -7,7 +13,7 @@ var loluser
 //Funciones generales
 
 function gotoinicio() {
-    window.location.href = ".../html/inicio.html"
+    window.location.href = "../html/inicio.html"
 }
 
 function gotoindex() {
@@ -68,46 +74,68 @@ function crearSala() {
     $(".colas").append('<option class="2" value="2"> 5 contra 5</option>')
 } */
 
-$(document).on('ready',function(){
-    $(document).on('click', '#btn-ingresar', function(){
+$(document).on('ready', function () {
+    $(document).on('click', '#btn-ingresar', function () {
         var json = $("#formulario").serialize();
         $.ajax({
             type: "POST",
             url: "http://elitegamingcenter.com/servicio/checklogin",
             data: json,
-            success: function(data){}
+            success: function (data) {}
         })
     });
 });
 
-//Comprobar si el usuario tiene verificada sus cuentas para poner su user o poner que está por verificar
-function onloadinicio(){
-
-}
-
-//Pasos para verificar la cuenta de lol
-function verificarlol(){
-
-}
-
-//
-function yaverificado(boolean){
-    if(boolean){
+//Función para que el programa haga una u otra cosa en función de si el usuario ya está verificado o no
+function yaverificado(boolean) {
+    if (boolean) {
         gotoindex()
-    }else{
-
+    } else {
+        $(".modalDialog").append(function () {
+            return '<div class="container"><a href="#close" title="Close" class="close">X</a>' +
+                '<h3 style="color: #e90606;">Verificación de cuenta de LoL</h3><br>' +
+                '<div class="row"><div class="center"><label>Nombre en League of legends</label>' +
+                '<input type="text" name="loluser" title="Introduzca su nombre del LoL" autofocus required><br><br>' +
+                '<label>Para vincular su cuenta siga estos pasos: <br>' +
+                '1. Acceda a su cuenta de League of Legends. <br>' +
+                '2. Acceda a la configuración de su cuenta (La ruedita de arriba a la derecha). <br>' +
+                '3. Busque la opción de VERIFICACIÓN. <br>' +
+                '4. Introduzca "VivaElite" en el recuadro y pulse el botón GUARDAR. <br>' +
+                '5. Pulse el botón Verificar y espere. <br></label>' +
+                '<input type="submit" onclick=sacarid() name="verificarboton" value="Verificar"></div>' +
+                '</div></div>';
+        });
     }
 }
 
-/* function verificarlol(){
+//Función para sacar el ID de invocador a partir del nombre de invocador introducido
+//Hay que controlar que el nombre de invocador exista
+function sacarid (){
+    loluser = document.getElementsByName("loluser")[0].value;
+    leagueJs.Summoner
+	.gettingByName(loluser)
+	.then(data => {
+        'use strict';        
+        //Prueba de coger un dato (Funciona). Para probar todo usar ' node server.js '
+        const id = data.id;
+        verificarlol(id, loluser);        
+	})
+	.catch(err => {
+		'use strict';
+		console.log(err);
+	});
+}
+
+//Función que lleva a cabo la verificación de la cuenta mediante la opción del cliente del LOL
+//Hay que controlar si no introducen bien el texto en el LOL
+function verificarlol(valor1, valor2){
+    id = valor1;
+    loluser = valor2;
     leagueJs.ThirdPartyCode
-	.verifying('VivaElite', 76669236, 'euw')
+	.verifying('VivaElite', id, 'euw')
 	.then(data => {
 		'use strict';
-		console.log(data);
 		if (data){
-			loluser = (".name").text
-			console.log(loluser)
 			addnom(loluser);
 		}
 	})
@@ -115,4 +143,4 @@ function yaverificado(boolean){
 		'use strict';
 		console.log(err);
 	});
-} */
+}

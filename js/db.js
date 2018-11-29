@@ -122,9 +122,9 @@ function anadirJug() {
 
 function comprobarLol(){
   //No olvidar \/
-  var eliteuser = "danireySvQ";
+  var eliteuser = "Enrique";
   // \/
-  var centro = "ELITE SEVILLA";
+  var centro = "Sevilla";
   var sql = "SELECT loluser FROM jugadores WHERE eliteuser LIKE '" + eliteuser + "'";
   con.query(sql, function (err, result) {
     console.log(result)
@@ -133,6 +133,7 @@ function comprobarLol(){
     if (r == "" || r == null){
       yaverificado(false)      
       console.log("false amigo")
+      
     }else{
       yaverificado(true)
       console.log("true amigo")
@@ -161,6 +162,7 @@ function addnom (nombre)
   var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + eliteuser + "'";
     con.query(sql, function (err, result) {
       if (err) throw err;
-      
+      //Hay que pasar el loluser para ponerlo en el index
+      else gotoindex()
     });
 }

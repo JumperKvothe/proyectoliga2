@@ -1,6 +1,6 @@
 // setting default platformId to be used if you don't specify it on the endpoint method
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
-process.env.LEAGUE_API_KEY = 'RGAPI-7ad40c80-dc44-49c3-a308-29d6cf8d2ada'
+process.env.LEAGUE_API_KEY = 'RGAPI-0814f46a-da91-4e7e-9368-9a33805acaf3'
 
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
@@ -49,7 +49,7 @@ leagueJs.League
 		console.log(err);
 	});
 
-leagueJs.ThirdPartyCode
+/* leagueJs.ThirdPartyCode
 	.verifying('VivaElite', 76669236, 'euw')
 	.then(data => {
 		'use strict';
@@ -63,6 +63,6 @@ leagueJs.ThirdPartyCode
 	.catch(err => {
 		'use strict';
 		console.log(err);
-	});
+	}); */
 
     //Página donde está la API y cómo usarla: https://github.com/Colorfulstan/LeagueJS
