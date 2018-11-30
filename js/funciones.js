@@ -35,20 +35,6 @@ function gotoclasi() {
 }
 
 function copyToClipboard(element) {
-    console.log("holi")
-    /* var clipboardText = $(element).val();
-    var textArea = document.createElement("textarea");
-    textArea.value = clipboardText;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.body.removeChild(textArea); */
-
-    /* var $temp = $("<input>");
-    $("body").append($temp);
-    $temp.val($(element).html()).select(); //Note the use of html() rather than text()
-    document.execCommand("copy");
-    $temp.remove(); */
-
     try {
         var $temp = $("<input>");
         $("body").append($temp);
