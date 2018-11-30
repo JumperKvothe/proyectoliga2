@@ -43,11 +43,22 @@ function copyToClipboard(element) {
     textArea.select();
     document.body.removeChild(textArea); */
 
-    var $temp = $("<input>");
+    /* var $temp = $("<input>");
     $("body").append($temp);
     $temp.val($(element).html()).select(); //Note the use of html() rather than text()
     document.execCommand("copy");
-    $temp.remove();
+    $temp.remove(); */
+
+    try {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).val()).select();
+        var retVal = document.execCommand("copy");
+        console.log('Copy to clipboard returns: ' + retVal);
+        $temp.remove();
+    } catch (err) {
+        console.log('Error while copying to clipboard: ' + err);
+    }
 }
 
 //Funciones index
