@@ -136,6 +136,11 @@ function comprobarLol(){
       
     }else{
       yaverificado(true)
+      if (typeof(Storage) !== "undefined") {
+        sessionStorage.setItem('loluser', r);
+    } else {
+        console.log("No lo soporta el navegador")
+    }
       console.log("true amigo")
     }
     if (err) {

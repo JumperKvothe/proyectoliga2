@@ -1,5 +1,5 @@
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
-process.env.LEAGUE_API_KEY = 'RGAPI-0814f46a-da91-4e7e-9368-9a33805acaf3'
+process.env.LEAGUE_API_KEY = 'RGAPI-789b13dd-3997-4784-8ce4-94710c9ccc19'
 
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
@@ -105,6 +105,9 @@ function yaverificado(boolean) {
                 '<input type="submit" onclick=sacarid() name="verificarboton" value="Verificar"></div>' +
                 '</div></div>';
         });
+        $('form').submit(function () {
+            return false;
+           });
     }
 }
 
@@ -136,6 +139,28 @@ function verificarlol(id, loluser){
 		if (data){
 			addnom(loluser);
 		}
+	})
+	.catch(err => {
+		'use strict';
+		console.log(err);
+	});
+}
+
+function imprimirN (){
+        
+    var nombrelol = sessionStorage.getItem('loluser');
+    console.log(nombrelol);
+    leagueJs.Summoner
+	.gettingByName(nombrelol)
+	.then(data => {
+        'use strict';        
+        console.log(data);
+        
+        $( document ).ready(function() {
+			$(".nombre").html(data.name);
+			loluser = data.name;
+        });
+        
 	})
 	.catch(err => {
 		'use strict';
