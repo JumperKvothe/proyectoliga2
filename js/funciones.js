@@ -35,13 +35,19 @@ function gotoclasi() {
 }
 
 function copyToClipboard(element) {
-
-    var clipboardText = $(element).val();
+    console.log("holi")
+    /* var clipboardText = $(element).val();
     var textArea = document.createElement("textarea");
     textArea.value = clipboardText;
     document.body.appendChild(textArea);
     textArea.select();
-    document.body.removeChild(textArea);
+    document.body.removeChild(textArea); */
+
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).html()).select(); //Note the use of html() rather than text()
+    document.execCommand("copy");
+    $temp.remove();
 }
 
 //Funciones index
@@ -104,6 +110,9 @@ function yaverificado(boolean) {
                 '5. Pulse el botón Verificar y espere. <br></label>' +
                 '<input type="submit" onclick=sacarid() name="verificarboton" value="Verificar"></div>' +
                 '</div></div>';
+        });
+        $(function() {
+            $("form").submit(function() { return false; });
         });
     }
 }
