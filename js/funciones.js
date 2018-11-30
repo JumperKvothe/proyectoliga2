@@ -4,12 +4,6 @@ process.env.LEAGUE_API_KEY = 'RGAPI-789b13dd-3997-4784-8ce4-94710c9ccc19'
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 
-//Variables Globales
-nombre = "paco"
-var puntos = 1000
-var datos = Array()
-var loluser
-
 //Funciones generales
 
 function gotoinicio() {
@@ -22,7 +16,6 @@ function gotoindex() {
 
 function gotomodojuego() {
     window.location.href = "../html/modojuego.html"
-    //guardarDatos()
 }
 
 function goto1vs1() {
@@ -45,37 +38,10 @@ function copyToClipboard(element) {
     } catch (err) {
         console.log('Error while copying to clipboard: ' + err);
     }
-}
-
-//Funciones index
-
-function guardarDatos() {
-    //nombre = ("#name").html
-    //puntos = ("#points").html
-    puntos = 700
-    datos[0] = nombre
-    datos[1] = puntos
-    localStorage.setItem("datos", JSON.stringify(datos));
+    $('#copia').text("Copiado!")
 }
 
 //Funciones goto1vs1
-
-function crearSala() {
-
-    $("#right").append('<div style="border: 1px solid white;"><p>EEE</p></div>')
-    $("#left").append('<div style="border: 1px solid white;"><p>EEE</p></div><br>')
-    $("#crear").hide()
-    //console.log(nombre, puntos)
-    var datosA = JSON.parse(localStorage.getItem("datos"));
-    console.log(datosA[0], datosA[1], datosA)
-}
-
-/* function crearPartidaLoL() {
-
-    $(".colas").append('<option value="0" selected disabled>Elige una cola</option>')
-    $(".colas").append('<option class="1" value="1"> 1 contra 1</option>')
-    $(".colas").append('<option class="2" value="2"> 5 contra 5</option>')
-} */
 
 $(document).on('ready', function () {
     $(document).on('click', '#btn-ingresar', function () {
