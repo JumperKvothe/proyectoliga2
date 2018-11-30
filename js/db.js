@@ -27,10 +27,11 @@ function funcionesdb(num) {
       break;
     //Comprobar si al pulsar la imagen del lol el usuario está verificado o no
     case 4:
-      console.time('comprobarLol')
       comprobarLol()
-      console.timeEnd('comprobarLol')
       break;
+    //Consultar los puntos de un jugador para mostrarlos en la interfaz  
+    case 5:
+      consultarPuntos()
   }
 }
 
@@ -161,11 +162,25 @@ function crearRegistro(eliteuser, centro){
   
 function addnom (loluser)
 {
-  eliteuser = "Enrique"
+  console.log(loluser)
+  var eliteuser = "Enrique"
   //Hay que coger el Elite User
   var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + eliteuser + "'";
     con.query(sql, function (err, result) {
       if (err) throw err;
       else gotoindex()
     });
+}
+
+function consultarPuntos(){
+
+  console.log(nombrelol)
+  var sql = "SELECT puntos FROM jugadores WHERE loluser LIKE '" + nombrelol + "'";
+  con.query(sql, function (err, result) {
+    console.log(result)
+    var puntos = result[0].puntos
+    console.log(puntos)
+    puntos(puntos)
+    if (err) throw err;
+  });
 }
