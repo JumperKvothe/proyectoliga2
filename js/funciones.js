@@ -35,13 +35,30 @@ function gotoclasi() {
 }
 
 function copyToClipboard(element) {
-
-    var clipboardText = $(element).val();
+    console.log("holi")
+    /* var clipboardText = $(element).val();
     var textArea = document.createElement("textarea");
     textArea.value = clipboardText;
     document.body.appendChild(textArea);
     textArea.select();
-    document.body.removeChild(textArea);
+    document.body.removeChild(textArea); */
+
+    /* var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).html()).select(); //Note the use of html() rather than text()
+    document.execCommand("copy");
+    $temp.remove(); */
+
+    try {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).val()).select();
+        var retVal = document.execCommand("copy");
+        console.log('Copy to clipboard returns: ' + retVal);
+        $temp.remove();
+    } catch (err) {
+        console.log('Error while copying to clipboard: ' + err);
+    }
 }
 
 //Funciones index
@@ -105,9 +122,9 @@ function yaverificado(boolean) {
                 '<input type="submit" onclick=sacarid() name="verificarboton" value="Verificar"></div>' +
                 '</div></div>';
         });
-        $('form').submit(function () {
-            return false;
-           });
+        $(function() {
+            $("form").submit(function() { return false; });
+        });
     }
 }
 
