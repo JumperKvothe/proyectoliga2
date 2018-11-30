@@ -93,7 +93,8 @@ function sacarid (){
         verificarlol(id, loluser);        
 	})
 	.catch(err => {
-		'use strict';
+        'use strict';
+        alert("El nombre introducido no existe");
 		console.log(err);
 	});
 }

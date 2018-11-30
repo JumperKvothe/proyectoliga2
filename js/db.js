@@ -168,7 +168,6 @@ function addnom (loluser)
   var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + eliteuser + "'";
     con.query(sql, function (err, result) {
       if (err) throw err;
-      //Hay que pasar el loluser para ponerlo en el index
       else gotoindex()
     });
 }
