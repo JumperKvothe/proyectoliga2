@@ -128,9 +128,7 @@ function sacarid (){
 
 //Función que lleva a cabo la verificación de la cuenta mediante la opción del cliente del LOL
 //Hay que controlar si no introducen bien el texto en el LOL
-function verificarlol(valor1, valor2){
-    id = valor1;
-    loluser = valor2;
+function verificarlol(id, loluser){
     leagueJs.ThirdPartyCode
 	.verifying('VivaElite', id, 'euw')
 	.then(data => {
