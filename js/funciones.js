@@ -118,7 +118,7 @@ function verificarlol(id, loluser){
 
 function imprimirN (){
     
-    var nombrelol = sessionStorage.getItem('loluser');
+    var nombrelol = localStorage.getItem('loluser');
     console.log(nombrelol);
     leagueJs.Summoner
 	.gettingByName(nombrelol)
@@ -128,7 +128,6 @@ function imprimirN (){
         
         $( document ).ready(function() {
 			$(".nombre").html(data.name);
-			loluser = data.name;
         });
         
 	})
@@ -139,6 +138,6 @@ function imprimirN (){
     funcionesdb(5)
 }
 
-function puntos(puntos){
-    $('#puntos').html(puntos);
+function getPuntos(puntos){
+    $('.puntos').html(puntos);
 }

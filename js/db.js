@@ -138,7 +138,7 @@ function comprobarLol(){
     }else{
       yaverificado(true)
       if (typeof(Storage) !== "undefined") {
-        sessionStorage.setItem('loluser', r);
+       localStorage.setItem('loluser', r);
     } else {
         console.log("No lo soporta el navegador")
     }
@@ -174,13 +174,14 @@ function addnom (loluser)
 
 function consultarPuntos(){
 
+  let nombrelol = localStorage.getItem('loluser');
   console.log(nombrelol)
   var sql = "SELECT puntos FROM jugadores WHERE loluser LIKE '" + nombrelol + "'";
   con.query(sql, function (err, result) {
     console.log(result)
-    var puntos = result[0].puntos
+    let puntos = result[0].puntos
     console.log(puntos)
-    puntos(puntos)
+    getPuntos(puntos)
     if (err) throw err;
   });
 }
