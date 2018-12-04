@@ -27,6 +27,10 @@ function gotoclasi() {
     window.location.href = "../html/clasi.html"
 }
 
+function gotologin() {
+    window.location.href = "../html/login.html"
+}
+
 function copyToClipboard(element) {
     try {
         var $temp = $("<input>");

@@ -32,6 +32,11 @@ function funcionesdb(num) {
     //Consultar los puntos de un jugador para mostrarlos en la interfaz  
     case 5:
       consultarPuntos()
+      break;
+    //Guardar un nuevo usuario en la base de datos
+    case 6:
+      agregarusuario()
+      break;
   }
 }
 
@@ -153,12 +158,6 @@ function comprobarLol(){
   });
 
 }
-
-function crearRegistro(eliteuser, centro){
-  var sql = "INSERT INTO jugadores (eliteuser, centro) VALUES ('" + eliteuser + "', '" + centro + "')";
-    con.query(sql4, function (err, result) {
-    })
-}
   
 function addnom (loluser)
 {
@@ -183,5 +182,17 @@ function consultarPuntos(){
     console.log(puntos)
     getpuntos(puntos)
     if (err) throw err;
+  });
+}
+
+function agregarusuario(){
+  var eliteuser = document.getElementsByName("nombre")[0].value;
+  var centro = documment.getElementsByName("centro")[0].value;
+  var contrasena = document.getElementsByName("contrasena")[0].value;
+  var sql = "INSERT INTO jugadores (eliteuser, centro, contrasena) VALUES ('" + eliteuser + "', '" + centro + 
+  "', '" + contrasena + "')";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    else gotoindex();
   });
 }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Título -->
+    <title>Registro</title>
+
+    <!-- Icono web -->
+    <link rel="icon" href="../img/core-img/icono.png">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../style.css">
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/funciones.js"></script>    
+    <script src="../js/db.js"></script>
+    <script>if (window.module) module = window.module;</script>
+
+</head>
+
+<body>
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <div class="liga-main-menu">
+            <div class="classy-nav-container">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between">
+
+                        <a onclick="gotologin()" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
+
+                        <div class="classy-menu">
+
+                            <div class="classynav">
+                                <ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="single-hero-slide d-flex align-items-center justify-content-center">
+        <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="hero-slides-content text-center">
+                        <div id="page">
+                            <h1 class="center">Regístrese</h1>
+                            <div class="container">
+                                <form method="POST" id="form1" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-12 center">
+                                            <br><label class="labelform">Nombre</label><br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 center">
+                                            <input type="text" name="Nombre" title="Introduzca su nombre" autofocus
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 center">
+                                            <br><label class="labelform">Contraseña</label><br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 center">
+                                            <input type="text" name="Contrasena" id="Contrasena" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 center">
+                                            <br><label class="labelform">Centro</label><br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 center">
+                                            <select id="centro" name="centro" placeholder="Centro" required>
+                                                    <option value="1">Elite Sevilla
+                                                    <option value="2">Elite Madrid / Atocha
+                                                    <option value="3">Elite Barcelona
+                                                    <option value="4">Elite Valencia
+                                                    <option value="5">Elite Granada
+                                                    <option value="6">Elite Malaga
+                                                    <option value="7">Elite Mallorca
+                                                    <option value="8">Elite Zaragoza
+                                                    <option value="9">Elite Bilbao
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 center">
+                                            <a data-delay="0ms" onclick="gotologin()" class="btn oneMusic-btn mt-50">Atrás
+                                            <i class="fa fa-angle-double-right"></i></a>
+                                            <!-- Llevar a la función que hace las consultas y lleva al inicio.html -->
+                                            <a data-delay="0ms" onclick="" class="btn oneMusic-btn mt-50">Registrarse
+                                                <i class="fa fa-angle-double-right"></i></a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

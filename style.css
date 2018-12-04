@@ -11,6 +11,10 @@
 @import url(css/one-music-icon.css);
 @import url(node_modules/bootstrap/dist/css/bootstrap.min.css);
 
+/* formularios */
+.labelform {
+  color:turquoise;
+}
 /* ventana emergente */
 
 .modalDialog {
