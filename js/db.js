@@ -211,7 +211,18 @@ function agregarusuario(){
 
 //Comprobar si los datos de login son correctos
 function comprobarLogin(){
-  let nombre = $('#nombre').val
-  let pass = $('#pass').val
-  show.console(nombre)
+  let nombre = document.getElementById('nombre').value
+  let pass = document.getElementById('pass').value
+  let sql = "SELECT * FROM jugadores WHERE eliteuser LIKE '" + nombre + "' AND contrasena LIKE '" + pass + "'"
+  con.query(sql, function (err, result){
+    if(err) throw err;
+    else{
+      if (result == ""){
+        alert("Usuario o contraseña erróneos")
+      }else{
+       localStorage.setItem('currentUser', result[0]);
+       gotoinicio()
+      }
+    }
+  })
 }
