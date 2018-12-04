@@ -174,13 +174,14 @@ function addnom (loluser)
 
 function consultarPuntos(){
 
-  console.log(nombrelol)
-  var sql = "SELECT puntos FROM jugadores WHERE loluser LIKE '" + nombrelol + "'";
+  var nombrel = sessionStorage.getItem('loluser');
+  console.log(nombrel)
+  var sql = "SELECT puntos FROM jugadores WHERE loluser LIKE '" + nombrel + "'";
   con.query(sql, function (err, result) {
     console.log(result)
     var puntos = result[0].puntos
     console.log(puntos)
-    puntos(puntos)
+    getpuntos(puntos)
     if (err) throw err;
   });
 }

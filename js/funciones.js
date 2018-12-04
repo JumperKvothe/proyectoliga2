@@ -1,5 +1,5 @@
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
-process.env.LEAGUE_API_KEY = 'RGAPI-789b13dd-3997-4784-8ce4-94710c9ccc19'
+process.env.LEAGUE_API_KEY = 'RGAPI-aeefc586-af92-4fc2-8043-3dfba2b7d9d5'
 
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
@@ -128,7 +128,6 @@ function imprimirN (){
         
         $( document ).ready(function() {
 			$(".nombre").html(data.name);
-			loluser = data.name;
         });
         
 	})
@@ -139,6 +138,6 @@ function imprimirN (){
     funcionesdb(5)
 }
 
-function puntos(puntos){
-    $('#puntos').html(puntos);
+function getpuntos(puntos){
+    $('.puntos').html(puntos);
 }

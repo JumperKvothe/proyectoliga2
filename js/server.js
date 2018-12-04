@@ -1,11 +1,11 @@
 // setting default platformId to be used if you don't specify it on the endpoint method
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
-process.env.LEAGUE_API_KEY = 'RGAPI-0814f46a-da91-4e7e-9368-9a33805acaf3'
+process.env.LEAGUE_API_KEY = 'RGAPI-aeefc586-af92-4fc2-8043-3dfba2b7d9d5'
 
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 
-leagueJs.Summoner
+/* leagueJs.Summoner
 	.gettingByName('JumperKvothe')
 	.then(data => {
         'use strict';
@@ -24,7 +24,7 @@ leagueJs.Summoner
 	.catch(err => {
 		'use strict';
 		console.log(err);
-	});
+	}); */
 
 /* leagueJs.Summoner
 	.gettingByAccount(22177292, 'euw')
