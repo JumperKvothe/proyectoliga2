@@ -138,7 +138,7 @@ function comprobarLol(){
     }else{
       yaverificado(true)
       if (typeof(Storage) !== "undefined") {
-        sessionStorage.setItem('loluser', r);
+       localStorage.setItem('loluser', r);
     } else {
         console.log("No lo soporta el navegador")
     }
@@ -179,7 +179,7 @@ function consultarPuntos(){
   var sql = "SELECT puntos FROM jugadores WHERE loluser LIKE '" + nombrel + "'";
   con.query(sql, function (err, result) {
     console.log(result)
-    var puntos = result[0].puntos
+    let puntos = result[0].puntos
     console.log(puntos)
     getpuntos(puntos)
     if (err) throw err;
