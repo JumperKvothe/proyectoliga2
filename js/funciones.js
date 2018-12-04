@@ -31,6 +31,10 @@ function gotologin() {
     window.location.href = "../html/login.html"
 }
 
+function gotoregis(){
+    window.location.href = "../html/registrarse.html"
+}
+
 function copyToClipboard(element) {
     try {
         var $temp = $("<input>");
@@ -144,4 +148,9 @@ function imprimirN (){
 
 function getPuntos(puntos){
     $('.puntos').html(puntos);
+}
+
+function conectarse(){
+    funcionesdb(7)
+
 }

@@ -37,6 +37,9 @@ function funcionesdb(num) {
     case 6:
       agregarusuario()
       break;
+    //Comprobar si los datos de login son correctos
+    case 7:
+      comprobarLogin()
   }
 }
 
@@ -195,4 +198,11 @@ function agregarusuario(){
     if (err) throw err;
     else gotoindex();
   });
+}
+
+//Comprobar si los datos de login son correctos
+function comprobarLogin(){
+  let nombre = $('#nombre').val
+  let pass = $('#pass').val
+  show.console(nombre)
 }
