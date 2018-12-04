@@ -36,9 +36,8 @@
                 <div class="container">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between">
-                        <a class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
+                        <a onclick="gotologin()" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
                         <div class="classy-menu">
-
                             <div class="classynav">
                                 <ul>
                                 </ul>
@@ -49,48 +48,31 @@
             </div>
         </div>
     </header>
-
-    <!-- ##### Hero Area Start ##### -->
-    <section class="hero-area">
-        <!-- Single Hero Slide -->
-        <div class="single-hero-slide d-flex align-items-center justify-content-center">
-            <!-- Slide Img -->
-            <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
-            <!-- Slide Content -->
-            <div class="container">
-            <div class="row">
-            <div class="col-12">
-            <div class="hero-slides-content text-center">
-            <div id="page">
-                <div>
-                <form>
-                    <label class="labelform">Nombre de Usuario</label><br>
-                    <input type="text" id="nombre" placeholder="Nombre de Usuario" required autofocus><br>
-                    <label class="labelform">Contraseña</label><br>
-                    <input type="password" id="pass" placeholder="Contraseña" required><br>
-                    <!-- <label class="labelform">Centro</label><br>
-                    <select id="centro"placeholder="Centro" required>
-                        <option value="1">Elite Sevilla
-                        <option value="2">Elite Madrid / Atocha
-                        <option value="3">Elite Barcelona
-                        <option value="4">Elite Valencia
-                        <option value="5">Elite Granada
-                        <option value="6">Elite Malaga
-                        <option value="7">Elite Mallorca
-                        <option value="8">Elite Zaragoza
-                        <option value="9">Elite Bilbao
-                    </select><br> -->
-                    <a data-delay="0ms" onclick="conectarse()" class="btn oneMusic-btn mt-50">Conectarse<i class="fa fa-angle-double-right"></i></a>
-                    <a data-delay="0ms" onclick="gotoregis()" class="btn oneMusic-btn mt-50">Registrarse<i class="fa fa-angle-double-right"></i></a>
-
-                             
-                </form>
-                </div>
+    <!-- Single Hero Slide -->
+    <div class="single-hero-slide d-flex align-items-center justify-content-center">
+        <!-- Slide Img -->
+        <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
+        <!-- Slide Content -->
+        <div class="container">
+        <div class="row">
+        <div class="col-12">
+        <div class="hero-slides-content text-center">
+        <div id="page">
+            <div>
+            <form>
+                <h1 class="center">Login</h1>
+                <br><label class="labelform">Nombre de Usuario</label><br>
+                <input type="text" id="nombre" placeholder="Nombre de Usuario" required autofocus><br>
+                <br><label class="labelform">Contraseña</label><br>
+                <input type="password" id="pass" placeholder="Contraseña" required><br>
+                <a data-delay="0ms" onclick="conectarse()" class="btn oneMusic-btn mt-50">Conectarse<i class="fa fa-angle-double-right"></i></a>
+                <a data-delay="0ms" onclick="gotoregis()" class="btn oneMusic-btn mt-50">Registrarse<i class="fa fa-angle-double-right"></i></a>    
+            </form>
             </div>
-            </div>
-            </div>
-            </div>
-    </section>
+        </div>
+        </div>
+        </div>
+        </div>
     <!-- ##### Hero Area End ##### -->
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>

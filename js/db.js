@@ -132,31 +132,29 @@ function anadirJug() {
 function comprobarLol(){
   //No olvidar \/
   var eliteuser = "Enrique";
-  // \/
-  var centro = "Sevilla";
+
   var sql = "SELECT loluser FROM jugadores WHERE eliteuser LIKE '" + eliteuser + "'";
   con.query(sql, function (err, result) {
     console.log(result)
     var r = result[0].loluser
-    console.log(r)
-    if (r == "" || r == null){
-      yaverificado(false)      
-      console.log("false amigo")
-      
-    }else{
-      yaverificado(true)
-      if (typeof(Storage) !== "undefined") {
-       localStorage.setItem('loluser', r);
-    } else {
-        console.log("No lo soporta el navegador")
-    }
-      console.log("true amigo")
-    }
+    console.log(r)    
     if (err) {
-      //throw err;
-      yaverificado(false)
-      console.log("error cabesa")
-      crearRegistro(eliteuser, centro)
+      throw err;
+    }
+    else {
+      if (r == "" || r == null){
+        yaverificado(false)      
+        console.log("false amigo")
+        
+      }else{
+        yaverificado(true)
+          if (typeof(Storage) !== "undefined") {
+          localStorage.setItem('loluser', r);
+        } else {
+            console.log("No lo soporta el navegador")
+        }
+          console.log("true amigo")
+      }
     }
   });
 
@@ -188,15 +186,26 @@ function consultarPuntos(){
   });
 }
 
+//Meter un nuevo usuario en la base de datos
 function agregarusuario(){
-  var eliteuser = document.getElementsByName("nombre")[0].value;
-  var centro = documment.getElementsByName("centro")[0].value;
-  var contrasena = document.getElementsByName("contrasena")[0].value;
-  var sql = "INSERT INTO jugadores (eliteuser, centro, contrasena) VALUES ('" + eliteuser + "', '" + centro + 
-  "', '" + contrasena + "')";
+  var eliteu = document.getElementsByName("nombre")[0].value;
+  var cen = document.getElementsByName("centro")[0].value;
+  var contra = document.getElementsByName("contrasena")[0].value;
+  var sql = "SELECT * FROM jugadores WHERE eliteuser = '" + eliteu + "'";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    else gotoindex();
+    else {
+      if (result=="" && contra!="")
+      {
+        var sql2 = "INSERT INTO jugadores (eliteuser, centro, contrasena) VALUES ('" + eliteu + "', '" + cen + 
+        "', '" + contra + "')";
+        con.query(sql2, function (err, result) {
+          if (err) throw err;
+          else gotologin();
+        });
+      }
+      else{alert("Nombre de usuario en uso o no hay contraseña");}
+    }
   });
 }
 
