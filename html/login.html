@@ -1,89 +1,102 @@
 <!DOCTYPE html>
-
-
-<html>
+<html lang="en">
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="format-detection" content="telephone=no" />
-	<meta name="msapplication-tap-highlight" content="no" />
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-	<meta http-equiv="Content-Security-Policy" content="default-src  'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src " />
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Título -->
+    <title>Inicio</title>
 
-	<title></title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Icono web -->
+    <link rel="icon" href="../img/core-img/icono.png">
 
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../style.css">
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
+        <script src="../js/funciones.js"></script>
+        <script src="../js/db.js"></script>
+        <script src="../node_modules/js/bootstrap/popper.min.js"></script>
+        <script src="../node_modules/js/bootstrap/bootstrap.min.js"></script>
+        <script src="../node_modules/js/plugins/plugins.js"></script>
+    <script>if (window.module) module = window.module;</script>
 
 </head>
 
+<body>
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <div class="liga-main-menu">
+            <div class="classy-nav-container">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between">
+                        <a class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
+                        <div class="classy-menu">
 
-<div class="container">
+                            <div class="classynav">
+                                <ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <!-- ##### Hero Area Start ##### -->
+    <section class="hero-area">
+        <!-- Single Hero Slide -->
+        <div class="single-hero-slide d-flex align-items-center justify-content-center">
+            <!-- Slide Img -->
+            <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
+            <!-- Slide Content -->
+            <div class="container">
+            <div class="row">
+            <div class="col-12">
+            <div class="hero-slides-content text-center">
+            <div id="page">
+                <div>
+                <form>
+                    <label class="labelform">Nombre de Usuario</label><br>
+                    <input type="text" id="nombre" placeholder="Nombre de Usuario" required autofocus><br>
+                    <label class="labelform">Contraseña</label><br>
+                    <input type="password" id="pass" placeholder="Contraseña" required><br>
+                    <!-- <label class="labelform">Centro</label><br>
+                    <select id="centro"placeholder="Centro" required>
+                        <option value="1">Elite Sevilla
+                        <option value="2">Elite Madrid / Atocha
+                        <option value="3">Elite Barcelona
+                        <option value="4">Elite Valencia
+                        <option value="5">Elite Granada
+                        <option value="6">Elite Malaga
+                        <option value="7">Elite Mallorca
+                        <option value="8">Elite Zaragoza
+                        <option value="9">Elite Bilbao
+                    </select><br> -->
+                    <a data-delay="0ms" onclick="conectarse()" class="btn oneMusic-btn mt-50">Conectarse<i class="fa fa-angle-double-right"></i></a>
+                    <a data-delay="0ms" onclick="gotoregis()" class="btn oneMusic-btn mt-50">Registrarse<i class="fa fa-angle-double-right"></i></a>
 
-	<form id="loginform" class="form-signin" method="post" ACTION="http://elitegamingcenter.com/servicio/checklogin"
-	 enctype="multipart/form-data">
-		<img src="img/logo2.png" style="width: 100%;" />
-		<h2 class="form-signin-heading" style="text-align:center;"></h2>
-		<label for="username" class="sr-only">Usuario del centro</label>
-		<input type="text" name="username" id="username" class="form-control" placeholder="Usuario del centro" required
-		 autofocus>
-		<label for="email" class="sr-only">Contraseña</label>
-		<input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
-		<label for="centro" class="sr-only">Centro al que pertenece</label>
-		<select id="centro" name="centro" class="form-control" placeholder="Centro" required autofocus>
-			<option value="1">Elite Sevilla
-			<option value="2">Elite Madrid / Atocha
-			<option value="3">Elite Barcelona
-			<option value="4">Elite Valencia
-			<option value="5">Elite Granada
-			<option value="6">Elite Malaga
-			<option value="7">Elite Mallorca
-			<option value="8">Elite Zaragoza
-			<option value="9">Elite Bilbao
-		</select>
+                             
+                </form>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+    </section>
+    <!-- ##### Hero Area End ##### -->
 
-		<input class="btn btn-lg btn-primary btn-block" id="insert" value="Log in" name="registro" type="submit"></button>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+        <script src="../node_modules/js/active.js"></script>
+    <script>if (window.module) module = window.module;</script>
 
-
-
-	</form>
-
-	<script type='text/javascript'>
-		if (localStorage.getItem("login") == "1") {
-			window.location.href = "index.html";
-		} else {
-			$("#loginform").submit(function (event) {
-
-				event.preventDefault();
-
-				var $form = $(this),
-					url = $form.attr('action');
-
-				var posting = $.post(url, {
-					username: $('#username').val(),
-					password: $('#password').val(),
-					centro: $('#centro').val()
-				});
-
-				posting.done(function (data) {
-					var response = jQuery.parseJSON(data);
-					if (response == '1') {
-						alert("loginok");
-					} else {
-						if (response == '0') {
-							alert('Credenciales incorrectas');
-						} else {
-							if (response == '3') {
-								alert('Error de conexion, intentelo de nuevo mas tarde');
-							}
-						}
-					}
-				});
-			});
-		}
-	</script>
-</div> <!-- /container -->
 </body>
 
 </html>

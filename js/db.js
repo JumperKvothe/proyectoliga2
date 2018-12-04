@@ -32,6 +32,10 @@ function funcionesdb(num) {
     //Consultar los puntos de un jugador para mostrarlos en la interfaz  
     case 5:
       consultarPuntos()
+      break
+    //Comprobar si los datos de login son correctos
+    case 6:
+      comprobarLogin()
   }
 }
 
@@ -184,4 +188,11 @@ function consultarPuntos(){
     getpuntos(puntos)
     if (err) throw err;
   });
+}
+
+//Comprobar si los datos de login son correctos
+function comprobarLogin(){
+  let nombre = $('#nombre').val
+  let pass = $('#pass').val
+  show.console(nombre)
 }

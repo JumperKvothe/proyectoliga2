@@ -27,6 +27,10 @@ function gotoclasi() {
     window.location.href = "../html/clasi.html"
 }
 
+function gotoregis(){
+    window.location.href = "../html/registrarse.html"
+}
+
 function copyToClipboard(element) {
     try {
         var $temp = $("<input>");
@@ -140,4 +144,9 @@ function imprimirN (){
 
 function getPuntos(puntos){
     $('.puntos').html(puntos);
+}
+
+function conectarse(){
+    funcionesdb(6)
+
 }
