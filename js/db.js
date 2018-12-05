@@ -107,7 +107,7 @@ function anadirJug() {
     njug = result.length
 
     for (i = 0; i < njug; i++) {
-      jug = result[i].loluser
+      jug = result[i].eliteuser
       pts = result[i].puntos
       centro = result[i].centro
       setValue(jug, pts, centro, i);
@@ -116,7 +116,7 @@ function anadirJug() {
   });
 
   function setValue(jug, pts, centro, i) {
-    $(".juga").append(function () {
+    $(".clas").append(function () {
       return '<tr class="odd"><th scope="row">' + (i + 1) + '</th><td>' + jug + '</td><td>' +
         pts + '</td><td>' + centro + '</td></tr>';
     });
