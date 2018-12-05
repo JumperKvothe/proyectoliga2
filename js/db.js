@@ -107,7 +107,7 @@ function anadirJug() {
     njug = result.length
 
     for (i = 0; i < njug; i++) {
-      jug = result[i].loluser
+      jug = result[i].eliteuser
       pts = result[i].puntos
       centro = result[i].centro
       setValue(jug, pts, centro, i);
@@ -135,13 +135,10 @@ function comprobarLol(){
     else {
       //No la tiene validada
       if (r == "" || r == null){
-        yaverificado(false)      
-        console.log("false amigo")
-      
+        div_show();
       //La tiene validada
       }else{
-        yaverificado(true)
-        console.log("true amigo")
+        gotoindex()
       }
     }
   });
@@ -213,8 +210,6 @@ function comprobarLogin(){
       if (result == ""){
         alert("Usuario o contraseña erróneos")
       }else{
-        console.log(result[0])
-        console.log(result[0].eliteuser)
        localStorage.setItem('currentUser', JSON.stringify(result[0]));
        gotoinicio()
       }
