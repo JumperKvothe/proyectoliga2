@@ -17,18 +17,19 @@
     <link rel="stylesheet" href="../style.css">
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
-        <script src="../js/funciones.js"></script>
-        <script src="../js/db.js"></script>
-        <script src="../node_modules/js/bootstrap/popper.min.js"></script>
-        <script src="../node_modules/js/bootstrap/bootstrap.min.js"></script>
-        <script src="../node_modules/js/plugins/plugins.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/funciones.js"></script>
+    <script src="../js/db.js"></script>
+    <script src="../node_modules/js/bootstrap/popper.min.js"></script>
+    <script src="../node_modules/js/bootstrap/bootstrap.min.js"></script>
+    <script src="../node_modules/js/plugins/plugins.js"></script>
     <script>if (window.module) module = window.module;</script>
+
 
 </head>
 
-<body>
+<body id="body" style="overflow:hidden;">
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <div class="liga-main-menu">
@@ -62,15 +63,35 @@
             <div class="col-12">
             <div class="hero-slides-content text-center">
             <div id="page">
-                <form>
-                    <h2>Bienvenido</h2><br>
-                    <h2 id="eliteuser"></h2><br>
-                        <div><img src="../img/core-img/lol.jpg" class="lol" alt="League of Legends"
-                                onclick="funcionesdb(4)">
+            <form>
+                <h2>Bienvenido</h2><br>
+                <h2 id="eliteuser"></h2><br>
+                <div><img src="../img/core-img/lol.jpg" class="lol" alt="League of Legends" onclick="funcionesdb(4)">
+                </div>
+                <div id="abc">
+                <!-- Popup Div Starts Here -->
+                <div id="popupContact">
+                    <!-- Contact Us Form -->
+                    <form id="form" class="form" method="post" name="form">
+                        <div class="container"><a href="#close" id="popup" onclick="div_hide()" class="close">X</a>
+                        <h3 style="color: #e90606;">Verificación de cuenta de LoL</h3>
+                        <div class="row">
+                        <div class="center"><label class="labelform">Nombre en League of legends</label><br>
+                        <input type="text" name="loluser" title="Introduzca su nombre del LoL"autofocus required><br><br>
+                        <label class="labelform">Para vincular su cuenta siga estos pasos: <br>
+                            1. Acceda a su cuenta de League of Legends. <br>
+                            2. Acceda a la configuración de su cuenta (La ruedita de arriba a la derecha). <br>
+                            3. Busque la opción de VERIFICACIÓN. <br>
+                            4. Introduzca "VivaElite" en el recuadro y pulse el botón GUARDAR. <br>
+                            5. Pulse el botón Verificar y espere.</label><br>
+                            <!-- <input type="submit" onclick=sacarid() name="verificarboton" value="Verificar"></div> -->
+                            <a onclick="sacarid()" class="btn oneMusic-btn mt-50">Verificar <i class="fa fa-angle-double-right"></i></a>
+                            </div>
                         </div>
-
-                    <div id="openModal" class="modalDialog">
-                    </div>
+                    </form>
+                </div>
+                <!-- Popup Div Ends Here -->
+                </div>
             </div>
             </div>
             </div>
@@ -78,9 +99,16 @@
     </section>
     <!-- ##### Hero Area End ##### -->
 
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-        <script src="../node_modules/js/active.js"></script>
-    <script>if (window.module) module = window.module;</script>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+    <script src="../node_modules/js/active.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
 
 </body>
 
