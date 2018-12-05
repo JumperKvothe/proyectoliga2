@@ -1,5 +1,5 @@
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
-process.env.LEAGUE_API_KEY = 'RGAPI-aeefc586-af92-4fc2-8043-3dfba2b7d9d5'
+process.env.LEAGUE_API_KEY = 'RGAPI-743f335c-2e6c-4c91-b74a-ed208386c5c5'
 
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
@@ -69,6 +69,7 @@ function yaverificado(boolean) {
     if (boolean) {
         gotoindex()
     } else {
+        div_show();
         /* $(".modalDialog").append(function () {
             return '<div class="container"><a href="#close" title="Close" class="close">X</a>' +
                 '<h3 style="color: #e90606;">Verificación de cuenta de LoL</h3><br>' +
@@ -87,13 +88,17 @@ function yaverificado(boolean) {
         $(function() {
             $("form").submit(function() { return false; });
         }); */
-
-        /* $('.modalDialog').append('<b>Hola</b>')
-        $('#eliteuser').html('eee')
-        console.log($('*').get()) */
-        console.log("por qué no funciona?")
     }
 }
+
+//Function To Display Popup
+function div_show() {
+    document.getElementById('abc').style.display = "block";
+    }
+    //Function to Hide Popup
+    function div_hide(){
+    document.getElementById('abc').style.display = "none";
+    }
 
 //Función para sacar el ID de invocador a partir del nombre de invocador introducido
 function sacarid (){

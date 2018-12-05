@@ -14,7 +14,8 @@ function createWindow()
             protocol: 'file',
             slashes: true
         }))
-
+        win.maximize()
+        win.setResizable(false)
         //win.webContents.openDevTools()
     }
 
