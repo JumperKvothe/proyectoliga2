@@ -116,7 +116,6 @@ function verificarlol(id, loluser) {
 function imprimirN() {
 
     let user = JSON.parse(localStorage.getItem('currentUser'))
-    console.log(user.loluser);
     leagueJs.Summoner
         .gettingByName(user.loluser)
         .then(data => {

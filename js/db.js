@@ -116,7 +116,7 @@ function anadirJug() {
   });
 
   function setValue(jug, pts, centro, i) {
-    $(".juga").append(function () {
+    $(".clas").append(function () {
       return '<tr class="odd"><th scope="row">' + (i + 1) + '</th><td>' + jug + '</td><td>' +
         pts + '</td><td>' + centro + '</td></tr>';
     });
