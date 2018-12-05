@@ -140,3 +140,10 @@ function mostrarNombre() {
     let user = JSON.parse(localStorage.getItem('currentUser'))
     $('#eliteuser').html(user.eliteuser)
 }
+
+//Eventos con tecla enter
+function enter(){
+    if(event.key === 'Enter') {
+        funcionesdb(7)        
+    }
+}
