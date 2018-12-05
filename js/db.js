@@ -14,14 +14,15 @@ function funcionesdb(num) {
     //Update cola1vs1 a 1 mientras un usuario busca rival
     case 1:
       updateColaInd()
-      break
+      break;
     //Comprobar cada x tiempo la gente que está esperando rival en 1vs1 y emparejarlos
     case 2:
       /* setInterval(function () {
         matchMakingInd();
       }, 1000) */
       matchMakingInd()
-      break
+      break;
+    //Escoger a los jugadores con más puntos para ponerlos en la clasificación
     case 3:
       anadirJug()
       break;
@@ -40,27 +41,21 @@ function funcionesdb(num) {
     //Comprobar si los datos de login son correctos
     case 7:
       comprobarLogin()
+      break; 
   }
 }
 
-/* funcion sacar nombre  
-  GET de nombreelite sacamos en una consulta el nomlol
-    llamamos a la funcion de funcionesdb.js donde usaremos el league.js 
-    a partir de su nombre para ponerlo en el index */
-
+//Revisar
 //Update cola1vs1 a 1 mientras un usuario busca rival
 function updateColaInd() {
-  if (err) throw err;
-  console.log("Connected!");
-  //No olvidar \/
-  loluser = "danireySvQ";
-  var sql = "UPDATE jugadores SET colaind = 1 WHERE loluser LIKE '" + loluser + "'";
+  let user = JSON.parse(localStorage.getItem('currentUser'))
+  var sql = "UPDATE jugadores SET colaind = 1 WHERE eliteuser LIKE '" + user.eliteuser + "'";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log(result.affectedRows + " record(s) updated");
   });
 }
 
+//Revisar
 //Comprobar cada x tiempo la gente que está esperando rival en 1vs1 y emparejarlos
 function matchMakingInd() {
   var njug = 0;
@@ -83,6 +78,8 @@ function matchMakingInd() {
 
   });
 
+  //Sacamos a los jugadores de cola y los metemos en una sala
+  //Falta generar tournament code
   function setValue(valor1, valor2) {
     jug1 = valor1;
     jug2 = valor2;
@@ -101,9 +98,10 @@ function matchMakingInd() {
   }
 }
 
+//Revisar (poner límite de players? límite por página?)
+//Escoger a los jugadores con más puntos para ponerlos en la clasificación
 function anadirJug() {
-  var njug, pts = 0;
-  var jug, centro = "";
+  var njug, pts, jug, centro;
   var sql = "SELECT * FROM jugadores ORDER BY puntos DESC";
   con.query(sql, function (err, result) {
     njug = result.length
@@ -117,11 +115,7 @@ function anadirJug() {
     if (err) throw err;
   });
 
-  function setValue(valor1, valor2, valor3, valor4) {
-    jug = valor1;
-    pts = valor2;
-    centro = valor3;
-    i = valor4;
+  function setValue(jug, pts, centro, i) {
     $(".juga").append(function () {
       return '<tr class="odd"><th scope="row">' + (i + 1) + '</th><td>' + jug + '</td><td>' +
         pts + '</td><td>' + centro + '</td></tr>';
@@ -129,59 +123,58 @@ function anadirJug() {
   }
 }
 
+//Revisar
+//Comprobar si el usuario actual ha validado su cuenta de lol
 function comprobarLol(){
-  //No olvidar \/
-  var eliteuser = "Enrique";
-
-  var sql = "SELECT loluser FROM jugadores WHERE eliteuser LIKE '" + eliteuser + "'";
+  let user = JSON.parse(localStorage.getItem('currentUser'))
+  var sql = "SELECT loluser FROM jugadores WHERE eliteuser LIKE '" + user.eliteuser + "'";
   con.query(sql, function (err, result) {
     console.log(result)
     var r = result[0].loluser
-    console.log(r)    
-    if (err) {
-      throw err;
-    }
+    if (err) throw err
     else {
+      //No la tiene validada
       if (r == "" || r == null){
         yaverificado(false)      
         console.log("false amigo")
-        
+      
+      //La tiene validada
       }else{
         yaverificado(true)
-          if (typeof(Storage) !== "undefined") {
-          localStorage.setItem('loluser', r);
-        } else {
-            console.log("No lo soporta el navegador")
-        }
-          console.log("true amigo")
+        console.log("true amigo")
       }
     }
   });
 
 }
-  
+
+//Revisar
 function addnom (loluser)
 {
   console.log(loluser)
-  var eliteuser = "Enrique"
-  //Hay que coger el Elite User
-  var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + eliteuser + "'";
+  let user = JSON.parse(localStorage.getItem('currentUser'))
+  console.log(user.eliteuser)
+  var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + user.eliteuser + "'";
     con.query(sql, function (err, result) {
       if (err) throw err;
-      else gotoindex()
+      else { 
+        gotoindex()
+        user = JSON.parse(localStorage.getItem('currentUser'))
+        localStorage.setItem('currentUser', JSON.stringify(user['loluser'] = loluser))
+      }
     });
 }
 
+//Revisar
+//Sacar los puntos que tiene el usuario en su cuenta
 function consultarPuntos(){
-
-  var nombrel = sessionStorage.getItem('loluser');
-  console.log(nombrel)
-  var sql = "SELECT puntos FROM jugadores WHERE loluser LIKE '" + nombrel + "'";
+  let user = JSON.parse(localStorage.getItem('currentUser'))
+  var sql = "SELECT puntos FROM jugadores WHERE eliteuser LIKE '" + user.eliteuser + "'";
   con.query(sql, function (err, result) {
     console.log(result)
     let puntos = result[0].puntos
     console.log(puntos)
-    getpuntos(puntos)
+    $('.puntos').html(puntos);
     if (err) throw err;
   });
 }
@@ -220,7 +213,9 @@ function comprobarLogin(){
       if (result == ""){
         alert("Usuario o contraseña erróneos")
       }else{
-       localStorage.setItem('currentUser', result[0]);
+        console.log(result[0])
+        console.log(result[0].eliteuser)
+       localStorage.setItem('currentUser', JSON.stringify(result[0]));
        gotoinicio()
       }
     }

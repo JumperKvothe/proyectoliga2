@@ -51,7 +51,7 @@ function copyToClipboard(element) {
 
 //Funciones goto1vs1
 
-$(document).on('ready', function () {
+/* $(document).on('ready', function () {
     $(document).on('click', '#btn-ingresar', function () {
         var json = $("#formulario").serialize();
         $.ajax({
@@ -61,14 +61,15 @@ $(document).on('ready', function () {
             success: function (data) {}
         })
     });
-});
+}); */
 
-//Función para que el programa haga una u otra cosa en función de si el usuario ya está verificado o no
+/*Función que manda al usuario con cuenta de lol verificada a la siguiente página y al que no le da la
+oportunidad de poder verificarla a través del cliente de lol*/
 function yaverificado(boolean) {
     if (boolean) {
         gotoindex()
     } else {
-        $(".modalDialog").append(function () {
+        /* $(".modalDialog").append(function () {
             return '<div class="container"><a href="#close" title="Close" class="close">X</a>' +
                 '<h3 style="color: #e90606;">Verificación de cuenta de LoL</h3><br>' +
                 '<div class="row"><div class="center"><label>Nombre en League of legends</label>' +
@@ -82,14 +83,19 @@ function yaverificado(boolean) {
                 '<input type="submit" onclick=sacarid() name="verificarboton" value="Verificar"></div>' +
                 '</div></div>';
         });
+
         $(function() {
             $("form").submit(function() { return false; });
-        });
+        }); */
+
+        /* $('.modalDialog').append('<b>Hola</b>')
+        $('#eliteuser').html('eee')
+        console.log($('*').get()) */
+        console.log("por qué no funciona?")
     }
 }
 
 //Función para sacar el ID de invocador a partir del nombre de invocador introducido
-//Hay que controlar que el nombre de invocador exista
 function sacarid (){
     loluser = document.getElementsByName("loluser")[0].value;
     leagueJs.Summoner
@@ -119,17 +125,20 @@ function verificarlol(id, loluser){
 		}
 	})
 	.catch(err => {
-		'use strict';
+        'use strict';
+        alert("No se introdució el texto correcto en el cliente de lol")
 		console.log(err);
 	});
 }
 
+//Revisar
+//Mostrar el nombre de lol en el index de lol
 function imprimirN (){
     
-    var nombrelol = localStorage.getItem('loluser');
-    console.log(nombrelol);
+    let user = JSON.parse(localStorage.getItem('currentUser'))
+    console.log(user.loluser);
     leagueJs.Summoner
-	.gettingByName(nombrelol)
+	.gettingByName(user.loluser)
 	.then(data => {
         'use strict';        
         console.log(data);
@@ -146,11 +155,8 @@ function imprimirN (){
     funcionesdb(5)
 }
 
-function getPuntos(puntos){
-    $('.puntos').html(puntos);
-}
-
-function conectarse(){
-    funcionesdb(7)
-
+//Mostrar nombre del usuario en el inicio.html
+function mostrarNombre(){
+    let user = JSON.parse(localStorage.getItem('currentUser'))
+    $('#eliteuser').html(user.eliteuser)
 }

@@ -28,7 +28,7 @@
 
 </head>
 
-<body>
+<body onload="mostrarNombre()">
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <div class="liga-main-menu">
@@ -38,9 +38,12 @@
                     <nav class="classy-navbar justify-content-between">
                         <a onclick="gotoinicio()" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
                         <div class="classy-menu">
-
                             <div class="classynav">
                                 <ul>
+                                    <li><a onclick="gotoindex()">Principal</a></li>
+                                    <li><a href="historial.html">Historial</a></li>
+                                    <li><a onclick="gotoclasi()">Clasificación</a></li>                                    
+                                    <li><a onclick="gotologin()">Desconectarse</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -70,7 +73,8 @@
                         </div>
 
                     <div id="openModal" class="modalDialog">
-                    </div>
+                    
+                    </form></div>
             </div>
             </div>
             </div>
