@@ -12,10 +12,15 @@ function createWindow()
         win.loadURL(url.format({
             pathname: path.join(__dirname,'../html/login.html'),
             protocol: 'file',
-            slashes: true
+            slashes: true,
+            resizable: false
         }))
-        win.maximize()
-        win.setResizable(false)
+        win.maximize();
+        //win.setResizable(false);
+        //win.setFullScreenable(false);
+        //win.setMaximizable(true);
+        //win.setMinimizable(false);
+        //win.setMenu(null)
         //win.webContents.openDevTools()
     }
 
