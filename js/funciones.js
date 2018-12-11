@@ -132,6 +132,7 @@ function imprimirN() {
             console.log(err);
         });
     funcionesdb(5)
+    funcionesdb(8)
 }
 
 //Mostrar nombre del usuario en el inicio.html

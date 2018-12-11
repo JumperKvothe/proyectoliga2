@@ -42,6 +42,10 @@ function funcionesdb(num) {
     case 7:
       comprobarLogin()
       break; 
+    //Buscar el rival más cercano en puntos
+    case 8:
+      buscarRival()
+      break;
   }
 }
 
@@ -215,4 +219,44 @@ function comprobarLogin(){
       }
     }
   })
+}
+
+function buscarRival() {
+  /* let user = JSON.parse(localStorage.getItem('currentUser'));
+  let puntos1 = 0;
+  let puntos2 = 0;
+  let nombrelol2 = 0;
+  var sql = "SELECT puntos FROM jugadores WHERE eliteuser LIKE '" + user.eliteuser + "'";
+  con.query(sql, function (err, result) {
+    console.log(result)
+    puntos1 = result[0].puntos
+    if (err) throw err;
+  });
+
+  var sql2 = "SELECT loluser, puntos FROM jugadores ORDER BY ABS(puntos -'" + puntos1 + "') ASC";
+  con.query(sql2, function (err, result) {
+    console.log(result)
+    nombrelol2 = result[0].loluser
+    puntos2 = result[0].puntos
+    $('.nombre2').html(nombrelol2);
+    $('.puntos2').html(puntos2);
+    if (err) throw err;
+  }); */
+  var sql = "SELECT puntos, loluser FROM jugadores WHERE colaind=1 ORDER BY puntos";
+  con.query(sql, function (err, result) {
+    njug = result.length
+    if (njug % 2 != 0) {
+      njug - 1
+    }
+    for (i = 0; i < njug; i++) {
+      jug1 = result[i].loluser
+      if (i != njug - 1) {
+        i++;
+        jug2 = result[i].loluser
+        setValue(jug1, jug2);
+      }
+    }
+    if (err) throw err;
+
+  });
 }
