@@ -15,10 +15,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>  
         <script src="../js/funciones.js"></script>
+        <script src="../js/db.js"></script>
     <script>if (window.module) module = window.module;</script>
     
 </head>
-<body>
+<body onload="imprimirN()">
         <!-- ##### Header Area Start ##### -->
         <header class="header-area">
             <div class="liga-main-menu">
@@ -49,16 +50,18 @@
         <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
             <div class="container-fluid" style="max-height: 75%">
                 <div>  
-                    <div class="col">
-                        <div class="row-6 center">
-                            <label class="labelvs">Nombre</label>
-                            <label class="labelvs">Puntos</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="labelvs nombre"></label><br><br><br>
+                            <label class="labelvs puntos"></label>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="row-6 center">
-                            <label class="labelvs">Nombre2</label>
-                            <label class="labelvs">Puntos2</label>
+                        <div class="col-sm-2">
+                            <img src="../img/core-img/vs.png" alt="">
+                            <label class="labelvs search">Buscando...</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="labelvs nombre2">-----</label><br><br><br>
+                            <label class="labelvs puntos2">-----</label>
                         </div>
                     </div>
 

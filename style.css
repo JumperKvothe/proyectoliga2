@@ -13,13 +13,23 @@
 
 /* 1 VS 1 */
 
-.vs {
-border: 1px solid white
+.labelvs {
+  font-size: 1.4cm;
+  color: turquoise
 }
 
-.labelvs {
+.labelvsicon {
   font-size: 2cm;
-  color: turquoise
+  color: turquoise;
+  vertical-align: middle;
+}
+
+.col-sm-2 {
+  text-align: center
+}
+
+.col-sm-5 {
+  text-align: center
 }
 
 /* formularios */
