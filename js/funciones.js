@@ -35,6 +35,10 @@ function gotoregis() {
     window.location.href = "../html/registrarse.html"
 }
 
+function gotoej(){
+    window.location.href = "ejemplo.html"
+}
+
 function copyToClipboard(element) {
     try {
         var $temp = $("<input>");
@@ -146,4 +150,17 @@ function enter(){
     if(event.key === 'Enter') {
         funcionesdb(7)        
     }
+}
+
+//Cargar el loader
+function loader(){
+    loaders = document.getElementsByClassName('loader-wrapper');
+    loaders[0].style.display = "inherit";
+    function change(self) {
+        for (var i = loaders.length - 1; i >= 0; i--) {
+            loaders[i].style.display = "none";
+        }
+        id = self.id;
+        loaders[id - 1].style.display = "inherit";
+    };
 }
