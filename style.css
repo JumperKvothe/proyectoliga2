@@ -16,12 +16,12 @@
 #loader-4 #loader{
 	position: relative;
 	color:transparent;
-	font-size: 4em;
+	font-size: 1.4cm;
 	font-family: 'Righteous', cursive !important;
 	text-decoration: none;
 	float: left; 
 	top:40%;
-	left: 40%;
+	left: 10%;
 	z-index: 2;
     -webkit-animation: fade 2s linear infinite;
     -moz-animation: fade 2s linear infinite;
