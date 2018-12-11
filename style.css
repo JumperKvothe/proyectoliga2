@@ -11,6 +11,17 @@
 @import url(css/one-music-icon.css);
 @import url(node_modules/bootstrap/dist/css/bootstrap.min.css);
 
+/* 1 VS 1 */
+
+.vs {
+border: 1px solid white
+}
+
+.labelvs {
+  font-size: 2cm;
+  color: turquoise
+}
+
 /* formularios */
 .labelform {
   color:turquoise;
