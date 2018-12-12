@@ -105,7 +105,55 @@ function verificarlol(id, loluser) {
         .then(data => {
             'use strict';
             if (data) {
-                addnom(loluser);
+                var puntos;
+                /////////
+                leagueJs.League
+                    .gettingPositionsForSummonerId(data.id, 'euw')
+                    .then(data => {
+                        'use strict';
+                        console.log(data)
+                        if (data.length == 0){
+                            console.log("unranked")
+                            elo = 0
+                        }else{
+                            console.log("ranked en alguna cola")
+                            let pos = 4;
+                            for (let i = 0; i < data.length; i++) {
+                                if (data[i].queueType.localeCompare("RANKED_SOLO_5x5") == 0){
+                                    pos = i
+                                }
+                            }
+                            if (pos == 4){
+                                elo = 500
+                            }else{
+                                switch (data[pos].tier) {
+                                    case "Bronze":
+                                        elo = 750
+                                        break;
+                                    case "Silver":
+                                        elo = 1000
+                                        break;
+                                    case "Gold":
+                                        elo = 1250
+                                        break;
+                                    case "Platinum":
+                                        elo = 1500
+                                        break;
+                                    case "Diamond":
+                                        elo = 1750
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        'use strict';
+                        console.log(err);
+                    });
+            console.log(elo)
+                addnom(loluser, elo);
             }
         })
         .catch(err => {
@@ -125,11 +173,20 @@ function imprimirN() {
         .then(data => {
             'use strict';
             console.log(data);
-
             $(document).ready(function () {
                 $(".nombre").html(data.name);
             });
-
+            //////////////////////////////////////////////////////////////////////////////Borrar luego
+            leagueJs.League
+                .gettingPositionsForSummonerId(data.id, 'euw')
+                .then(data => {
+                    'use strict';
+                    console.log(data)
+                })
+                .catch(err => {
+                    'use strict';
+                    console.log(err);
+                });
         })
         .catch(err => {
             'use strict';

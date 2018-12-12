@@ -146,11 +146,11 @@ function comprobarLol() {
 }
 
 //Revisar
-function addnom(loluser) {
+function addnom(loluser, elo) {
   console.log(loluser)
   let user = JSON.parse(localStorage.getItem('currentUser'))
   console.log(user.eliteuser)
-  var sql = "UPDATE jugadores SET loluser = '" + loluser + "' WHERE eliteuser LIKE '" + user.eliteuser + "'";
+  var sql = "UPDATE jugadores SET loluser = '" + loluser + "', elo = " + elo + " WHERE eliteuser LIKE '" + user.eliteuser + "'";
   con.query(sql, function (err, result) {
     if (err) throw err;
     else {
