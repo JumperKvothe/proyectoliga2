@@ -178,6 +178,39 @@ text-shadow: rgb(255,255,255) 0 0 0;
   text-align: center
 }
 
+/* equipos */ 
+.nombreequipo {
+
+}
+.caja {
+text-align: center; 
+text-decoration: none;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: helvetica;
+    font-weight: 300;
+    font-size: 25px;
+    font-style: italic;
+    background-color: #82b085;
+    border-radius: 15px;
+    border: 3px double #006505;
+}
+
+.botonCE {
+  text-decoration: none;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: helvetica;
+    font-weight: 300;
+    font-size: 25px;
+    font-style: italic;
+    background-color: #82b085;
+    border-radius: 15px;
+    border: 3px double #006505;
+}
+
 /* ventana emergente */
 
 div#popupContact {
