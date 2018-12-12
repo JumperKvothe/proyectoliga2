@@ -232,7 +232,7 @@ function buscarRival() {
     if (err) throw err;
   });
 
-  //Solucionar cque cuando no haya ninguno con menos puntos vaya al que más por arriba
+  //Solucionar que cuando no haya ninguno con menos puntos vaya al siguiente por arriba
   //Si tampoco hay más por arriba y está sólo que se quede buscando
   //Y que los que encuentre, hacer como en matchmakingind y que me ponga sus colaind a 0
   //Matchmakingind está comentada ahora mismo
