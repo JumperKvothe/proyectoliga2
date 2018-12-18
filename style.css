@@ -211,6 +211,11 @@ text-decoration: none;
     border: 3px double #006505;
 }
 
+.contE {
+  height: 80%;
+  padding-top: 50px;
+}
+
 /* ventana emergente */
 
 div#popupContact {
