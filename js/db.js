@@ -101,8 +101,10 @@ function matchMakingInd() {
 //Revisar (poner límite de players? límite por página?)
 //Escoger a los jugadores con más puntos para ponerlos en la clasificación
 function anadirJug() {
+  console.log(document.getElementById('tablita').value)
+  var limit = parseInt(document.getElementById('tablita').value)
   var njug, pts, jug, centro;
-  var sql = "SELECT * FROM jugadores ORDER BY puntos DESC";
+  var sql = "SELECT * FROM jugadores ORDER BY puntos DESC LIMIT " + limit + ", 10";
   con.query(sql, function (err, result) {
     njug = result.length
 
@@ -117,7 +119,7 @@ function anadirJug() {
 
   function setValue2(jug, pts, centro, i) {
     $(".clas").append(function () {
-      return '<tr class="odd"><th scope="row">' + (i + 1) + '</th><td>' + jug + '</td><td>' +
+      return '<tr class="odd"><th scope="row">' + (i + 1 + limit) + '</th><td>' + jug + '</td><td>' +
         pts + '</td><td>' + centro + '</td></tr>';
     });
   }
@@ -248,4 +250,8 @@ function buscarRival() {
       if (err) throw err;
     });
   }
+}
+
+function arrow(boolean){
+  
 }
