@@ -220,3 +220,14 @@ function loader(){
         loaders[id - 1].style.display = "inherit";
     };
 }
+
+//Formulario de crear equipo
+/* function crearEquipo() {
+    $(".CrearE").append(function () {
+        return '<form> '+
+        '<label class="labelform">Nombre de Equipo</label><br>'+
+        '<input type="text" id="nombreE" placeholder="Nombre de Equipo" onkeydown="enter()" required autofocus><br>'+
+        '<button onclick="">Invitar</button></form>';
+      });
+} */
+

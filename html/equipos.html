@@ -17,18 +17,18 @@
     <link rel="stylesheet" href="../style.css">
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
-        <script src="../node_modules/js/bootstrap/popper.min.js"></script>
-        <script src="../node_modules/js/bootstrap/bootstrap.min.js"></script>
-        <script src="../node_modules/js/plugins/plugins.js"></script>
-        <script src="../js/funciones.js"></script>
-        <script src="../js/db.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../node_modules/js/bootstrap/popper.min.js"></script>
+    <script src="../node_modules/js/bootstrap/bootstrap.min.js"></script>
+    <script src="../node_modules/js/plugins/plugins.js"></script>
+    <script src="../js/funciones.js"></script>
+    <script src="../js/db.js"></script>
     <script>if (window.module) module = window.module;</script>
 
 </head>
 
-<body>
+<body onload="listaE()">
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
@@ -44,7 +44,7 @@
                                     <li><a onclick="gotoindex()">Principal</a></li>
                                     <li><a href="historial.html">Historial</a></li>
                                     <li><a onclick="gotoclasi()">Clasificación</a></li>
-                                    <li><a href="equipos.html">Equipo</li>                                    
+                                    <li><a href="equipos.html">Equipo</li>
                                     <li><a onclick="gotologin()">Desconectarse</a></li>
                                 </ul>
                             </div>
@@ -64,11 +64,16 @@
             <!-- Slide Content -->
             <div class="container contE">
                 <div class="row">
-                    <div class="col-sm-6 caja">
-                        <label class="nombreequipo">fgsdfgsdg</label>
-                    </div>
+                    <div class="prueba col-sm-6"></div>
                     <div class="col-sm-6">
                         <a class="botonCE" onclick="crearEquipo()">Crear equipo</a>
+                        <div class="CrearE">
+                            <form>
+                                <label class="labelform">Nombre de Equipo</label><br>
+                                <input type="text" id="nombreE" onkeydown="enter()" required autofocus><br>
+                                <button onclick="">Invitar</button></form>
+                        </div>
+                        <div class="infoE cajaJug"></div>
                     </div>
                 </div>
             </div>
@@ -76,9 +81,16 @@
     </section>
     <!-- ##### Hero Area End ##### -->
 
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-        <script src="../node_modules/js/active.js"></script>
-    <script>if (window.module) module = window.module;</script>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+    <script src="../node_modules/js/active.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
 
 </body>
 
