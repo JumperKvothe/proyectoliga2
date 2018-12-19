@@ -1,5 +1,5 @@
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
-process.env.LEAGUE_API_KEY = 'RGAPI-ad115899-d79d-4d23-8bd4-7c1cd13604cc'
+process.env.LEAGUE_API_KEY = 'RGAPI-415e9dfd-7c99-4be5-9456-5c66400d4090'
 
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);

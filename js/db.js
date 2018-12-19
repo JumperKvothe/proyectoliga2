@@ -249,3 +249,7 @@ function buscarRival() {
     });
   }
 }
+
+function crearEquipo() {
+  var sql = "SELECT nombre FROM equipos"
+}
