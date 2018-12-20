@@ -13,139 +13,152 @@
 
 @import url('https://fonts.googleapis.com/css?family=Righteous');
 
-#loader-4 #loader{
-	position: relative;
-	color:transparent;
-	font-size: 1.4cm;
-	font-family: 'Righteous', cursive !important;
-	text-decoration: none;
-	float: left; 
-	top:40%;
-	left: 10%;
-	z-index: 2;
-    -webkit-animation: fade 2s linear infinite;
-    -moz-animation: fade 2s linear infinite;
-    -o-animation: fade 2s linear infinite;
-    	animation: fade 2s linear infinite ;
+#loader-4 #loader {
+  position: relative;
+  color: transparent;
+  font-size: 1.4cm;
+  font-family: 'Righteous', cursive !important;
+  text-decoration: none;
+  float: left;
+  top: 40%;
+  left: 10%;
+  z-index: 2;
+  -webkit-animation: fade 2s linear infinite;
+  -moz-animation: fade 2s linear infinite;
+  -o-animation: fade 2s linear infinite;
+  animation: fade 2s linear infinite;
 }
 
-#loader-4 > #loader:nth-of-type(1) {
-	-webkit-animation-delay: 0.75s;
-	-moz-animation-delay: 0.75s;
-	-o-animation-delay: 0.75s;
-	animation-delay: 0.75s;
+#loader-4>#loader:nth-of-type(1) {
+  -webkit-animation-delay: 0.75s;
+  -moz-animation-delay: 0.75s;
+  -o-animation-delay: 0.75s;
+  animation-delay: 0.75s;
 }
 
-#loader-4 > #loader:nth-of-type(2) {
-	-webkit-animation-delay: 0.95s;
-	-moz-animation-delay: 0.95s;
-	-o-animation-delay: 0.95s;
-		animation-delay: 0.95s;
-}
-#loader-4 > #loader:nth-of-type(3) {
-	-webkit-animation-delay: 1.15s;
-	-moz-animation-delay: 1.15s;
-	-o-animation-delay: 1.15s;
-		animation-delay: 1.15s;
-}
-#loader-4 > #loader:nth-of-type(4) {
-	-webkit-animation-delay: 1.35s;
-	-moz-animation-delay: 1.35s;
-	-o-animation-delay: 1.35s;
-		animation-delay: 1.35s;
+#loader-4>#loader:nth-of-type(2) {
+  -webkit-animation-delay: 0.95s;
+  -moz-animation-delay: 0.95s;
+  -o-animation-delay: 0.95s;
+  animation-delay: 0.95s;
 }
 
-#loader-4 > #loader:nth-of-type(5) {
-	-webkit-animation-delay: 1.55s;
-	-moz-animation-delay: 1.55s;
-	-o-animation-delay: 1.55s;
-		animation-delay: 1.55s;
+#loader-4>#loader:nth-of-type(3) {
+  -webkit-animation-delay: 1.15s;
+  -moz-animation-delay: 1.15s;
+  -o-animation-delay: 1.15s;
+  animation-delay: 1.15s;
 }
-#loader-4 > #loader:nth-of-type(6) {
-	-webkit-animation-delay: 1.75s;
-	-moz-animation-delay: 1.75s;
-	-o-animation-delay: 1.75s;
-		animation-delay: 1.75s;
+
+#loader-4>#loader:nth-of-type(4) {
+  -webkit-animation-delay: 1.35s;
+  -moz-animation-delay: 1.35s;
+  -o-animation-delay: 1.35s;
+  animation-delay: 1.35s;
 }
-#loader-4 > #loader:nth-of-type(7) {
-	-webkit-animation-delay: 1.95s;
-	-moz-animation-delay: 1.95s;
-	-o-animation-delay: 1.95s;
-		animation-delay: 1.95s;
+
+#loader-4>#loader:nth-of-type(5) {
+  -webkit-animation-delay: 1.55s;
+  -moz-animation-delay: 1.55s;
+  -o-animation-delay: 1.55s;
+  animation-delay: 1.55s;
 }
-#loader-4 > #loader:nth-of-type(8) {
-	-webkit-animation-delay: 2.15s;
-	-moz-animation-delay: 2.15s;
-	-o-animation-delay: 2.15s;
-		animation-delay: 2.15s;
+
+#loader-4>#loader:nth-of-type(6) {
+  -webkit-animation-delay: 1.75s;
+  -moz-animation-delay: 1.75s;
+  -o-animation-delay: 1.75s;
+  animation-delay: 1.75s;
 }
-#loader-4 > #loader:nth-of-type(9) {
-	-webkit-animation-delay: 2.35s;
-	-moz-animation-delay: 2.35s;
-	-o-animation-delay: 2.35s;
-		animation-delay: 2.35s;
+
+#loader-4>#loader:nth-of-type(7) {
+  -webkit-animation-delay: 1.95s;
+  -moz-animation-delay: 1.95s;
+  -o-animation-delay: 1.95s;
+  animation-delay: 1.95s;
 }
-#loader-4 > #loader:nth-of-type(10) {
-	-webkit-animation-delay: 2.55s;
-	-moz-animation-delay: 2.55s;
-	-o-animation-delay: 2.55s;
-		animation-delay: 2.55s;
+
+#loader-4>#loader:nth-of-type(8) {
+  -webkit-animation-delay: 2.15s;
+  -moz-animation-delay: 2.15s;
+  -o-animation-delay: 2.15s;
+  animation-delay: 2.15s;
 }
-#loader-4 > #loader:nth-of-type(11) {
-	-webkit-animation-delay: 2.75s;
-	-moz-animation-delay: 2.75s;
-	-o-animation-delay: 2.75s;
-		animation-delay: 2.75s;
+
+#loader-4>#loader:nth-of-type(9) {
+  -webkit-animation-delay: 2.35s;
+  -moz-animation-delay: 2.35s;
+  -o-animation-delay: 2.35s;
+  animation-delay: 2.35s;
 }
-#loader-4 > #loader:nth-of-type(12) {
-	-webkit-animation-delay: 2.95s;
-	-moz-animation-delay: 2.95s;
-	-o-animation-delay: 2.95s;
-		animation-delay: 2.95s;
+
+#loader-4>#loader:nth-of-type(10) {
+  -webkit-animation-delay: 2.55s;
+  -moz-animation-delay: 2.55s;
+  -o-animation-delay: 2.55s;
+  animation-delay: 2.55s;
+}
+
+#loader-4>#loader:nth-of-type(11) {
+  -webkit-animation-delay: 2.75s;
+  -moz-animation-delay: 2.75s;
+  -o-animation-delay: 2.75s;
+  animation-delay: 2.75s;
+}
+
+#loader-4>#loader:nth-of-type(12) {
+  -webkit-animation-delay: 2.95s;
+  -moz-animation-delay: 2.95s;
+  -o-animation-delay: 2.95s;
+  animation-delay: 2.95s;
 }
 
 
 /*keyframes for fade animation*/
 
 
-@-webkit-keyframes fade{
-	0%{
-		text-shadow: rgb(255,255,255) 0 0 0;
-	}
+@-webkit-keyframes fade {
+  0% {
+    text-shadow: rgb(255, 255, 255) 0 0 0;
+  }
 
-	90%,100%{
-		text-shadow: rgb(0,0,0) 0 0 19px;
-	}
+  90%,
+  100% {
+    text-shadow: rgb(0, 0, 0) 0 0 19px;
+  }
 }
 
-@-moz-keyframes fade{
-	0%{
-text-shadow: rgb(255,255,255) 0 0 0;
-	}
+@-moz-keyframes fade {
+  0% {
+    text-shadow: rgb(255, 255, 255) 0 0 0;
+  }
 
-	90%,100%{
-		text-shadow: rgb(0,0,0) 0 0 19px;
-	}
+  90%,
+  100% {
+    text-shadow: rgb(0, 0, 0) 0 0 19px;
+  }
 }
 
-@-o-keyframes fade{
-	0%{
-		text-shadow: rgb(255,255,255) 0 0 0;
-	}
+@-o-keyframes fade {
+  0% {
+    text-shadow: rgb(255, 255, 255) 0 0 0;
+  }
 
-	90%,100%{
-		text-shadow: rgb(0,0,0) 0 0 19px;
-	}
+  90%,
+  100% {
+    text-shadow: rgb(0, 0, 0) 0 0 19px;
+  }
 }
 
-@keyframes fade{
-	0%{
-		text-shadow: rgb(255,255,255) 0 0 0;
-	}
+@keyframes fade {
+  0% {
+    text-shadow: rgb(255, 255, 255) 0 0 0;
+  }
 
-	90%,100%{
-		text-shadow: rgb(0,0,0) 0 0 19px;
-	}
+  90%,
+  100% {
+    text-shadow: rgb(0, 0, 0) 0 0 19px;
+  }
 }
 
 /* 1 VS 1 */
@@ -171,44 +184,75 @@ text-shadow: rgb(255,255,255) 0 0 0;
 
 /* formularios */
 .labelform {
-  color:turquoise;
+  color: turquoise;
 }
 
 .form {
   text-align: center
 }
 
-/* equipos */ 
-.nombreequipo {
+/* equipos */
+.nombreequipo {}
 
+.CrearE {
+  height: 150px;
+  text-align: center;
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 25px;
+  font-style: italic;
+  background-color: #82b085;
+  border-radius: 15px;
+  border: 3px double #006505;
 }
+
 .caja {
-text-align: center; 
-text-decoration: none;
-    padding: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-family: helvetica;
-    font-weight: 300;
-    font-size: 25px;
-    font-style: italic;
-    background-color: #82b085;
-    border-radius: 15px;
-    border: 3px double #006505;
+  height: 55px;
+  text-align: center;
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 25px;
+  font-style: italic;
+  background-color: #82b085;
+  border-radius: 15px;
+  border: 3px double #006505;
+}
+
+.cajaJug {
+  text-align: center;
+  text-decoration: none;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 25px;
+  font-style: italic;
+  background-color: #82b085;
+  border-radius: 15px;
+  border: 3px double #006505;
 }
 
 .botonCE {
-  text-decoration: none;
-    padding: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-family: helvetica;
-    font-weight: 300;
-    font-size: 25px;
-    font-style: italic;
-    background-color: #82b085;
-    border-radius: 15px;
-    border: 3px double #006505;
+  text-align: center;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 25px;
+  font-style: italic;
+  background-color: #82b085;
+  border-radius: 15px;
+  border: 3px double #006505;
 }
 
 .contE {
@@ -219,24 +263,24 @@ text-decoration: none;
 /* ventana emergente */
 
 div#popupContact {
-  position:absolute;
-  left:42%;
-  top:38%;
-  margin-left:-202px;
-  font-family:'Raleway',sans-serif
-  }
+  position: absolute;
+  left: 42%;
+  top: 38%;
+  margin-left: -202px;
+  font-family: 'Raleway', sans-serif
+}
 
-  #abc {
-    width:100%;
-    height:100%;
-    opacity:.95;
-    top:0;
-    left:0;
-    display:none;
-    position:fixed;
-    background-color:#313131;
-    overflow:auto
-    }
+#abc {
+  width: 100%;
+  height: 100%;
+  opacity: .95;
+  top: 0;
+  left: 0;
+  display: none;
+  position: fixed;
+  background-color: #313131;
+  overflow: auto
+}
 
 .close {
   background: #606061;

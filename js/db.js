@@ -247,7 +247,7 @@ function buscarRival() {
     puntos1 = result[0].puntos
     $(".nombre").html(result[0].loluser);
     $('.puntos').html(result[0].puntos);
-    setInterval(setValue3(puntos1, result[0].loluser),1000);
+    setInterval(setValue3(puntos1, result[0].loluser), 1000);
     if (err) throw err;
   });
 
@@ -256,8 +256,8 @@ function buscarRival() {
   //Y que los que encuentre, hacer como en matchmakingind y que me ponga sus colaind a 0
   //Matchmakingind está comentada ahora mismo
   function setValue3(punto, nelite) {
-    var sql2 = "SELECT puntos, loluser FROM jugadores WHERE colaind=1 AND puntos <=" + punto + 
-    " AND loluser != '" + nelite + "' ORDER BY puntos DESC LIMIT 1";
+    var sql2 = "SELECT puntos, loluser FROM jugadores WHERE colaind=1 AND puntos <=" + punto +
+      " AND loluser != '" + nelite + "' ORDER BY puntos DESC LIMIT 1";
     con.query(sql2, function (err, result) {
       console.log(result)
       nombrelol2 = result[0].loluser
@@ -267,4 +267,54 @@ function buscarRival() {
       if (err) throw err;
     });
   }
+}
+
+//Función para sacar la lista de equipos
+function listaE() {
+  let user = JSON.parse(localStorage.getItem('currentUser'));
+  let id = user.idjugador;
+  var sql = "SELECT nombre FROM equipos WHERE idj1= " + id + " OR idj2= " + id + " OR idj3= " + id +
+    " OR idj4= " + id + " OR idj5= " + id + " OR idj6= " + id + " OR idj7= " + id + "";
+  con.query(sql, function (err, result) {
+    for (i = 0; i < result.length; i++) {
+      let nomE = result[i].nombre;
+      $('.prueba').append(function () {
+        return ' <div class="caja"><label class="nombreequipo' + i + ' botonEq' + i + '" ></label></div>';
+      });
+      $('.nombreequipo' + i + '').html(nomE);
+      $('.botonEq' + i + '').click(function () {
+        infoE(nomE);
+      })
+    }
+    if (err) throw err;
+  });
+}
+onclick = "infoE('+nomE+')"
+
+//Función para sacar la lista de jugadores dentro de un equipo seleccionado
+function infoE(nomE) {
+  console.log(nomE)
+  var sql = "SELECT loluser FROM jugadores j JOIN equipos e ON " +
+    "j.idjugador = e.idj1 OR " +
+    "j.idjugador = e.idj2 OR " +
+    "j.idjugador = e.idj3 OR " +
+    "j.idjugador = e.idj4 OR " +
+    "j.idjugador = e.idj5 OR " +
+    "j.idjugador = e.idj6 OR " +
+    "j.idjugador = e.idj7 WHERE e.nombre LIKE '" + nomE + "'";
+  con.query(sql, function (err, result) {
+    console.log(result);
+    for (i = 0; i < result.length; i++) {
+      $('.infoE').append(function () {
+        return ' <label class="nombrejug' + i + '"></label><br>';
+      });
+      $('.nombrejug' + i + '').html(result[i].loluser);
+    }
+    if (err) throw err;
+  });
+}
+
+
+function arrow(boolean) {
+
 }
