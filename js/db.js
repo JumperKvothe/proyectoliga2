@@ -24,7 +24,7 @@ function funcionesdb(num) {
       break;
       //Escoger a los jugadores con más puntos para ponerlos en la clasificación
     case 3:
-      anadirJug()
+      clasificacion()
       break;
       //Comprobar si al pulsar la imagen del lol el usuario está verificado o no
     case 4:
@@ -98,28 +98,45 @@ function matchMakingInd() {
   }
 }
 
-//Revisar (poner límite de players? límite por página?)
 //Escoger a los jugadores con más puntos para ponerlos en la clasificación
-function anadirJug() {
-  console.log(document.getElementById('tablita').value)
-  var limit = parseInt(document.getElementById('tablita').value)
-  var njug, pts, jug, centro;
-  var sql = "SELECT * FROM jugadores ORDER BY puntos DESC LIMIT " + limit + ", 10";
+function clasificacion() {
+  let pag = parseInt(document.getElementById('tablita').value)
+  let njug, pts, jug, centro, maxpag;
+  let sql = "SELECT * FROM jugadores"
   con.query(sql, function (err, result) {
     njug = result.length
-
-    for (i = 0; i < njug; i++) {
-      jug = result[i].eliteuser
-      pts = result[i].puntos
-      centro = result[i].centro
-      setValue2(jug, pts, centro, i);
+    maxpag = njug/7
+    if (njug%7 != 0){
+      maxpag++
+    }
+    if(pag <= maxpag){
+      query()
+    }else{
+      document.getElementById('tablita').value = parseInt(document.getElementById('tablita').value) -1
     }
     if (err) throw err;
   });
 
+  //Consulta los jugadores de la página actual de la clasificación
+  function query(){
+    var sql2 = "SELECT * FROM jugadores ORDER BY puntos DESC, eliteuser LIMIT " + (pag-1)*7 + ", 7";
+    con.query(sql2, function (err, result) {
+      njug = result.length
+      $(".clas").empty();
+      for (i = 0; i < njug; i++) {
+        jug = result[i].eliteuser
+        pts = result[i].puntos
+        centro = result[i].centro
+        setValue2(jug, pts, centro, i);
+      }
+      if (err) throw err;
+    });
+  }
+  
+  //Crea las filas de la tabla de clasificación
   function setValue2(jug, pts, centro, i) {
     $(".clas").append(function () {
-      return '<tr class="odd"><th scope="row">' + (i + 1 + limit) + '</th><td>' + jug + '</td><td>' +
+      return '<tr class="odd"><th scope="row">' + (i + (pag-1)*7 + 1) + '</th><td>' + jug + '</td><td>' +
         pts + '</td><td>' + centro + '</td></tr>';
     });
   }
@@ -250,8 +267,4 @@ function buscarRival() {
       if (err) throw err;
     });
   }
-}
-
-function arrow(boolean){
-  
 }

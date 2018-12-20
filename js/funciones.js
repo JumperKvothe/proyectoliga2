@@ -35,7 +35,7 @@ function gotoregis() {
     window.location.href = "../html/registrarse.html"
 }
 
-function gotoej(){
+function gotoej() {
     window.location.href = "ejemplo.html"
 }
 
@@ -112,20 +112,20 @@ function verificarlol(id, loluser) {
                     .then(data => {
                         'use strict';
                         console.log(data)
-                        if (data.length == 0){
+                        if (data.length == 0) {
                             console.log("unranked")
                             elo = 0
-                        }else{
+                        } else {
                             console.log("ranked en alguna cola")
                             let pos = 4;
                             for (let i = 0; i < data.length; i++) {
-                                if (data[i].queueType.localeCompare("RANKED_SOLO_5x5") == 0){
+                                if (data[i].queueType.localeCompare("RANKED_SOLO_5x5") == 0) {
                                     pos = i
                                 }
                             }
-                            if (pos == 4){
+                            if (pos == 4) {
                                 elo = 500
-                            }else{
+                            } else {
                                 switch (data[pos].tier) {
                                     case "Bronze":
                                         elo = 750
@@ -152,7 +152,7 @@ function verificarlol(id, loluser) {
                         'use strict';
                         console.log(err);
                     });
-            console.log(elo)
+                console.log(elo)
                 addnom(loluser, elo);
             }
         })
@@ -202,16 +202,17 @@ function mostrarNombre() {
 }
 
 //Eventos con tecla enter
-function enter(){
-    if(event.key === 'Enter') {
-        funcionesdb(7)        
+function enter() {
+    if (event.key === 'Enter') {
+        funcionesdb(7)
     }
 }
 
 //Cargar el loader
-function loader(){
+function loader() {
     loaders = document.getElementsByClassName('loader-wrapper');
     loaders[0].style.display = "inherit";
+
     function change(self) {
         for (var i = loaders.length - 1; i >= 0; i--) {
             loaders[i].style.display = "none";
@@ -219,4 +220,17 @@ function loader(){
         id = self.id;
         loaders[id - 1].style.display = "inherit";
     };
+}
+
+//Cambiar páginas clasificación
+function arrow(bool){
+    if (bool){
+        document.getElementById('tablita').value = parseInt(document.getElementById('tablita').value) +1
+        funcionesdb(3)
+    }else{
+        if (parseInt(document.getElementById('tablita').value) != 1) {
+            document.getElementById('tablita').value = parseInt(document.getElementById('tablita').value) -1
+            funcionesdb(3)
+        }
+    }
 }
