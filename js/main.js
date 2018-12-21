@@ -10,7 +10,7 @@ function createWindow()
     {
         win = new BrowserWindow ({width: 800, height: 600, webPreferences: {devTools: true}})
         win.loadURL(url.format({
-            pathname: path.join(__dirname,'../html/login.html'),
+            pathname: path.join(__dirname,'../html/inicio.html'),
             protocol: 'file',
             slashes: true,
             resizable: false
