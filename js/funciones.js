@@ -245,3 +245,23 @@ function arrow(bool){
       });
 } */
 
+var pos = 0
+
+//Mostrar amigos
+function showFriends(){
+    let elem = document.getElementById('chat-sidebar')
+    let value = window.getComputedStyle(elem)
+    value = parseInt(value.getPropertyValue("right"));
+    var id = setInterval(suma, 1);
+    function suma(){
+        if(pos == 180){
+            clearInterval(id)
+        }else{
+            pos += 2
+            let valor = pos + value
+            if (valor <= 180){
+                elem.style.right = valor + "px"
+            }
+        }
+    }
+}
