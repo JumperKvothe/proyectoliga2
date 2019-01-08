@@ -245,23 +245,34 @@ function arrow(bool){
       });
 } */
 
-var pos = 0
-
-//Mostrar amigos
-function showFriends(){
+//Mostrar/Ocultar lista amigos
+//Si pones el cursor en la parte superior de la lista se sigue ocultando (arreglar)
+function showFriends(bool){
     let elem = document.getElementById('chat-sidebar')
-    let value = window.getComputedStyle(elem)
-    value = parseInt(value.getPropertyValue("right"));
-    var id = setInterval(suma, 1);
-    function suma(){
-        if(pos == 180){
-            clearInterval(id)
-        }else{
-            pos += 2
-            let valor = pos + value
-            if (valor <= 180){
-                elem.style.right = valor + "px"
+    if(bool){
+        let value = window.getComputedStyle(elem)
+        value = parseInt(value.getPropertyValue('right'));
+        let id1 = setInterval(suma, 1);
+        function suma(){
+            if(value > -1){
+                clearInterval(id1)
+            }else{
+                value += 2
+                elem.style.right = value + "px"
+            }
+        }
+    }else{
+        let value2 = window.getComputedStyle(elem)
+        value2 = parseInt(value2.getPropertyValue('right'));
+        let id2 = setInterval(resta, 1);
+        function resta(){
+            if(value2 < -179){
+                clearInterval(id2)
+            }else{
+                value2 -= 2
+                elem.style.right = value2 + "px"
             }
         }
     }
+    
 }
