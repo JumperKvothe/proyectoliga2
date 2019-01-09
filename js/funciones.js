@@ -199,6 +199,7 @@ function imprimirN() {
 function mostrarNombre() {
     let user = JSON.parse(localStorage.getItem('currentUser'))
     $('#eliteuser').html(user.eliteuser)
+    checkOnline()
 }
 
 //Eventos con tecla enter
@@ -347,3 +348,8 @@ $(document).ready(function(){
    }
    
   });
+
+  //Comprobar usuarios online
+  function onlineUsers(){
+
+  }

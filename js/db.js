@@ -8,6 +8,8 @@ var con = mysql.createConnection({
   multipleStatements: true
 });
 
+var onlineUsers = []
+
 function funcionesdb(num) {
 
   switch (num) {
@@ -41,6 +43,10 @@ function funcionesdb(num) {
       //Comprobar si los datos de login son correctos
     case 7:
       comprobarLogin()
+      break;
+      //Meter los usuarios online en un array
+    case 8:
+      checkOnline()
       break;
   }
 }
@@ -228,6 +234,10 @@ function comprobarLogin() {
       if (result == "") {
         alert("Usuario o contraseña erróneos")
       } else {
+        sql2 = "INSERT INTO gente_online (id, fecha) VALUES (" + result[0].idjugador + ", NOW())"
+        con.query(sql2, function (err, result) {
+          if (err) throw err;
+        })
         localStorage.setItem('currentUser', JSON.stringify(result[0]));
         gotoinicio()
       }
@@ -314,7 +324,16 @@ function infoE(nomE) {
   });
 }
 
-
-function arrow(boolean) {
-
+//Meter los usuarios online en un array
+//Añadido en la función mostrarNombre de funciones.js
+function checkOnline(){
+  var aux = []
+  sql = "SELECT id FROM gente_online"
+  con.query(sql, function (err, result) {
+    for (let i = 0; i < result.length; i++) {
+      onlineUsers[i] = result[i]
+      console.log(onlineUsers[i])
+    }
+    if (err) throw err;
+  })
 }
