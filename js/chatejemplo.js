@@ -21,6 +21,7 @@ $(document).ready(function(){
    
     var userID = $(this).attr("class");
     var username = $(this).children().text() ;
+    console.log("box")
     
     if ($.inArray(userID, arr) != -1)
     {
@@ -71,4 +72,33 @@ $(document).ready(function(){
    
   });
   
-  
+  //Mostrar/Ocultar lista amigos
+function showFriends(bool){
+   let elem = document.getElementById('chat-sidebar')
+   if(bool){
+       let value = window.getComputedStyle(elem)
+       value = parseInt(value.getPropertyValue('right'));
+       let id1 = setInterval(suma, 1);
+       function suma(){
+           if(value > -1){
+               clearInterval(id1)
+           }else{
+               value += 2
+               elem.style.right = value + "px"
+           }
+       }
+   }else{
+       let value2 = window.getComputedStyle(elem)
+       value2 = parseInt(value2.getPropertyValue('right'));
+       let id2 = setInterval(resta, 1);
+       function resta(){
+           if(value2 < -179){
+               clearInterval(id2)
+           }else{
+               value2 -= 2
+               elem.style.right = value2 + "px"
+           }
+       }
+   }
+   
+}

@@ -25,6 +25,7 @@ body{
  width:250px;
  background:white;
  border-radius:5px 5px 0px 0px;
+ z-index: 3;
 }
 
 .msg_head{ 
@@ -98,6 +99,12 @@ body{
      padding-bottom: 10px;
      border: 1px solid #b2b2b2;
      background:#e2e2e2;
+     border-left-style: groove;
+     border-left-width: 5px;
+     border-left-color: coral;
+     border-top-style: groove;
+     border-top-width: 5px;
+     border-top-color: coral;
 }
  #sidebar-user-box {
      padding: 10px;
