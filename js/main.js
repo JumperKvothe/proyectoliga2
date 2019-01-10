@@ -4,6 +4,10 @@ const {app, BrowserWindow} = electron
 const path = require('path')
 const url = require('url')
 
+require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, '../node_modules', '.bin', 'electron')});
+
+
 let win
 
 function createWindow()
