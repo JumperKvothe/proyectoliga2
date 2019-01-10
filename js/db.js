@@ -337,3 +337,26 @@ function checkOnline(){
     if (err) throw err;
   })
 }
+
+/* module.exports = function alCerrar(){
+  sql = "INSERT INTO gente_online (id, fecha) VALUES (9999, '1900/01/01 00:00:00')"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+  })
+} */
+
+/* const alCerrar = () => {
+  sql = "INSERT INTO gente_online (id, fecha) VALUES (9999, '1900/01/01 00:00:00')"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+  })
+}
+
+module.exports = {
+  alCerrar: alCerrar
+} */
+
+
+
+
+
