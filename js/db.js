@@ -330,6 +330,8 @@ function infoE(nomE) {
   });
 }
 
+//Función para crear un equipo
+
 
 
 //Meter los usuarios online en un array
