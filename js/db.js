@@ -111,21 +111,21 @@ function clasificacion() {
   let sql = "SELECT * FROM jugadores"
   con.query(sql, function (err, result) {
     njug = result.length
-    maxpag = njug/7
-    if (njug%7 != 0){
+    maxpag = njug / 7
+    if (njug % 7 != 0) {
       maxpag++
     }
-    if(pag <= maxpag){
+    if (pag <= maxpag) {
       query()
-    }else{
-      document.getElementById('tablita').value = parseInt(document.getElementById('tablita').value) -1
+    } else {
+      document.getElementById('tablita').value = parseInt(document.getElementById('tablita').value) - 1
     }
     if (err) throw err;
   });
 
   //Consulta los jugadores de la página actual de la clasificación
-  function query(){
-    var sql2 = "SELECT * FROM jugadores ORDER BY puntos DESC, eliteuser LIMIT " + (pag-1)*7 + ", 7";
+  function query() {
+    var sql2 = "SELECT * FROM jugadores ORDER BY puntos DESC, eliteuser LIMIT " + (pag - 1) * 7 + ", 7";
     con.query(sql2, function (err, result) {
       njug = result.length
       $(".clas").empty();
@@ -138,13 +138,18 @@ function clasificacion() {
       if (err) throw err;
     });
   }
-  
+
   //Crea las filas de la tabla de clasificación
   function setValue2(jug, pts, centro, i) {
-    $(".clas").append(function () {
-      return '<tr class="odd"><th scope="row">' + (i + (pag-1)*7 + 1) + '</th><td>' + jug + '</td><td>' +
-        pts + '</td><td>' + centro + '</td></tr>';
+    var sql3 = "SELECT nombre FROM centros WHERE id = " + centro + "";
+    con.query(sql3, function (err, result) {
+      $(".clas").append(function () {
+        return '<tr class="odd"><th scope="row">' + (i + (pag - 1) * 7 + 1) + '</th><td>' + jug + '</td><td>' +
+          pts + '</td><td>' + result[0].nombre + '</td></tr>';
+      });
+      if (err) throw err;
     });
+
   }
 }
 
@@ -299,7 +304,6 @@ function listaE() {
     if (err) throw err;
   });
 }
-onclick = "infoE('+nomE+')"
 
 //Función para sacar la lista de jugadores dentro de un equipo seleccionado
 function infoE(nomE) {
@@ -314,6 +318,7 @@ function infoE(nomE) {
     "j.idjugador = e.idj7 WHERE e.nombre LIKE '" + nomE + "'";
   con.query(sql, function (err, result) {
     console.log(result);
+    $('.infoE').empty();
     for (i = 0; i < result.length; i++) {
       $('.infoE').append(function () {
         return ' <label class="nombrejug' + i + '"></label><br>';
@@ -321,12 +326,17 @@ function infoE(nomE) {
       $('.nombrejug' + i + '').html(result[i].loluser);
     }
     if (err) throw err;
+    cont++;
   });
 }
 
+//Función para crear un equipo
+
+
+
 //Meter los usuarios online en un array
 //Añadido en la función mostrarNombre de funciones.js
-function checkOnline(){
+function checkOnline() {
   var aux = []
   sql = "SELECT id FROM gente_online"
   con.query(sql, function (err, result) {

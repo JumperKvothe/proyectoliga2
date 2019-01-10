@@ -1,5 +1,5 @@
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
-process.env.LEAGUE_API_KEY = 'RGAPI-bedf3552-bdae-4663-8725-b8386c09932a'
+process.env.LEAGUE_API_KEY = 'RGAPI-d2382023-19e8-489d-baf2-104f43b99e34'
 
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
@@ -237,14 +237,14 @@ function arrow(bool){
 }
 
 //Formulario de crear equipo
-/* function crearEquipo() {
+function crearEquipo() {
     $(".CrearE").append(function () {
         return '<form> '+
         '<label class="labelform">Nombre de Equipo</label><br>'+
         '<input type="text" id="nombreE" placeholder="Nombre de Equipo" onkeydown="enter()" required autofocus><br>'+
         '<button onclick="">Invitar</button></form>';
       });
-} */
+}
 
 //Mostrar/Ocultar lista amigos
 function showFriends(bool){

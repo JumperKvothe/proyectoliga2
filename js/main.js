@@ -4,6 +4,11 @@ const {app, BrowserWindow} = electron
 const path = require('path')
 const url = require('url')
 
+/* require('electron-reload')(__dirname, {
+    electron: require(`${__dirname}/../node_modules/electron`)}); */
+    //Hay que desinstalarlo si no lo usamos
+
+
 let win
 
 //let dbjs = require("./db.js");
