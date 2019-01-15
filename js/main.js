@@ -1,14 +1,17 @@
-const {app, BrowserWindow, Menu} = require('electron')
+const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 
 const path = require('path')
 const url = require('url')
 
-if(process.env.NODE_ENV !== 'production'){
+
+const h = require('../js/hola.js')
+
+//if(process.env.NODE_ENV !== 'production'){
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, '../node_modules', '.bin', 'electron')
     });
     //Hay que desinstalarlo si no lo usamos
-}
+//}
 
 let win
 
@@ -43,6 +46,8 @@ function createWindow()
         //win.setMaximizable(true);
         //win.setMinimizable(false);
         //win.webContents.openDevTools()
+        
+        h.hola();
     }
 
 //Crear una plantilla de pestañas y subpestañas (en arrays) y sus funciones onclick    
