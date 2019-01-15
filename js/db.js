@@ -326,11 +326,96 @@ function infoE(nomE) {
       $('.nombrejug' + i + '').html(result[i].loluser);
     }
     if (err) throw err;
-    cont++;
+    compAñaJug(nomE, i);
   });
 }
 
-//Función para crear un equipo
+//Funciones para crear un equipo
+function crearE1() {
+  let cont = 0;
+  let nombreE = document.getElementById("nombreE").value;
+  sql = "SELECT nombre FROM equipos";
+  con.query(sql, function (err, result) {
+    for (i = 0; i < result.length; i++) {
+      if (nombreE != result[i].nombre) {} else {
+        cont++
+      };
+    }
+    if (cont == 0) {
+      crearE2(nombreE);
+    } else {
+      alert("Nombre ya existente");
+    }
+    if (err) throw err;
+  })
+}
+
+function crearE2(nomE) {
+  let user = JSON.parse(localStorage.getItem('currentUser'));
+  let id = user.idjugador;
+  console.log(nomE);
+  console.log(id);
+
+  sql2 = "INSERT INTO equipos (nombre, idj1) VALUES ('" + nomE + "' , " + id + ")";
+  con.query(sql2, function (err, result) {
+    if (err) throw err;
+  });
+}
+
+
+//Función para añadir jugador a los equipos
+function compAñaJug(nomE, contJ)
+{
+  var sql = "SELECT idj1, idj2, idj3, idj4, idj5, idj6, idj7 FROM equipos where nombre = '" + nomE + "'";
+  con.query(sql, function (err, result) {
+    console.log(result);
+    console.log(result[0].idj2);
+    for (i = 0; i < 7; i++) {
+      if (result[0].idj2 =="")
+      {
+        $('.infoE').append(function () {
+          return ' <label class="nombrejug' + i + '"></label><br>';
+        });
+        $('.nombrejug' + i + '').html(result[i].loluser);
+      }
+      else {}
+      if (result[0].idj3 =="")
+      {
+
+      }
+      else {}
+      if (result[0].idj4 =="")
+      {
+
+      }
+      else {}
+      if (result[0].idj5 =="")
+      {
+
+      }
+      else {}
+      if (result[0].idj6 =="")
+      {
+
+      }
+      else {}
+      if (result[0].idj7 =="")
+      {
+
+      }
+      else {}
+
+
+      $('.infoE').append(function () {
+        return ' <label class="nombrejug' + i + '"></label><br>';
+      });
+      $('.nombrejug' + i + '').html(result[i].loluser);
+    }
+    if (err) throw err;
+  });
+}
+
+
 
 
 
@@ -365,8 +450,3 @@ function checkOnline() {
 module.exports = {
   alCerrar: alCerrar
 } */
-
-
-
-
-
