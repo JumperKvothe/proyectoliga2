@@ -3,9 +3,6 @@ const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
 
-
-const h = require('../js/hola.js')
-
 //if(process.env.NODE_ENV !== 'production'){
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, '../node_modules', '.bin', 'electron')
@@ -20,7 +17,7 @@ app.on('ready', createWindow)
 //Crear la ventana desde electron
 function createWindow()
     {
-        win = new BrowserWindow ({width: 800, height: 600, webPreferences: {devTools: true}})
+        win = new BrowserWindow ({show:false, width: 800, height: 600, webPreferences: {devTools: true}})
         win.loadURL(url.format({
             pathname: path.join(__dirname,'../html/login.html'),
             protocol: 'file',
@@ -35,6 +32,10 @@ function createWindow()
         //Eliminar pestañas/subpestañas
         //win.setMenu(null)
 
+        win.once('ready-to-show', () => {
+            win.show();
+        })
+
         win.on('closed', () => {
             app.quit();
         });
@@ -45,9 +46,7 @@ function createWindow()
         //win.setFullScreenable(false);
         //win.setMaximizable(true);
         //win.setMinimizable(false);
-        //win.webContents.openDevTools()
-        
-        h.hola();
+        //win.webContents.openDevTools()        
     }
 
 //Crear una plantilla de pestañas y subpestañas (en arrays) y sus funciones onclick    
