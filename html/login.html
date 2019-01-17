@@ -25,7 +25,6 @@
         <script src="../node_modules/js/bootstrap/bootstrap.min.js"></script>
         <script src="../node_modules/js/plugins/plugins.js"></script>
     <script>if (window.module) module = window.module;</script>
-
 </head>
 
 <body>
@@ -66,7 +65,7 @@
                 <br><label class="labelform">Contraseña</label><br>
                 <input type="password" id="pass" placeholder="Contraseña" onkeydown="enter()" required><br>
                 <a data-delay="0ms" onclick="funcionesdb(7)" class="btn oneMusic-btn mt-50">Conectarse<i class="fa fa-angle-double-right"></i></a>
-                <a data-delay="0ms" onclick="gotoregis()" class="btn oneMusic-btn mt-50">Registrarse<i class="fa fa-angle-double-right"></i></a>    
+                <a data-delay="0ms" id="regis" onclick="gotoregis()" class="btn oneMusic-btn mt-50">Registrarse<i class="fa fa-angle-double-right"></i></a>    
             </form>
             </div>
         </div>
@@ -78,6 +77,8 @@
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <script src="../node_modules/js/active.js"></script>
     <script>if (window.module) module = window.module;</script>
+    
+    <script>require('../js/hola.js')</script>
 
 </body>
 
