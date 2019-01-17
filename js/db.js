@@ -305,7 +305,7 @@ function listaE() {
   });
 }
 
-//Función para sacar la lista de jugadores dentro de un equipo seleccionado
+//Función para sacar la lista de jugadores de un equipo seleccionado
 function infoE(nomE) {
   console.log(nomE)
   var sql = "SELECT loluser FROM jugadores j JOIN equipos e ON " +
@@ -318,6 +318,7 @@ function infoE(nomE) {
     "j.idjugador = e.idj7 WHERE e.nombre LIKE '" + nomE + "'";
   con.query(sql, function (err, result) {
     console.log(result);
+    let tamE = result.length;
     $('.infoE').empty();
     for (i = 0; i < result.length; i++) {
       $('.infoE').append(function () {
@@ -326,7 +327,7 @@ function infoE(nomE) {
       $('.nombrejug' + i + '').html(result[i].loluser);
     }
     if (err) throw err;
-    compAñaJug(nomE, i);
+    compAñaJug(nomE, tamE);
   });
 }
 
@@ -361,63 +362,91 @@ function crearE2(nomE) {
     if (err) throw err;
   });
 }
-
+1
 
 //Función para añadir jugador a los equipos
-function compAñaJug(nomE, contJ)
-{
-  var sql = "SELECT idj1, idj2, idj3, idj4, idj5, idj6, idj7 FROM equipos where nombre = '" + nomE + "'";
+function compAñaJug(nomE, tamE) {
+  nomEq = nomE;
+  tamEq = tamE;
+  var sql = "SELECT idj1, idj2, idj3, idj4, idj5, idj6, idj7 FROM equipos where nombre = '" + nomEq + "'";
   con.query(sql, function (err, result) {
     console.log(result);
-    console.log(result[0].idj2);
-    for (i = 0; i < 7; i++) {
-      if (result[0].idj2 =="")
-      {
-        $('.infoE').append(function () {
-          return ' <label class="nombrejug' + i + '"></label><br>';
-        });
-        $('.nombrejug' + i + '').html(result[i].loluser);
-      }
-      else {}
-      if (result[0].idj3 =="")
-      {
-
-      }
-      else {}
-      if (result[0].idj4 =="")
-      {
-
-      }
-      else {}
-      if (result[0].idj5 =="")
-      {
-
-      }
-      else {}
-      if (result[0].idj6 =="")
-      {
-
-      }
-      else {}
-      if (result[0].idj7 =="")
-      {
-
-      }
-      else {}
-
-
+    if (result[0].idj2 == null) {
       $('.infoE').append(function () {
-        return ' <label class="nombrejug' + i + '"></label><br>';
+        return ' <input type="search" id="busqC" class="form" name="q" placeholder="Busca un compañero"><br>' +
+          '<button onclick="busqC(nomEq, tamEq)">Invitar</button>';
       });
-      $('.nombrejug' + i + '').html(result[i].loluser);
+    } else if (result[0].idj3 == null) {
+      $('.infoE').append(function () {
+        return ' <input type="search" id="busqC" class="form" name="q" placeholder="Busca un compañero"><br>' +
+          '<button onclick="busqC(nomEq, tamEq)">Invitar</button>';
+      });
+    } else if (result[0].idj4 == null) {
+      $('.infoE').append(function () {
+        return ' <input type="search" id="busqC" class="form" name="q" placeholder="Busca un compañero"><br>' +
+          '<button onclick="busqC(nomEq, tamEq)">Invitar</button>';
+      });
+    } else if (result[0].idj5 == null) {
+      $('.infoE').append(function () {
+        return ' <input type="search" id="busqC" class="form" name="q" placeholder="Busca un compañero"><br>' +
+          '<button onclick="busqC(nomEq, tamEq)">Invitar</button>';
+      });
+    } else if (result[0].idj6 == null) {
+      $('.infoE').append(function () {
+        return ' <input type="search" id="busqC" class="form" name="q" placeholder="Busca un compañero"><br>' +
+          '<button onclick="busqC(nomEq, tamEq)">Invitar</button>';
+      });
+    } else if (result[0].idj7 == null) {
+      $('.infoE').append(function () {
+        return ' <input type="search" id="busqC" class="form" name="q" placeholder="Busca un compañero"><br>' +
+          '<button onclick="busqC(nomEq, tamEq)">Invitar</button>';
+      });
     }
     if (err) throw err;
   });
 }
 
+//Funciones para buscar a un jugador e invitarlo a un equipo
+//Esta comprueba si el jugador de LoL existe en la base de datos
+function busqC(nomEq, tamEq) {
+  let nomNJ = document.getElementById("busqC").value;
+  nomEqu = nomEq;
+  tamEqu = tamEq;
+  sql = "SELECT idjugador FROM jugadores WHERE loluser='" + nomNJ + "'";
+  con.query(sql, function (err, result) {
+    if (result.length==0) {
+      alert("El nombre de usuario no existe o quizás no se haya registrado en la app");
+    } else {
+      busqC2(result[0].idjugador, nomEqu, tamEqu);
+    }
+    if (err) throw err;
+  });
+}
 
+//esta comprueba que no esté ese jugador ya en el equipo y sino llama a la función que lo mete
+function busqC2(idj, nomEqu, tamEqu) {
+  idjug = idj;
+  tamEquipo = tamEqu;
+  nomEquipo = nomEqu;
+  sql = "SELECT idj1, idj2, idj3, idj4, idj5, idj6, idj7 FROM equipos where nombre = '" + nomEquipo + "'";
+  con.query(sql, function (err, result) {
+    if (idjug == result[0].idj1 || idjug == result[0].idj2 || idjug == result[0].idj3 || idjug == result[0].idj4 ||
+      idjug == result[0].idj5 || idjug == result[0].idj6 || idjug == result[0].idj7) {
+      alert("Ese jugador ya se encuentra en el equipo");
+    } else {
+      busqC3(idjug, nomEquipo, tamEquipo);
+    }
+  });
+}
 
-
+//Esta función introduce el jugador en el equipo
+function busqC3(idjug, nomEquipo, tamEquipo) {
+  tamEquipo = tamEquipo + 1;
+  sql = "UPDATE equipos SET idj" + tamEquipo + "= " + idjug + " WHERE nombre LIKE '" + nomEquipo + "'";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+  })
+}
 
 //Meter los usuarios online en un array
 //Añadido en la función mostrarNombre de funciones.js
