@@ -236,16 +236,6 @@ function arrow(bool){
     }
 }
 
-//Formulario de crear equipo
-/* function crearEquipo() {
-    $(".CrearE").append(function () {
-        return '<form> '+
-        '<label class="labelform">Nombre de Equipo</label><br>'+
-        '<input type="text" id="nombreE" placeholder="Nombre de Equipo" onkeydown="enter()" required autofocus><br>'+
-        '<button onclick="">Invitar</button></form>';
-      });
-} */
-
 //Mostrar/Ocultar lista amigos
 function showFriends(bool){
     let elem = document.getElementById('chat-sidebar')
