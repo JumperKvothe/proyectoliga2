@@ -479,3 +479,27 @@ function checkOnline() {
 module.exports = {
   alCerrar: alCerrar
 } */
+
+//Mandar mensajes del chatbox que abra
+function mandarMensajes(userID, msg){
+  let user = JSON.parse(localStorage.getItem('currentUser'));
+  let miid = user.idjugador;
+  sql = 'INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (' +
+  miid + ', ' + userID + ', "' + msg + '", NOW())'
+  console.log(sql)
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+  });
+}
+
+//Recibir mensajes del chatbox que abra
+function recibirMensajes(username){
+  let miid = JSON.parse(localStorage.getItem('currentUser').idjugador)
+  let suid
+
+  sql = "SELECT id FROM jugadores WHERE eliteuser LIKE '" + username + "'"
+  con.query(sql, function (err, result) {
+    
+    if (err) throw err;
+  })
+}
