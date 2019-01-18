@@ -302,14 +302,15 @@ $(document).ready(function(){
        '<div class="msg_head">'+username +
        '<div class="close">x</div> </div>'+
        '<div class="msg_wrap"> <div class="msg_body"> <div class="msg_push"></div> </div>'+
-       '<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div>  </div>  </div>' ;     
-      
+       /* '<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div></div></div>'; */
+       '<div class="msg_footer"><input type="text" class="msg_input"></div></div></div>';
        $("body").append(  chatPopup  );
     displayChatBox();
+    //recibirMensajes(userID)
    });
    
    
-   $(document).on('keypress', 'textarea' , function(e) {       
+   $(document).on('keypress', 'input' , function(e) {       
           if (e.keyCode == 13 ) {   
               var msg = $(this).val();  
      $(this).val('');
@@ -318,6 +319,7 @@ $(document).ready(function(){
      $('<div class="msg-right">'+msg+'</div>').insertBefore('[rel="'+chatbox+'"] .msg_push');
      $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
      }
+     mandarMensajes(chatbox, msg) 
           }
       });
    
