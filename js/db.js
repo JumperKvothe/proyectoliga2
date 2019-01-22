@@ -239,14 +239,21 @@ function comprobarLogin() {
       if (result == "") {
         alert("Usuario o contraseña erróneos")
       } else {
-        sql2 = "INSERT INTO gente_online (id, fecha) VALUES (" + result[0].idjugador + ", NOW())"
-        con.query(sql2, function (err, result) {
-          if (err) throw err;
-        })
         localStorage.setItem('currentUser', JSON.stringify(result[0]));
+        conectarse()
         gotoinicio()
       }
     }
+  })
+}
+
+//Hay que usarla en todos los unload postlogin
+function conectarse(){
+  let user = JSON.parse(localStorage.getItem('currentUser'));
+  let miid = user.idjugador;
+  sql = "INSERT INTO gente_online (id, fecha) VALUES (" + miid + ", NOW())"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
   })
 }
 
@@ -456,10 +463,10 @@ function checkOnline() {
   con.query(sql, function (err, result) {
     for (let i = 0; i < result.length; i++) {
       onlineUsers[i] = result[i]
-      console.log(onlineUsers[i])
     }
     if (err) throw err;
   })
+  console.log(onlineUsers)
 }
 
 /* module.exports = function alCerrar(){
@@ -486,7 +493,6 @@ function mandarMensajes(userID, msg){
   let miid = user.idjugador;
   sql = 'INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (' +
   miid + ', ' + userID + ', "' + msg + '", NOW())'
-  console.log(sql)
   con.query(sql, function (err, result) {
     if (err) throw err;
   });
@@ -503,3 +509,32 @@ function recibirMensajes(username){
     if (err) throw err;
   })
 }
+
+/* module.exports = {
+  logout: function () {
+    sql = "INSERT INTO gente_online (id, fecha) VALUES (4321, '1900/01/01 00:00:00')"
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+    })
+  }
+}; */
+
+//module.exports = logout
+
+function logout(){
+  /* sql = "INSERT INTO gente_online (id, fecha) VALUES (4321, '1900/01/01 00:00:00')"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+  }) */
+  return "ae"
+}
+
+/* function desconectar(){
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    let miid = user.idjugador;
+    console.log("user")
+    sql = "DELETE gente_online WHERE id = " + miid;
+    con.query(sql, function (err, result) {
+    if (err) throw err;
+    })
+} */
