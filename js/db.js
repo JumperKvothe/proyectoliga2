@@ -621,7 +621,7 @@ function mostrarA(lista, longitud) {
     con.query(sql, function(err, result) {
       $(".chat-sidebar").append(function() {
         return (
-          '<div id="sidebar-user-box" class="2"><img id="img-icono" src="../img/elite.png"/>' +
+          '<div id="sidebar-user-box" class="' + lista[i] +'"><img id="img-icono" src="../img/elite.png"/>' +
           '<span id="slider-username">' +
           result[0].eliteuser +
           "</span></div>"
