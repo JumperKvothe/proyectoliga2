@@ -16,6 +16,8 @@ const db = require('./db')
 
 let win
 
+let userLogueado
+
 //Crear la ventana desde electron
 function createWindow()
     {
@@ -39,8 +41,7 @@ function createWindow()
         })
 
         win.on('close', () => {
-            console.log('asfasda')
-            adios()
+            logout()
         })
 
         win.on('closed', () => {
@@ -53,19 +54,41 @@ function createWindow()
         //win.setFullScreenable(false);
         //win.setMaximizable(true);
         //win.setMinimizable(false);
-        //win.webContents.openDevTools()        
+        //win.webContents.openDevTools()
     }
 
 
 app.on('ready', createWindow)
 
-ipc.on('quit', function (event, arg) {
+ipc.on('user-logueado', function (event, arg) {
+    userLogueado = arg
     console.log(arg)
 })
 
-function adios(){
-    console.log('adio5')
-    console.log()
+ipc.on('user-deslogueado', function (event) {
+    logout()
+    userLogueado = null
+    console.log("123")
+})
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "192.168.0.57",
+  user: "ligaelite",
+  password: "ligaelite",
+  database: "formulario",
+  multipleStatements: true
+});
+
+function logout(){
+    if (userLogueado != null){
+        sql = "DELETE FROM gente_online WHERE id = " + userLogueado;
+        console.log(sql)
+        con.query(sql, function (err, result) {
+        if (err) throw err;
+        })
+    }
 }
 
 //Crear una plantilla de pestañas y subpestañas (en arrays) y sus funciones onclick    

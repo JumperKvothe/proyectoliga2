@@ -1,5 +1,7 @@
 var mysql = require("mysql");
 
+const ipc = require('electron').ipcRenderer
+
 var con = mysql.createConnection({
   host: "192.168.0.57",
   user: "ligaelite",
@@ -299,6 +301,7 @@ function conectarse(){
   con.query(sql, function (err, result) {
     if (err) throw err;
   })
+  ipc.send('user-logueado', miid)
 }
 
 //Buscar el rival más cercano en puntos
