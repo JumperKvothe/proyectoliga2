@@ -1,5 +1,7 @@
 var mysql = require('mysql');
 
+const ipc = require('electron').ipcRenderer
+
 var con = mysql.createConnection({
   host: "192.168.0.57",
   user: "ligaelite",
@@ -255,6 +257,7 @@ function conectarse(){
   con.query(sql, function (err, result) {
     if (err) throw err;
   })
+  ipc.send('user-logueado', miid)
 }
 
 //Buscar el rival más cercano en puntos
@@ -509,32 +512,3 @@ function recibirMensajes(username){
     if (err) throw err;
   })
 }
-
-/* module.exports = {
-  logout: function () {
-    sql = "INSERT INTO gente_online (id, fecha) VALUES (4321, '1900/01/01 00:00:00')"
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-    })
-  }
-}; */
-
-//module.exports = logout
-
-function logout(){
-  /* sql = "INSERT INTO gente_online (id, fecha) VALUES (4321, '1900/01/01 00:00:00')"
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-  }) */
-  return "ae"
-}
-
-/* function desconectar(){
-    let user = JSON.parse(localStorage.getItem('currentUser'));
-    let miid = user.idjugador;
-    console.log("user")
-    sql = "DELETE gente_online WHERE id = " + miid;
-    con.query(sql, function (err, result) {
-    if (err) throw err;
-    })
-} */

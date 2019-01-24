@@ -4,8 +4,6 @@ process.env.LEAGUE_API_KEY = 'RGAPI-d2382023-19e8-489d-baf2-104f43b99e34'
 const LeagueJs = require('../node_modules/leaguejs/lib/LeagueJS.js');
 const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 
-const ipc = require('electron').ipcRenderer
-
 //Funciones generales
 
 function gotoinicio() {
@@ -343,11 +341,14 @@ $(document).ready(function(){
    
   });
 
-  //Comprobar usuarios online
-  function onlineUsers(){
-
+  function loginLoad(){
+    ipc.send('user-deslogueado')
   }
 
-  window.onbeforeunload = function(e){
-    const reply = ipc.sendSync('quit', e.target.nodeName + " " + e.timeStamp)
-  }
+  $(document).ready(function(){
+    $(window).on('beforeunload', function(){
+        alert( 'Are you sure you want to leave?');
+    });
+  })
+
+  
