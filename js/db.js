@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 
-const ipc = require('electron').ipcRenderer
+const ipc = require("electron").ipcRenderer;
 
 var con = mysql.createConnection({
   host: "192.168.0.57",
@@ -285,23 +285,23 @@ function comprobarLogin() {
       if (result == "") {
         alert("Usuario o contraseña erróneos");
       } else {
-        localStorage.setItem('currentUser', JSON.stringify(result[0]));
-        conectarse()
-        gotoinicio()
+        localStorage.setItem("currentUser", JSON.stringify(result[0]));
+        conectarse();
+        gotoinicio();
       }
     }
   });
 }
 
 //Hay que usarla en todos los unload postlogin
-function conectarse(){
-  let user = JSON.parse(localStorage.getItem('currentUser'));
+function conectarse() {
+  let user = JSON.parse(localStorage.getItem("currentUser"));
   let miid = user.idjugador;
-  sql = "INSERT INTO gente_online (id, fecha) VALUES (" + miid + ", NOW())"
-  con.query(sql, function (err, result) {
+  sql = "INSERT INTO gente_online (id, fecha) VALUES (" + miid + ", NOW())";
+  con.query(sql, function(err, result) {
     if (err) throw err;
-  })
-  ipc.send('user-logueado', miid)
+  });
+  ipc.send("user-logueado", miid);
 }
 
 //Buscar el rival más cercano en puntos
@@ -586,24 +586,31 @@ function checkOnline() {
 function miraAC() {
   let user = JSON.parse(localStorage.getItem("currentUser"));
   let id = user.idjugador;
-  let long2;
+  let long1 = 0;
+  let long2 = 0;
   sql = "SELECT id_p FROM amigos WHERE id_r= " + id + "";
   con.query(sql, function(err, result) {
-    for (let i = 0; i < result.length; i++) {
-      onlineUsers[i] = result[i].id_p;
-      long1 = result.length;
+    if (result.length == 0) {
+    } else {
+      for (let i = 0; i < result.length; i++) {
+        onlineUsers[i] = result[i].id_p;
+        long1 = result.length;
+      }
+      if (err) throw err;
     }
-    if (err) throw err;
   });
 
   sql2 = "SELECT id_r FROM amigos WHERE id_p= " + id + "";
   con.query(sql2, function(err, result) {
-    for (let i = 0; i < result.length; i++) {
-      onlineUsers[i + long1] = result[i].id_r;
-      long2 = result.length + long1;
+    if (result.length == 0) {
+    } else {
+      for (let i = 0; i < result.length; i++) {
+        onlineUsers[i + long1] = result[i].id_r;
+        long2 = result.length + long1;
+      }
+      mostrarA(onlineUsers, long2);
+      if (err) throw err;
     }
-    mostrarA(onlineUsers, long2);
-    if (err) throw err;
   });
 }
 
@@ -615,10 +622,12 @@ function mostrarA(lista, longitud) {
       $(".chat-sidebar").append(function() {
         return (
           '<div id="sidebar-user-box" class="2"><img id="img-icono" src="../img/elite.png"/>' +
-          '<span id="slider-username">'+result[0].eliteuser+'</span></div>'
+          '<span id="slider-username">' +
+          result[0].eliteuser +
+          "</span></div>"
         );
       });
-     
+
       if (err) throw err;
     });
   }
@@ -646,9 +655,15 @@ module.exports = {
 function mandarMensajes(userID, msg) {
   let user = JSON.parse(localStorage.getItem("currentUser"));
   let miid = user.idjugador;
-  sql = 'INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (' +
-  miid + ', ' + userID + ', "' + msg + '", NOW())'
-  con.query(sql, function (err, result) {
+  sql =
+    "INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (" +
+    miid +
+    ", " +
+    userID +
+    ', "' +
+    msg +
+    '", NOW())';
+  con.query(sql, function(err, result) {
     if (err) throw err;
   });
 }
