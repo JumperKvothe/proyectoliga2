@@ -71,6 +71,11 @@ ipc.on('user-deslogueado', function (event) {
     console.log("123")
 })
 
+ipc.on('a', function (event) {
+    event.sender.send('b', '')
+    console.log('manolo')
+})
+
 var mysql = require('mysql');
 
 var con = mysql.createConnection({

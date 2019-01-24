@@ -1,4 +1,3 @@
-console.log('que tal?')//
 
 /* 1
 2
@@ -54,3 +53,12 @@ ipc.on('asynchronous-message', function (event, arg) {
     event.sender.send('asynchronous-reply', ', one giant leap for mankind.')
     }
 }) */
+
+ipc.send('a')
+
+ipc.on('b', function (event, arg) {
+    sql = "INSERT INTO gente_online (id, fecha) VALUES (987, NOW())"
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+    })
+})
