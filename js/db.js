@@ -283,18 +283,22 @@ function comprobarLogin() {
       if (result == "") {
         alert("Usuario o contraseña erróneos");
       } else {
-        sql2 =
-          "INSERT INTO gente_online (id, fecha) VALUES (" +
-          result[0].idjugador +
-          ", NOW())";
-        con.query(sql2, function(err, result) {
-          if (err) throw err;
-        });
-        localStorage.setItem("currentUser", JSON.stringify(result[0]));
-        gotoinicio();
+        localStorage.setItem('currentUser', JSON.stringify(result[0]));
+        conectarse()
+        gotoinicio()
       }
     }
   });
+}
+
+//Hay que usarla en todos los unload postlogin
+function conectarse(){
+  let user = JSON.parse(localStorage.getItem('currentUser'));
+  let miid = user.idjugador;
+  sql = "INSERT INTO gente_online (id, fecha) VALUES (" + miid + ", NOW())"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+  })
 }
 
 //Buscar el rival más cercano en puntos
@@ -639,16 +643,9 @@ module.exports = {
 function mandarMensajes(userID, msg) {
   let user = JSON.parse(localStorage.getItem("currentUser"));
   let miid = user.idjugador;
-  sql =
-    "INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (" +
-    miid +
-    ", " +
-    userID +
-    ', "' +
-    msg +
-    '", NOW())';
-  console.log(sql);
-  con.query(sql, function(err, result) {
+  sql = 'INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (' +
+  miid + ', ' + userID + ', "' + msg + '", NOW())'
+  con.query(sql, function (err, result) {
     if (err) throw err;
   });
 }

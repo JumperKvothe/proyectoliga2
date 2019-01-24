@@ -3,16 +3,18 @@ const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
 
-//if(process.env.NODE_ENV !== 'production'){
+/* //if(process.env.NODE_ENV !== 'production'){
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, '../node_modules', '.bin', 'electron')
     });
     //Hay que desinstalarlo si no lo usamos
-//}
+//} */
+
+const ipc = ipcMain
+
+const db = require('./db')
 
 let win
-
-app.on('ready', createWindow)
 
 //Crear la ventana desde electron
 function createWindow()
@@ -36,6 +38,11 @@ function createWindow()
             win.show();
         })
 
+        win.on('close', () => {
+            console.log('asfasda')
+            adios()
+        })
+
         win.on('closed', () => {
             app.quit();
         });
@@ -48,6 +55,18 @@ function createWindow()
         //win.setMinimizable(false);
         //win.webContents.openDevTools()        
     }
+
+
+app.on('ready', createWindow)
+
+ipc.on('quit', function (event, arg) {
+    console.log(arg)
+})
+
+function adios(){
+    console.log('adio5')
+    console.log()
+}
 
 //Crear una plantilla de pestañas y subpestañas (en arrays) y sus funciones onclick    
 const templateMenu = [
