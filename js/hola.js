@@ -35,7 +35,7 @@ ipc.send('a')
 
 ipc.on('b', function (event, arg) {
     sql = "INSERT INTO gente_online (id, fecha) VALUES (987, NOW())"
-    con.query(sql, function (err, result) {
+    /* con.query(sql, function (err, result) {
         if (err) throw err;
-    })
+    }) */
 })

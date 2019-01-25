@@ -287,6 +287,9 @@ $(document).ready(function(){
     return false;
    });
    
+var interval = true
+var m, d
+   
    $(document).on('click', '#sidebar-user-box', function() {
    
     var userID = $(this).attr("class");
@@ -307,6 +310,24 @@ $(document).ready(function(){
        $("body").append(  chatPopup  );
     displayChatBox();
     recibirMensajes(userID)
+
+    //let t = new Date().toJSON().slice(0, 19).replace('T', ' ')
+    d = new Date()
+    d = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + 
+    " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    console.log(d)
+    clearInterval(m)
+    m = setInterval(recibirMensajes2, 1000, d, userID)
+    
+    /* let i = new Interval(recibirMensajes2, 1000, Date.now());
+    if (i.isRunning()){
+        console.log(i.isRunning() + "off y on")
+        i.stop()
+        i.start()
+    }else{
+        console.log(i.isRunning() + "actívate")
+        i.start()
+    } */
    });
    
    
@@ -360,3 +381,22 @@ $(document).ready(function(){
         $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
     }
   }
+
+  var on = false
+
+  /* function Interval(fn, time, parameter) {
+    var timer = false;
+    this.start = function () {
+        timer = setInterval(fn, time, parameter);
+        on = true
+        console.log(on + "onfire")
+    };
+    this.stop = function () {
+        clearInterval(timer);
+        on = false;
+    };
+    this.isRunning = function () {
+        console.log(on + "r")
+        return on
+    }; 
+}*/

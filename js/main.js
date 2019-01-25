@@ -86,7 +86,6 @@ var con = mysql.createConnection({
 function logout(){
     if (userLogueado != null){
         sql = "DELETE FROM gente_online WHERE id = " + userLogueado;
-        console.log(sql)
         con.query(sql, function (err, result) {
         if (err) throw err;
         })

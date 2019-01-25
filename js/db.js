@@ -687,3 +687,19 @@ function recibirMensajes(username) {
     if (err) throw err;
   });
 }
+
+function recibirMensajes2(time, username) {
+  let miid = JSON.parse(localStorage.getItem("currentUser"));
+  miid = miid.idjugador
+  sql = "SELECT mensaje, emisor FROM mensajes WHERE emisor = " + username + 
+  " AND receptor = " + miid + " AND hora > '" + time + "'"
+  console.log(sql)
+  con.query(sql, function(err, result) {
+    console.log(result)
+    for (let i = 0; i < result.length; i++) {
+      mensaje(result[i].mensaje, username, false)
+      d = result[i].hora
+      if (err) throw err;
+    }
+  });
+}
