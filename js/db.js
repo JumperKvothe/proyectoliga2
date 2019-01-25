@@ -663,18 +663,27 @@ function mandarMensajes(userID, msg) {
     ', "' +
     msg +
     '", NOW())';
-  con.query(sql, function(err, result) {
-    if (err) throw err;
-  });
+  if (msg != null){
+    con.query(sql, function(err, result) {
+      if (err) throw err;
+    });
+  }  
 }
 
 //Recibir mensajes del chatbox que abra
 function recibirMensajes(username) {
-  let miid = JSON.parse(localStorage.getItem("currentUser").idjugador);
-  let suid;
-
-  sql = "SELECT id FROM jugadores WHERE eliteuser LIKE '" + username + "'";
+  let miid = JSON.parse(localStorage.getItem("currentUser"));
+  miid = miid.idjugador
+  sql = "SELECT mensaje, emisor FROM mensajes WHERE (emisor = " + miid + " AND receptor = " +
+  username + ") OR (emisor = " + username + " AND receptor = " + miid + ")";
   con.query(sql, function(err, result) {
+    for (let i = 0; i < result.length; i++) {
+      if (result[i].emisor == miid){
+        mensaje(result[i].mensaje, username, true)
+      }else{
+        mensaje(result[i].mensaje, username, false)
+      }
+    }
     if (err) throw err;
   });
 }

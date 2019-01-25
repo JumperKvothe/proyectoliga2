@@ -54,7 +54,7 @@ function createWindow()
         //win.setFullScreenable(false);
         //win.setMaximizable(true);
         //win.setMinimizable(false);
-        //win.webContents.openDevTools()
+        win.webContents.openDevTools()
     }
 
 
@@ -62,18 +62,15 @@ app.on('ready', createWindow)
 
 ipc.on('user-logueado', function (event, arg) {
     userLogueado = arg
-    console.log(arg)
 })
 
 ipc.on('user-deslogueado', function (event) {
     logout()
     userLogueado = null
-    console.log("123")
 })
 
 ipc.on('a', function (event) {
     event.sender.send('b', '')
-    console.log('manolo')
 })
 
 var mysql = require('mysql');

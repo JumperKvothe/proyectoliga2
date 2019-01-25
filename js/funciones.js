@@ -306,7 +306,7 @@ $(document).ready(function(){
        '<div class="msg_footer"><input type="text" class="msg_input"></div></div></div>';
        $("body").append(  chatPopup  );
     displayChatBox();
-    //recibirMensajes(userID)
+    recibirMensajes(userID)
    });
    
    
@@ -351,4 +351,12 @@ $(document).ready(function(){
     });
   })
 
-  
+  function mensaje(msg, chatbox, boolean){    
+    if(boolean){
+        $('<div class="msg-right">'+msg+'</div>').insertBefore('[rel="'+chatbox+'"] .msg_push');
+        $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+    }else{
+        $('<div class="msg-left">'+msg+'</div>').insertBefore('[rel="'+chatbox+'"] .msg_push');
+        $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+    }
+  }
