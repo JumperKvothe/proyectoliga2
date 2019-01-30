@@ -1,5 +1,5 @@
 const ipc = require('electron').ipcRenderer;
-require('../../db/db/logindb');
+require('../../db/db/iniciodb');
 
 $(document).ready(function () {
 
@@ -9,11 +9,21 @@ $(document).ready(function () {
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
     popup = document.getElementById('popup')
     verificar = document.getElementById('verificar')
+    lol = document.getElementById('lol')
+    chat = document.getElementById('chat-sidebar')
+    addAmigo = document.getElementById('addAmigo')
 
     //Añadir los eventos
-    popup.addEventListener('click', inicio)
+    popup.addEventListener('click', div_hide)
     verificar.addEventListener('click', sacarid)
-
+    lol.addEventListener('click', inicio)
+   /*  chat.addEventListener('mouseenter', function(){
+        showFriends(true)
+    })
+    chat.addEventListener('mouseleave', function(){
+        showFriends(false)
+    }) */
+    addAmigo.addEventListener('click', inicio2)
 })
 
 
@@ -21,7 +31,7 @@ $(document).ready(function () {
 function mostrarNombre() {
     let user = JSON.parse(localStorage.getItem('currentUser'))
     $('#eliteuser').html(user.eliteuser)
-    checkOnline()
+    ipc.send('iniciojs4')
 }
 
 //Function to Hide Popup
@@ -78,9 +88,22 @@ function showFriends(bool){
     
 }
 
-//No se puede llamar a funcionesdb(4) en el html (hay que arreglar)
+//Function To Display Popup (se usa desde db.js, hay que arreglarlo)
+//Función para mostrar cómo verificar la cuenta de lol desde el cliente
+function div_show() {
+    document.getElementById('abc').style.display = "block";
+    document.getElementById('bienvenido').style.display = "none";
+    document.getElementById('eliteuser').style.display = "none";
+}
 
 function inicio(){
-    console.log('inicio')
     ipc.send('iniciojs')
 }
+
+function inicio2(){
+    ipc.send('iniciojs2')
+}
+
+ipc.on('iniciojs3', function(event){
+    div_show()
+})

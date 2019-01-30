@@ -31,7 +31,7 @@ function funcionesdb(num) {
       break;
     //Comprobar si al pulsar la imagen del lol el usuario está verificado o no
     case 4:
-      comprobarLol();
+      /* comprobarLol(); */
       break;
     //Consultar los puntos de un jugador para mostrarlos en la interfaz
     case 5:
@@ -175,7 +175,7 @@ function clasificacion() {
 
 //Revisar
 //Comprobar si el usuario actual ha validado su cuenta de lol
-function comprobarLol() {
+/* function comprobarLol() {
   let user = JSON.parse(localStorage.getItem("currentUser"));
   var sql =
     "SELECT loluser FROM jugadores WHERE eliteuser LIKE '" +
@@ -195,7 +195,7 @@ function comprobarLol() {
       }
     }
   });
-}
+} */
 
 //Revisar
 function addnom(loluser, elo) {
@@ -507,7 +507,7 @@ function compAñaJug(nomE, tamE) {
   });
 }
 
-//Funciones para buscar un jugador y añadirlo a tus amigos
+/* //Funciones para buscar un jugador y añadirlo a tus amigos
 //Esta comprueba si el
 function addAmigo() {
   let nomAmigo = document.getElementById("search").value;
@@ -540,24 +540,6 @@ function addAmigo2(idj) {
     }
     if (err) throw err;
   });
-
-  /* sql2 =
-    "SELECT id FROM amigos WHERE id_r= " + idamigo + " AND id_p= " + id + "";
-  con.query(sql2, function(err, result) {
-    if (result.length > 0) {
-      console.log(result);
-      console.log("adfsf");
-      cont++;
-    } else {
-    }
-    if (err) throw err;
-  });
-  console.log(cont)
-  if (cont > 0) {
-    alert("El usuario ya es tu amigo");
-  } else {
-    addAmigo3(idamigo, id);
-  } */
 }
 
 //Último función de addAmigo para insertar la fila en la tabla amigos
@@ -573,7 +555,7 @@ function addAmigo3(ida, idu) {
   con.query(sql, function(err, result) {
     if (err) throw err;
   });
-}
+} */
 
 //Funciones para buscar a un jugador e invitarlo a un equipo
 //Esta comprueba si el jugador de LoL existe en la base de datos
@@ -636,7 +618,7 @@ function busqC3(idjug, nomEquipo, tamEquipo) {
   });
 }
 
-//Meter los usuarios online en un array
+/* //Meter los usuarios online en un array
 //Añadido en la función mostrarNombre de funciones.js
 function checkOnline() {
   var aux = [];
@@ -680,9 +662,9 @@ function miraAC() {
       if (err) throw err;
     }
   });
-}
+} */
 
-//Función que se encarga de mostrar la lista de amigos conectados para el chat
+/* //Función que se encarga de mostrar la lista de amigos conectados para el chat
 function mostrarA(lista, longitud) {
   for (let i = 0; i < longitud; i++) {
     sql = "SELECT eliteuser FROM jugadores WHERE idjugador=" + lista[i] + "";
@@ -701,7 +683,7 @@ function mostrarA(lista, longitud) {
       if (err) throw err;
     });
   }
-}
+} */
 
 /* module.exports = function alCerrar(){
   sql = "INSERT INTO gente_online (id, fecha) VALUES (9999, '1900/01/01 00:00:00')"

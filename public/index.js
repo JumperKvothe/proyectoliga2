@@ -190,14 +190,6 @@ function loader() {
     };
 }
 
-//Function To Display Popup (se usa desde db.js, hay que arreglarlo)
-//Función para mostrar cómo verificar la cuenta de lol desde el cliente
-function div_show() {
-    document.getElementById('abc').style.display = "block";
-    document.getElementById('bienvenido').style.display = "none";
-    document.getElementById('eliteuser').style.display = "none";
-}
-
 //Creo que no se está usando
 //
 function copyToClipboard(element) {

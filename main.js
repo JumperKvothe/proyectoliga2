@@ -116,3 +116,12 @@ ipc.on('registrarsejs', function(event){
 ipc.on('iniciojs', function (event){
     event.sender.send('iniciodb')
 })
+ipc.on('iniciojs2', function(event){
+    event.sender.send('iniciodb2')
+})
+ipc.on('iniciodb3', function (event){
+    event.sender.send('iniciojs3')
+})
+ipc.on('iniciojs4', function(event){
+    event.sender.send('iniciodb4')
+})
