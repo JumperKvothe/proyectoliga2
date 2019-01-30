@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 
-const ipc = require("electron").ipcRenderer;
+//const ipc = require("electron").ipcRenderer;
 
 var con = mysql.createConnection({
   host: "192.168.0.57",
@@ -43,7 +43,7 @@ function funcionesdb(num) {
       break;
     //Comprobar si los datos de login son correctos
     case 7:
-      comprobarLogin();
+      /* comprobarLogin(); */
       break;
     //Meter los usuarios online en un array
     case 8:
@@ -270,7 +270,7 @@ function agregarUsuario() {
 }
 
 //Comprobar si los datos de login son correctos
-function comprobarLogin() {
+/* function comprobarLogin() {
   let nombre = document.getElementById("nombre").value;
   let pass = document.getElementById("pass").value;
   let sql =
@@ -291,10 +291,10 @@ function comprobarLogin() {
       }
     }
   });
-}
+} */
 
 //Hay que usarla en todos los unload postlogin
-function conectarse() {
+/* function conectarse() {
   let user = JSON.parse(localStorage.getItem("currentUser"));
   let miid = user.idjugador;
   sql = "INSERT INTO gente_online (id, fecha) VALUES (" + miid + ", NOW())";
@@ -302,7 +302,7 @@ function conectarse() {
     if (err) throw err;
   });
   ipc.send("user-logueado", miid);
-}
+} */
 
 //Buscar el rival más cercano en puntos
 function buscarRival() {

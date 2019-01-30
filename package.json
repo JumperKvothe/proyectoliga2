@@ -2,7 +2,7 @@
   "name": "liga",
   "version": "1.0.0",
   "description": "Liga Elite",
-  "main": "./js/main.js",
+  "main": "./main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
@@ -18,7 +18,7 @@
     "appId": true,
     "win": {
       "target": "NSIS",
-      "icon": "./build/favicon.ico"
+      "icon": "./public/img/favicon.ico"
     }
   },
   "bugs": {

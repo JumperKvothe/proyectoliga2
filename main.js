@@ -12,8 +12,6 @@ const url = require('url')
 
 const ipc = ipcMain
 
-const db = require('./db')
-
 let win
 
 let userLogueado
@@ -23,7 +21,7 @@ function createWindow()
     {
         win = new BrowserWindow ({show:false, width: 800, height: 600, webPreferences: {devTools: true}})
         win.loadURL(url.format({
-            pathname: path.join(__dirname,'../html/login.html'),
+            pathname: path.join(__dirname,'./public/html/login.html'),
             protocol: 'file',
             slashes: true,
             resizable: false
@@ -41,7 +39,7 @@ function createWindow()
         })
 
         win.on('close', () => {
-            logout()
+            //logout()
         })
 
         win.on('closed', () => {
@@ -54,7 +52,7 @@ function createWindow()
         //win.setFullScreenable(false);
         //win.setMaximizable(true);
         //win.setMinimizable(false);
-        win.webContents.openDevTools()
+        //win.webContents.openDevTools()
     }
 
 
@@ -67,10 +65,6 @@ ipc.on('user-logueado', function (event, arg) {
 ipc.on('user-deslogueado', function (event) {
     logout()
     userLogueado = null
-})
-
-ipc.on('a', function (event) {
-    event.sender.send('b', '')
 })
 
 var mysql = require('mysql');
@@ -107,3 +101,12 @@ const templateMenu = [
         ]
     }
 ]
+
+/* ipc.on('a', function (event) {
+    event.sender.send('b', '')
+}) */
+
+//Eventos IPC
+ipc.on('loginjs', function (event, arg) {
+    event.sender.send('logindb', con)
+})

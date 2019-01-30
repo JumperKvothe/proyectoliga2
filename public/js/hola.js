@@ -31,11 +31,16 @@ ipc.on('asynchronous-message', function (event, arg) {
     }
 }) */
 
-ipc.send('a')
+//const ipc = require('electron').ipcRenderer
 
-ipc.on('b', function (event, arg) {
-    sql = "INSERT INTO gente_online (id, fecha) VALUES (987, NOW())"
-    /* con.query(sql, function (err, result) {
-        if (err) throw err;
-    }) */
+$(document).ready(function(){
+    ipc.send('a')
+
+    ipc.on('b', function (event, arg) {
+        sql = "INSERT INTO gente_online (id, fecha) VALUES (987, NOW())"
+        /* con.query(sql, function (err, result) {
+            if (err) throw err;
+        }) */
+        console.log(sql)
+    })
 })
