@@ -110,3 +110,9 @@ const templateMenu = [
 ipc.on('loginjs', function (event, arg) {
     event.sender.send('logindb', con)
 })
+ipc.on('registrarsejs', function(event){
+    event.sender.send('registrarsedb')
+})
+ipc.on('iniciojs', function (event){
+    event.sender.send('iniciodb')
+})

@@ -1,3 +1,22 @@
+const ipc = require('electron').ipcRenderer;
+require('../../db/db/logindb');
+
+$(document).ready(function () {
+
+    //Evento onload
+    mostrarNombre()
+    
+    //Declaración de variables de los elementos de html en los cuáles añadir un evento
+    popup = document.getElementById('popup')
+    verificar = document.getElementById('verificar')
+
+    //Añadir los eventos
+    popup.addEventListener('click', inicio)
+    verificar.addEventListener('click', sacarid)
+
+})
+
+
 //onload function
 function mostrarNombre() {
     let user = JSON.parse(localStorage.getItem('currentUser'))
@@ -60,3 +79,8 @@ function showFriends(bool){
 }
 
 //No se puede llamar a funcionesdb(4) en el html (hay que arreglar)
+
+function inicio(){
+    console.log('inicio')
+    ipc.send('iniciojs')
+}

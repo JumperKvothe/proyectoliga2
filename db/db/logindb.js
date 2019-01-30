@@ -21,6 +21,8 @@ function comprobarLogin() {
     nombre + "' AND contrasena LIKE '" + pass + "'";
   console.log('comprobarLogin')
   con.query(sql, function (err, result) {
+    console.log(result)
+    console.log(sql)
     if (err) throw err;
     else {
       if (result == "") {

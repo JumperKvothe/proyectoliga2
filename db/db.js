@@ -39,7 +39,7 @@ function funcionesdb(num) {
       break;
     //Guardar un nuevo usuario en la base de datos
     case 6:
-      agregarUsuario();
+      /* agregarUsuario(); */
       break;
     //Comprobar si los datos de login son correctos
     case 7:
@@ -241,7 +241,7 @@ function consultarPuntos() {
 }
 
 //Meter un nuevo usuario en la base de datos
-function agregarUsuario() {
+/* function agregarUsuario() {
   var eliteu = document.getElementsByName("nombre")[0].value;
   var cen = document.getElementsByName("centro")[0].value;
   var contra = document.getElementsByName("contrasena")[0].value;
@@ -267,7 +267,7 @@ function agregarUsuario() {
       }
     }
   });
-}
+} */
 
 //Comprobar si los datos de login son correctos
 /* function comprobarLogin() {

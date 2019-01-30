@@ -30,5 +30,5 @@ function loginLoad() {
 
 function login() {
     console.log('ipc')
-    ipc.send('loginjs', 'hola')
+    ipc.send('loginjs')
 }
