@@ -345,7 +345,7 @@ function buscarRival() {
   }
 }
 
-//Función para sacar la lista de equipos
+/* //Función para sacar la lista de equipos
 function listaE() {
   let user = JSON.parse(localStorage.getItem("currentUser"));
   let id = user.idjugador;
@@ -413,9 +413,9 @@ function infoE(nomE) {
     if (err) throw err;
     compAñaJug(nomE, tamE);
   });
-}
+} */
 
-//Funciones para crear un equipo
+/* //Funciones para crear un equipo
 function crearE1() {
   let cont = 0;
   let nombreE = document.getElementById("nombreE").value;
@@ -447,10 +447,9 @@ function crearE2(nomE) {
   con.query(sql2, function(err, result) {
     if (err) throw err;
   });
-}
-1;
+}; */
 
-//Función para añadir jugador a los equipos
+/* //Función para añadir jugador a los equipos
 function compAñaJug(nomE, tamE) {
   nomEq = nomE;
   tamEq = tamE;
@@ -505,7 +504,7 @@ function compAñaJug(nomE, tamE) {
     }
     if (err) throw err;
   });
-}
+} */
 
 /* //Funciones para buscar un jugador y añadirlo a tus amigos
 //Esta comprueba si el
@@ -703,7 +702,7 @@ module.exports = {
   alCerrar: alCerrar
 } */
 
-//Mandar mensajes del chatbox que abra
+/* //Mandar mensajes del chatbox que abra
 function mandarMensajes(userID, msg) {
   let user = JSON.parse(localStorage.getItem("currentUser"));
   let miid = user.idjugador;
@@ -720,9 +719,9 @@ function mandarMensajes(userID, msg) {
       if (err) throw err;
     });
   }
-}
+} */
 
-//Recibir mensajes del chatbox que abra
+/* //Recibir mensajes del chatbox que abra
 function recibirMensajes(username) {
   let miid = JSON.parse(localStorage.getItem("currentUser"));
   miid = miid.idjugador;
@@ -746,9 +745,9 @@ function recibirMensajes(username) {
     }
     if (err) throw err;
   });
-}
+} */
 
-function recibirMensajes2(time, username) {
+/* function recibirMensajes2(time, username) {
   let miid = JSON.parse(localStorage.getItem("currentUser"));
   miid = miid.idjugador;
   sql =
@@ -768,4 +767,4 @@ function recibirMensajes2(time, username) {
       if (err) throw err;
     }
   });
-}
+} */

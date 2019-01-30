@@ -23,6 +23,17 @@ ipc.on('iniciodb4', function (event) {
     checkOnline()
 })
 
+ipc.on('iniciodb5', function (event, arg) {
+    recibirMensajes(arg)
+})
+
+ipc.on('iniciodb7', function (event, arg1, arg2) {
+    recibirMensajes2(arg1, arg2)
+})
+
+ipc.on('iniciodb8', function (event, arg1, arg2) {
+    mandarMensajes(arg1, arg2)
+})
 //
 function comprobarLol() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
@@ -173,6 +184,71 @@ function mostrarA(lista, longitud) {
                 );
             });
 
+            if (err) throw err;
+        });
+    }
+}
+
+//Recibir mensajes del chatbox que abra
+function recibirMensajes(username) {
+    let miid = JSON.parse(localStorage.getItem("currentUser"));
+    miid = miid.idjugador;
+    sql =
+        "SELECT mensaje, emisor FROM mensajes WHERE (emisor = " +
+        miid +
+        " AND receptor = " +
+        username +
+        ") OR (emisor = " +
+        username +
+        " AND receptor = " +
+        miid +
+        ")";
+    con.query(sql, function (err, result) {
+        for (let i = 0; i < result.length; i++) {
+            if (result[i].emisor == miid) {
+                ipc.send('iniciodb6', result[i].mensaje, username, true)
+            } else {
+                ipc.send('iniciodb6', result[i].mensaje, username, false)
+            }
+        }
+        if (err) throw err;
+    });
+}
+
+function recibirMensajes2(time, username) {
+    let miid = JSON.parse(localStorage.getItem("currentUser"));
+    miid = miid.idjugador;
+    sql =
+        "SELECT mensaje, emisor FROM mensajes WHERE emisor = " +
+        username +
+        " AND receptor = " +
+        miid +
+        " AND hora > '" +
+        time +
+        "'";
+    con.query(sql, function (err, result) {
+        for (let i = 0; i < result.length; i++) {
+            mensaje(result[i].mensaje, username, false);
+            d = result[i].hora;
+            if (err) throw err;
+        }
+    });
+}
+
+//Mandar mensajes del chatbox que abra
+function mandarMensajes(userID, msg) {
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    let miid = user.idjugador;
+    sql =
+        "INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (" +
+        miid +
+        ", " +
+        userID +
+        ', "' +
+        msg +
+        '", NOW())';
+    if (msg != null) {
+        con.query(sql, function (err, result) {
             if (err) throw err;
         });
     }
