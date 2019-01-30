@@ -507,6 +507,74 @@ function compAñaJug(nomE, tamE) {
   });
 }
 
+//Funciones para buscar un jugador y añadirlo a tus amigos
+//Esta comprueba si el
+function addAmigo() {
+  let nomAmigo = document.getElementById("search").value;
+  sql = "SELECT idjugador FROM jugadores WHERE eliteuser='" + nomAmigo + "'";
+  con.query(sql, function(err, result) {
+    if (result.length == 0) {
+      alert(
+        "El nombre de usuario no existe o quizás no se haya registrado en la app"
+      );
+    } else {
+      addAmigo2(result[0].idjugador);
+    }
+
+    if (err) throw err;
+  });
+}
+
+//Función para comprobar que no es ya tu amigo
+function addAmigo2(idj) {
+  idamigo = idj;
+  let user = JSON.parse(localStorage.getItem("currentUser"));
+  let id = user.idjugador;
+  sql =
+    "SELECT id FROM amigos WHERE (id_p= " + idamigo + " AND id_r= " + id + ") OR (id_r= " + idamigo + " AND id_p= " + id + ")";
+  con.query(sql, function(err, result) {
+    if (result.length > 0) {
+      alert("El usuario ya es tu amigo");
+    } else {
+      addAmigo3(idamigo, id);
+    }
+    if (err) throw err;
+  });
+
+  /* sql2 =
+    "SELECT id FROM amigos WHERE id_r= " + idamigo + " AND id_p= " + id + "";
+  con.query(sql2, function(err, result) {
+    if (result.length > 0) {
+      console.log(result);
+      console.log("adfsf");
+      cont++;
+    } else {
+    }
+    if (err) throw err;
+  });
+  console.log(cont)
+  if (cont > 0) {
+    alert("El usuario ya es tu amigo");
+  } else {
+    addAmigo3(idamigo, id);
+  } */
+}
+
+//Último función de addAmigo para insertar la fila en la tabla amigos
+function addAmigo3(ida, idu) {
+  idamigo = ida;
+  iduser = idu;
+  sql =
+    "INSERT INTO amigos (id_p, id_r, estado) VALUES (" +
+    iduser +
+    ", " +
+    idamigo +
+    ", 1)";
+  con.query(sql, function(err, result) {
+    if (err) throw err;
+  });
+}
+
 //Funciones para buscar a un jugador e invitarlo a un equipo
 //Esta comprueba si el jugador de LoL existe en la base de datos
 function busqC(nomEq, tamEq) {
@@ -582,7 +650,7 @@ function checkOnline() {
   });
 }
 
-//Función que te comprueba la lista de los amigos conectados para luego llamar a la función que los muestra
+//Función que te comprueba la lista de los amigos para luego llamar a la función que los muestra
 function miraAC() {
   let user = JSON.parse(localStorage.getItem("currentUser"));
   let id = user.idjugador;
@@ -621,7 +689,9 @@ function mostrarA(lista, longitud) {
     con.query(sql, function(err, result) {
       $(".chat-sidebar").append(function() {
         return (
-          '<div id="sidebar-user-box" class="' + lista[i] +'"><img id="img-icono" src="../img/elite.png"/>' +
+          '<div id="sidebar-user-box" class="' +
+          lista[i] +
+          '"><img id="img-icono" src="../img/elite.png"/>' +
           '<span id="slider-username">' +
           result[0].eliteuser +
           "</span></div>"
@@ -663,25 +733,33 @@ function mandarMensajes(userID, msg) {
     ', "' +
     msg +
     '", NOW())';
-  if (msg != null){
+  if (msg != null) {
     con.query(sql, function(err, result) {
       if (err) throw err;
     });
-  }  
+  }
 }
 
 //Recibir mensajes del chatbox que abra
 function recibirMensajes(username) {
   let miid = JSON.parse(localStorage.getItem("currentUser"));
-  miid = miid.idjugador
-  sql = "SELECT mensaje, emisor FROM mensajes WHERE (emisor = " + miid + " AND receptor = " +
-  username + ") OR (emisor = " + username + " AND receptor = " + miid + ")";
+  miid = miid.idjugador;
+  sql =
+    "SELECT mensaje, emisor FROM mensajes WHERE (emisor = " +
+    miid +
+    " AND receptor = " +
+    username +
+    ") OR (emisor = " +
+    username +
+    " AND receptor = " +
+    miid +
+    ")";
   con.query(sql, function(err, result) {
     for (let i = 0; i < result.length; i++) {
-      if (result[i].emisor == miid){
-        mensaje(result[i].mensaje, username, true)
-      }else{
-        mensaje(result[i].mensaje, username, false)
+      if (result[i].emisor == miid) {
+        mensaje(result[i].mensaje, username, true);
+      } else {
+        mensaje(result[i].mensaje, username, false);
       }
     }
     if (err) throw err;
@@ -690,15 +768,21 @@ function recibirMensajes(username) {
 
 function recibirMensajes2(time, username) {
   let miid = JSON.parse(localStorage.getItem("currentUser"));
-  miid = miid.idjugador
-  sql = "SELECT mensaje, emisor FROM mensajes WHERE emisor = " + username + 
-  " AND receptor = " + miid + " AND hora > '" + time + "'"
-  console.log(sql)
+  miid = miid.idjugador;
+  sql =
+    "SELECT mensaje, emisor FROM mensajes WHERE emisor = " +
+    username +
+    " AND receptor = " +
+    miid +
+    " AND hora > '" +
+    time +
+    "'";
+  console.log(sql);
   con.query(sql, function(err, result) {
-    console.log(result)
+    console.log(result);
     for (let i = 0; i < result.length; i++) {
-      mensaje(result[i].mensaje, username, false)
-      d = result[i].hora
+      mensaje(result[i].mensaje, username, false);
+      d = result[i].hora;
       if (err) throw err;
     }
   });
