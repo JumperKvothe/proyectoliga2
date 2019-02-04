@@ -507,56 +507,6 @@ function compAñaJug(nomE, tamE) {
   });
 }
 
-/* //Funciones para buscar un jugador y añadirlo a tus amigos
-//Esta comprueba si el
-function addAmigo() {
-  let nomAmigo = document.getElementById("search").value;
-  sql = "SELECT idjugador FROM jugadores WHERE eliteuser='" + nomAmigo + "'";
-  con.query(sql, function(err, result) {
-    if (result.length == 0) {
-      alert(
-        "El nombre de usuario no existe o quizás no se haya registrado en la app"
-      );
-    } else {
-      addAmigo2(result[0].idjugador);
-    }
-
-    if (err) throw err;
-  });
-}
-
-//Función para comprobar que no es ya tu amigo
-function addAmigo2(idj) {
-  idamigo = idj;
-  let user = JSON.parse(localStorage.getItem("currentUser"));
-  let id = user.idjugador;
-  sql =
-    "SELECT id FROM amigos WHERE (id_p= " + idamigo + " AND id_r= " + id + ") OR (id_r= " + idamigo + " AND id_p= " + id + ")";
-  con.query(sql, function(err, result) {
-    if (result.length > 0) {
-      alert("El usuario ya es tu amigo");
-    } else {
-      addAmigo3(idamigo, id);
-    }
-    if (err) throw err;
-  });
-}
-
-//Último función de addAmigo para insertar la fila en la tabla amigos
-function addAmigo3(ida, idu) {
-  idamigo = ida;
-  iduser = idu;
-  sql =
-    "INSERT INTO amigos (id_p, id_r, estado) VALUES (" +
-    iduser +
-    ", " +
-    idamigo +
-    ", 1)";
-  con.query(sql, function(err, result) {
-    if (err) throw err;
-  });
-} */
-
 //Funciones para buscar a un jugador e invitarlo a un equipo
 //Esta comprueba si el jugador de LoL existe en la base de datos
 function busqC(nomEq, tamEq) {
