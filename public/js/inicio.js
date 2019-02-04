@@ -96,6 +96,132 @@ function div_show() {
     document.getElementById('eliteuser').style.display = "none";
 }
 
+//CHATBOX
+$(document).ready(function () {
+
+    var arr = []; // List of users 
+
+    $(document).on('click', '.msg_head', function () {
+        var chatbox = $(this).parents().attr("rel");
+        $('[rel="' + chatbox + '"] .msg_wrap').slideToggle('slow');
+        return false;
+    });
+
+
+    $(document).on('click', '.close', function () {
+        var chatbox = $(this).parents().parents().attr("rel");
+        $('[rel="' + chatbox + '"]').hide();
+        arr.splice($.inArray(chatbox, arr), 1);
+        displayChatBox();
+        return false;
+    });
+
+    var interval = true
+    var m, d
+
+    $(document).on('click', '#sidebar-user-box', function () {
+
+        var userID = $(this).attr("class");
+        var username = $(this).children().text();
+
+        if ($.inArray(userID, arr) != -1) {
+            arr.splice($.inArray(userID, arr), 1);
+        }
+
+        arr.unshift(userID);
+        chatPopup = '<div class="msg_box" style="right:270px" rel="' + userID + '">' +
+            '<div class="msg_head">' + username +
+            '<div class="close">x</div> </div>' +
+            '<div class="msg_wrap"> <div class="msg_body"> <div class="msg_push"></div> </div>' +
+            '<div class="msg_footer"><input type="text" class="msg_input"></div></div></div>';
+        $("body").append(chatPopup);
+        displayChatBox();
+        ipc.send('iniciojs5', userID)
+
+        d = new Date()
+        d = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() +
+            " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        console.log(d)
+        clearInterval(m)
+        m = setInterval(recibir, 1000, d, userID)
+
+        function recibir(){
+            ipc.send('iniciojs7', d, userID)
+        }
+
+        /* let i = new Interval(recibirMensajes2, 1000, Date.now());
+        if (i.isRunning()){
+            console.log(i.isRunning() + "off y on")
+            i.stop()
+            i.start()
+        }else{
+            console.log(i.isRunning() + "actívate")
+            i.start()
+        } */
+    });
+
+    //Hay que descomentarlo para chatear
+    $(document).on('keypress', 'input', function (e) {
+        if (e.keyCode == 13) {
+            var msg = $(this).val();
+            $(this).val('');
+            if (msg.trim().length != 0) {
+                var chatbox = $(this).parents().parents().parents().attr("rel");
+                $('<div class="msg-right">' + msg + '</div>').insertBefore('[rel="' + chatbox + '"] .msg_push');
+                $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+            }
+            ipc.send('iniciojs8', chatbox, msg)
+            //mandarMensajes(chatbox, msg)
+        }
+    });
+
+    function displayChatBox() {
+        i = 270; // start position
+        j = 260; //next position
+
+        $.each(arr, function (index, value) {
+            if (index < 4) {
+                $('[rel="' + value + '"]').css("right", i);
+                $('[rel="' + value + '"]').show();
+                i = i + j;
+            } else {
+                $('[rel="' + value + '"]').hide();
+            }
+        });
+    }
+
+});
+//FIN CHATBOX
+
+function mensaje(msg, chatbox, boolean) {
+    if (boolean) {
+        $('<div class="msg-right">' + msg + '</div>').insertBefore('[rel="' + chatbox + '"] .msg_push');
+        $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+    } else {
+        $('<div class="msg-left">' + msg + '</div>').insertBefore('[rel="' + chatbox + '"] .msg_push');
+        $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+    }
+}
+
+var on = false
+
+/* function Interval(fn, time, parameter) {
+    var timer = false;
+    this.start = function () {
+        timer = setInterval(fn, time, parameter);
+        on = true
+        console.log(on + "onfire")
+    };
+    this.stop = function () {
+        clearInterval(timer);
+        on = false;
+    };
+    this.isRunning = function () {
+        console.log(on + "r")
+        return on
+    }; 
+}*/
+
 function inicio(){
     ipc.send('iniciojs')
 }
@@ -106,4 +232,8 @@ function inicio2(){
 
 ipc.on('iniciojs3', function(event){
     div_show()
+})
+
+ipc.on('iniciojs6', function(event, arg1, arg2, arg3){
+    mensaje(arg1, arg2, arg3)
 })

@@ -125,3 +125,21 @@ ipc.on('iniciodb3', function (event){
 ipc.on('iniciojs4', function(event){
     event.sender.send('iniciodb4')
 })
+ipc.on('iniciojs5', function (event, arg){
+    event.sender.send('iniciodb5', arg)
+})
+ipc.on('iniciodb6', function (event, arg1, arg2, arg3){
+    event.sender.send('iniciojs6', arg1, arg2, arg3)
+})
+ipc.on('iniciojs7', function (event, arg1, arg2){
+    event.sender.send('iniciodb7', arg1, arg2)
+})
+ipc.on('iniciojs8', function(event, arg1, arg2){
+    event.sender.send('iniciodb8', arg1, arg2)
+})
+ipc.on('equiposjs', function(event){
+    event.sender.send('equiposdb')
+})
+ipc.on('equipos1js', function(event){
+    event.sender.send('equipos1db')
+})

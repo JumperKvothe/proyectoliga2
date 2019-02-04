@@ -40,10 +40,8 @@ function gotoej() {
     window.location.href = "ejemplo.html"
 }
 
-//Onloads JQuery
-
 //CHATBOX
-$(document).ready(function () {
+/*$(document).ready(function () {
 
     var arr = []; // List of users 
 
@@ -79,13 +77,11 @@ $(document).ready(function () {
             '<div class="msg_head">' + username +
             '<div class="close">x</div> </div>' +
             '<div class="msg_wrap"> <div class="msg_body"> <div class="msg_push"></div> </div>' +
-            /* '<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div></div></div>'; */
             '<div class="msg_footer"><input type="text" class="msg_input"></div></div></div>';
         $("body").append(chatPopup);
         displayChatBox();
         recibirMensajes(userID)
 
-        //let t = new Date().toJSON().slice(0, 19).replace('T', ' ')
         d = new Date()
         d = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() +
             " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
@@ -93,7 +89,7 @@ $(document).ready(function () {
         clearInterval(m)
         m = setInterval(recibirMensajes2, 1000, d, userID)
 
-        /* let i = new Interval(recibirMensajes2, 1000, Date.now());
+         let i = new Interval(recibirMensajes2, 1000, Date.now());
         if (i.isRunning()){
             console.log(i.isRunning() + "off y on")
             i.stop()
@@ -101,11 +97,11 @@ $(document).ready(function () {
         }else{
             console.log(i.isRunning() + "actívate")
             i.start()
-        } */
+        } 
     });
 
     //Hay que descomentarlo para chatear
-    /* $(document).on('keypress', 'input', function (e) {
+ $(document).on('keypress', 'input', function (e) {
         if (e.keyCode == 13) {
             var msg = $(this).val();
             $(this).val('');
@@ -116,7 +112,7 @@ $(document).ready(function () {
             }
             mandarMensajes(chatbox, msg)
         }
-    }); */
+    }); 
 
     function displayChatBox() {
         i = 270; // start position
@@ -148,7 +144,7 @@ function mensaje(msg, chatbox, boolean) {
 
 var on = false
 
-/* function Interval(fn, time, parameter) {
+function Interval(fn, time, parameter) {
     var timer = false;
     this.start = function () {
         timer = setInterval(fn, time, parameter);

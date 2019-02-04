@@ -18,17 +18,17 @@
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
-    <script src="../node_modules/js/bootstrap/popper.min.js"></script>
-    <script src="../node_modules/js/bootstrap/bootstrap.min.js"></script>
-    <script src="../node_modules/js/plugins/plugins.js"></script>
-    <script src="../js/funciones.js"></script>
-    <script src="../js/db.js"></script>
+    <script src="../../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../../node_modules/js/bootstrap/popper.min.js"></script>
+    <script src="../../node_modules/js/bootstrap/bootstrap.min.js"></script>
+    <script src="../../node_modules/js/plugins/plugins.js"></script>
+    <script src="../index.js"></script>
+    <script src="../js/equipos.js"></script>
     <script>if (window.module) module = window.module;</script>
 
 </head>
 
-<body onload="listaE()">
+<body>
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
@@ -71,7 +71,7 @@
                             <form>
                                 <label class="labelform">Nombre de Equipo</label><br>
                                 <input type="text" class="form" id="nombreE" required autofocus></input><br>
-                                <button onclick="crearE1()">Crear</button>
+                                <button id="crearE">Crear</button>
                             </form>
                         </div>
                         <div class="infoE cajaJug"></div>
@@ -88,7 +88,7 @@
             module = undefined;
         }
     </script>
-    <script src="../node_modules/js/active.js"></script>
+    <script src="../../node_modules/js/active.js"></script>
     <script>
         if (window.module) module = window.module;
     </script>
