@@ -3,6 +3,9 @@ require('../../db/db/registrarsedb');
 
 $(document).ready(function () {
 
+    //Evento onload
+    //chargeDB()
+
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
     btnconect = document.getElementById('btnconect')    
 
@@ -13,4 +16,9 @@ $(document).ready(function () {
 function register(){
     console.log('regis')
     ipc.send('registrarsejs')
+}
+
+function chargeDB(){
+    console.log('regisDB')
+    ipc.send('db')
 }

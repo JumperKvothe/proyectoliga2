@@ -4,7 +4,7 @@ require('../../db/db/logindb');
 $(document).ready(function () {
 
     //Evento onload (hay que arreglarlo)
-    loginLoad()
+    
 
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
     inputNombre = document.getElementById('nombre')
@@ -24,8 +24,10 @@ $(document).ready(function () {
 
 })
 
+//No se está usando
 function loginLoad() {
     ipc.send('user-deslogueado')
+    console.log('pillín')
 }
 
 function login() {
