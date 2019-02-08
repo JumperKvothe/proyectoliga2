@@ -1,21 +1,6 @@
 var mysql = require("mysql");
 var con
 
-//Hay que mirar como cargar la conexión desde el main
-/* var con = mysql.createConnection({
-  host: "192.168.0.57",
-  user: "ligaelite",
-  password: "ligaelite",
-  database: "formulario",
-  multipleStatements: true
-}); */
-
-ipc.on('logindb', function (event, arg) {
-  //Q
-  conexion(arg)
-  comprobarLogin()
-})
-
 function conexion(datos){
   con = mysql.createConnection({
     host: datos[0],
@@ -25,6 +10,12 @@ function conexion(datos){
     multipleStatements: datos[4]
   });
 }
+
+ipc.on('logindb', function (event, arg) {
+  //Q
+  conexion(arg)
+  comprobarLogin()
+})
 
 ipc.on('holi', function (event) {
 

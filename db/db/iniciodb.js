@@ -1,13 +1,15 @@
 var mysql = require("mysql");
+var con
 
-//Hay que mirar como cargar la conexión desde el main
-var con = mysql.createConnection({
-    host: "192.168.0.57",
-    user: "ligaelite",
-    password: "ligaelite",
-    database: "formulario",
-    multipleStatements: true
-});
+function conexion(datos){
+  con = mysql.createConnection({
+    host: datos[0],
+    user: datos[1],
+    password: datos[2],
+    database: datos[3],
+    multipleStatements: datos[4]
+  });
+}
 
 var onlineUsers = [];
 
