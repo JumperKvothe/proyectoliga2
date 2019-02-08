@@ -11,7 +11,7 @@ const url = require('url')
 const mysql = require('mysql');
 
 //Estaría guay cargar estos datos desde un archivo local aunque el main.js debería ser seguro
-var conex = ["192.168.0.57", "ligaelite", "ligaelite", "formulario", true];
+var conex = ["erionegro.salesianas.es", "erion_liga", "1234Mono!", "erionegro_ligaelite", true];
 var con = mysql.createConnection({
     host: conex[0],
     user: conex[1],
