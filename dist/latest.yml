@@ -1,0 +1,8 @@
+version: 1.0.0
+files:
+  - url: liga-setup-1.0.0.exe
+    sha512: qDmlAWNkkOUXxztOqi0Mgs81cYA92/3OpJwdfAaaXo140LUfnG9UbDWyfr5Jsu+Jei8CFfxF2obOmcGwXm0QAg==
+    size: 42039234
+path: liga-setup-1.0.0.exe
+sha512: qDmlAWNkkOUXxztOqi0Mgs81cYA92/3OpJwdfAaaXo140LUfnG9UbDWyfr5Jsu+Jei8CFfxF2obOmcGwXm0QAg==
+releaseDate: '2019-02-11T05:24:14.573Z'

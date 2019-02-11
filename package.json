@@ -5,20 +5,20 @@
   "main": "./main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "pack": "build --dir",
+    "dist": "build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JumperKvothe/proyectoliga2.git"
   },
-  "author": "Enrique",
+  "author": "danireySvQ",
   "license": "ISC",
   "build": {
     "appId": true,
     "win": {
       "target": "NSIS",
-      "icon": "./public/img/favicon.ico"
+      "icon": "build/icon.ico"
     }
   },
   "bugs": {

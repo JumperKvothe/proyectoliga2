@@ -4,5 +4,5 @@ directories:
 appId: 'true'
 win:
   target: NSIS
-  icon: ./build/favicon.ico
+  icon: build/icon.ico
 electronVersion: 3.0.9
