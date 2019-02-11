@@ -1,10 +1,13 @@
 const ipc = require('electron').ipcRenderer;
 require('../../db/db/iniciodb');
+require('../../db/indexdb');
 
 $(document).ready(function () {
 
-    //Evento onload
+    //Eventos onload
     mostrarNombre()
+    mostrarAmigos()
+    document.getElementById('popupSup').style.display = "none";
     
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
     popup = document.getElementById('popup')
@@ -26,17 +29,20 @@ $(document).ready(function () {
     addAmigo.addEventListener('click', inicio2)
 })
 
-
-//onload function
+//Mostrar tu nombre de usuario en la pantalla
 function mostrarNombre() {
     let user = JSON.parse(localStorage.getItem('currentUser'))
     $('#eliteuser').html(user.eliteuser)
-    ipc.send('iniciojs4')
+}
+
+//Ejecutar la función de mostrar tus amigos conectados en el chat
+function mostrarAmigos(){
+    ipc.send('iniciojs-amigos-to-db')
 }
 
 //Function to Hide Popup
 function div_hide() {
-    document.getElementById('abc').style.display = "none";
+    document.getElementById('popupSup').style.display = "none";
 }
 
 //Función para sacar el ID de invocador a partir del nombre de invocador introducido
@@ -88,10 +94,9 @@ function showFriends(bool){
     
 }
 
-//Function To Display Popup (se usa desde db.js, hay que arreglarlo)
 //Función para mostrar cómo verificar la cuenta de lol desde el cliente
 function div_show() {
-    document.getElementById('abc').style.display = "block";
+    document.getElementById('popupSup').style.display = "block";
     document.getElementById('bienvenido').style.display = "none";
     document.getElementById('eliteuser').style.display = "none";
 }

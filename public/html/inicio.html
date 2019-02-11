@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -16,19 +16,22 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="../style.css">
 
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
-    <script src="../../node_modules/js/bootstrap/popper.min.js"></script>
-    <script src="../../node_modules/js/bootstrap/bootstrap.min.js"></script>
-    <script src="../../node_modules/js/plugins/plugins.js"></script>
-    <script src="../index.js"></script>
+    <script>
+        if (typeof module === 'object') {
+        window.module = module; module = undefined;
+        }
+    </script>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../router.js"></script>
     <script src="../js/inicio.js"></script>
-    <script>if (window.module) module = window.module;</script>
+    <script src="../index.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
 
 </head>
 
-<body id="body" style="overflow:hidden;">
+<body>
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <div class="liga-main-menu">
@@ -36,11 +39,11 @@
                 <div class="container">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between">
-                        <a onclick="gotoinicio()" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
+                        <a id="inicio" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
                         <div class="classy-menu">
                             <div class="classynav">
-                                <ul>                                   
-                                    <li><a id="" onclick="gotologin()">Desconectarse</a></li>
+                                <ul>
+                                    <li><a id="desconectarse">Desconectarse</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -50,54 +53,52 @@
         </div>
     </header>
 
-    <!-- ##### Hero Area Start ##### -->
-    <section class="hero-area">
-        <!-- Single Hero Slide -->
-        <div class="single-hero-slide d-flex align-items-center justify-content-center">
-            <!-- Slide Img -->
-            <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
-            <!-- Slide Content -->
-            <div class="container">
-            <div class="row">
+    <div class="container center">
+        <div class="row">
             <div class="col-12">
-            <div class="hero-slides-content text-center">
-            <div id="page">
-            <form>
-                <h2 id="bienvenido">Bienvenido</h2><br>
-                <h2 id="eliteuser"></h2><br>
-                <div><img src="../img/core-img/lol.jpg" id="lol" class="lol" alt="League of Legends">
-                </div>
-                <div id="abc">
-                <!-- Popup Div Starts Here -->
-                <div id="popupContact">
-                    <!-- Contact Us Form -->
-                    <form id="form" class="form" method="post" name="form">
-                        <div class="container"><a href="#close" id="popup" class="close">X</a>
-                        <h3 style="color: #e90606;">Verificación de cuenta de LoL</h3>
-                        <div class="row">
-                        <div class="center"><label class="labelform">Nombre en League of legends</label><br>
-                        <input type="text" name="loluser" title="Introduzca su nombre del LoL"autofocus required><br><br>
-                        <label class="labelform">Para vincular su cuenta siga estos pasos: <br>
-                            1. Acceda a su cuenta de League of Legends. <br>
-                            2. Acceda a la configuración de su cuenta (La ruedita de arriba a la derecha). <br>
-                            3. Busque la opción de VERIFICACIÓN. <br>
-                            4. Introduzca "VivaElite" en el recuadro y pulse el botón GUARDAR. <br>
-                            5. Pulse el botón Verificar y espere.</label><br>
-                            <a id="verificar" class="btn oneMusic-btn mt-50">Verificar <i class="fa fa-angle-double-right"></i></a>
-                            </div>
+                <div class="hero-slides-content text-center">
+                    <div id="page">
+                        <h2 id="bienvenido">Bienvenido</h2><br>
+                        <h2 id="eliteuser"></h2><br>
+                        <div><img src="../img/core-img/lol.jpg" id="lol" class="lol" alt="League of Legends">
                         </div>
-                    </form>
+                        <div id="popupSup">
+                            <!-- Popup Div Starts Here -->
+                            <div id="popupContact">
+                                <!-- Contact Us Form -->
+                                <form id="form" class="form" method="post" name="form">
+                                    <div class="container"><a href="#close" id="popup" class="close">X</a>
+                                        <h3 style="color: #e90606;">Verificación de cuenta de LoL</h3>
+                                        <div class="row">
+                                            <div class="center"><label class="labelform">Nombre en League
+                                                    of legends</label><br>
+                                                <input type="text" name="loluser" title="Introduzca su nombre del LoL"
+                                                    autofocus required><br><br>
+                                                <label class="labelform">Para vincular su cuenta siga estos
+                                                    pasos: <br>
+                                                    1. Acceda a su cuenta de League of Legends. <br>
+                                                    2. Acceda a la configuración de su cuenta (La ruedita
+                                                    de arriba a la derecha). <br>
+                                                    3. Busque la opción de VERIFICACIÓN. <br>
+                                                    4. Introduzca "VivaElite" en el recuadro y pulse el
+                                                    botón GUARDAR. <br>
+                                                    5. Pulse el botón Verificar y espere.</label><br>
+                                                <a id="verificar" class="btn oneMusic-btn mt-50">Verificar
+                                                    <i class="fa fa-angle-double-right"></i></a>
+                                            </div>
+                                        </div>
+                                </form>
+                            </div>
+                            <!-- Popup Div Ends Here -->
+                        </div>
+                    </div>
                 </div>
-                <!-- Popup Div Ends Here -->
-                </div>
             </div>
-            </div>
-            </div>
-            </div>
-            <div id="chat-sidebar" class="chat-sidebar" onmouseenter="showFriends(true)" onmouseleave="showFriends(false)">
-                <input type="search" id="search" placeholder="Busca un amigo" style="margin-left: 3%; margin-bottom: 3%">
-                <button id="addAmigo">&#10004</button>
-                <!-- <div id="sidebar-user-box" class="2">
+        </div>
+        <div id="chat-sidebar" class="chat-sidebar" onmouseenter="showFriends(true)" onmouseleave="showFriends(false)">
+            <input type="search" id="search" placeholder="Busca un amigo" style="margin-left: 3%; margin-bottom: 3%">
+            <button id="addAmigo">&#10004</button>
+            <!-- <div id="sidebar-user-box" class="2">
                     <img id="img-icono" src="../img/elite.png"/>
                     <span id="slider-username">JumperKvothe</span>
                 </div>
@@ -105,21 +106,8 @@
                     <img id="img-icono" src="../img/elite.png"/>
                     <span id="slider-username">Skptricks </span>
                 </div> -->
-            </div>
-    </section>
-    <!-- ##### Hero Area End ##### -->
-    
-    <script>
-        if (typeof module === 'object') {
-            window.module = module;
-            module = undefined;
-        }
-    </script>
-    <script src="../../node_modules/js/active.js"></script>
-    <script>
-        if (window.module) module = window.module;
-    </script>
-
+        </div>
+    </div>
 </body>
 
 </html>

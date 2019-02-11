@@ -1,7 +1,8 @@
 var mysql = require("mysql");
 var con
+var CryptoJS = require("crypto-js");
 
-function conexion(datos){
+function conexion(datos) {
   con = mysql.createConnection({
     host: datos[0],
     user: datos[1],
@@ -11,42 +12,43 @@ function conexion(datos){
   });
 }
 
-ipc.on('registrarsedb', function (event, arg) {
+ipc.on('registrardb', function (event, arg) {
+  conexion(arg)
   agregarUsuario()
 })
 
 //Meter un nuevo usuario en la base de datos
+//Repasar cuando esté online
 function agregarUsuario() {
-  var eliteu = document.getElementsByName("nombre")[0].value;
-  var cen = document.getElementsByName("centro")[0].value;
-  var contra = document.getElementsByName("contrasena")[0].value;
-  var sql = "SELECT * FROM jugadores WHERE eliteuser = '" + eliteu + "'";
+  var eliteu = document.getElementById('nombre').value;
+  var sql = "SELECT * FROM jugadores WHERE eliteuser LIKE '" + eliteu + "'";
   con.query(sql, function (err, result) {
     if (err) throw err;
     else {
-      if (result == "" && contra != "") {
-        var sql2 =
-          "INSERT INTO jugadores (eliteuser, centro, contrasena) VALUES ('" +
-          eliteu + "', '" + cen + "', '" + contra + "')";
-        con.query(sql2, function (err, result) {
-          if (err) throw err;
-          else gotologin();
-        });
+      if (result.length == 0) {
+        insertarUsuario()
       } else {
-        if (contra == "") {
-          alert('No estableciste una contraseña')
-        } else {
-          alert('Nombre en uso')
-        }
+        con = null;
+        alert('Nombre de usuario en uso, pruebe con otro')
       }
     }
   });
 }
 
-ipc.on('prueba', function (event) {
-  prueba();
-})
-
-function prueba() {
-  console.log('12345')
+//Falta encriptar la contraseña
+function insertarUsuario() {
+  var eliteu = document.getElementById('nombre').value;
+  var cen = document.getElementById("centro").value;
+  var contra = document.getElementById("pass").value;
+  var encpass = CryptoJS.AES.encrypt(contra, 'SvQ').toString();
+  var sql = "INSERT INTO jugadores (eliteuser, centro, contrasena) VALUES ('" +
+    eliteu + "', '" + cen + "', '" + encpass + "')";
+  con.query(sql, function (err, result) {
+    con = null
+    if (err) throw err;
+    else {
+      alert('Usuario creado con éxito')
+      goToLogin()
+    }
+  });
 }

@@ -3,13 +3,14 @@ require('../../db/db/logindb');
 
 $(document).ready(function () {
 
-    //Evento onload (hay que arreglarlo)
-    
+    //Evento onload
+    //Limpio el almacenamiento del usuario actual
+    localStorage.setItem("currentUser", null);
 
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
     inputNombre = document.getElementById('nombre')
     inputPass = document.getElementById('pass')
-    btnconect = document.getElementById('btnconect')
+    btncon = document.getElementById('btnconectarse')
 
     //Añadir los eventos
     inputNombre.addEventListener('keyup', function (e) {
@@ -20,17 +21,21 @@ $(document).ready(function () {
         if (e.keyCode === 13)
             login()
     })
-    btnconect.addEventListener('click', login)
+    btncon.addEventListener('click', login)
 
 })
 
-//No se está usando
-function loginLoad() {
-    ipc.send('user-deslogueado')
-    console.log('pillín')
-}
-
+//Valido que los campos no estén vacíos y mando ejecutar el login
 function login() {
-    console.log('ipc')
-    ipc.send('loginjs')
+    if (document.getElementById('nombre').value == "") {
+        if (document.getElementById('pass').value == "") {
+            alert("Introduzca un nombre y una contraseña")
+        } else {
+            alert("Introduzca un nombre")
+        }
+    } else if (document.getElementById('pass').value == "") {
+        alert("Introduzca una contraseña")
+    } else {
+        ipc.send('loginjs-to-db')
+    }
 }

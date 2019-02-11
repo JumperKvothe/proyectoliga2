@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -16,15 +16,19 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="../style.css">
 
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-        <script src="../../node_modules/js/jquery/jquery-2.2.4.min.js"></script>
-        <script src="../../node_modules/js/bootstrap/popper.min.js"></script>
-        <script src="../../node_modules/js/bootstrap/bootstrap.min.js"></script>
-        <script src="../../node_modules/js/plugins/plugins.js"></script>
-        <script src="../index.js"></script>
-        <script src="../js/login.js"></script>
-        <!-- <script src="../../db/db/logindb.js"></script> -->
-    <script>if (window.module) module = window.module;</script>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../router.js"></script>
+    <script src="../js/login.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
+
 </head>
 
 <body>
@@ -35,10 +39,11 @@
                 <div class="container">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between">
-                        <a onclick="gotologin()" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
+                        <a id="login" class="nav-brand"><img src="../img/core-img/logoelite.png" alt=""></a>
                         <div class="classy-menu">
                             <div class="classynav">
                                 <ul>
+
                                 </ul>
                             </div>
                         </div>
@@ -47,37 +52,28 @@
             </div>
         </div>
     </header>
-    <!-- Single Hero Slide -->
-    <div class="single-hero-slide d-flex align-items-center justify-content-center">
-        <!-- Slide Img -->
-        <div class="slide-img bg-img" style="background-image: url(../img/core-img/img1.jpg);"></div>
-        <!-- Slide Content -->
-        <div class="container">
+
+    <div class="container center">
         <div class="row">
-        <div class="col-12">
-        <div class="hero-slides-content text-center">
-        <div id="page">
-            <div>
-            <form>
-                <h1 class="center">Login</h1>
-                <br><label class="labelform">Nombre de Usuario</label><br>
-                <input type="text" id="nombre" placeholder="Nombre de Usuario" required autofocus><br>
-                <br><label class="labelform">Contraseña</label><br>
-                <input type="password" id="pass" placeholder="Contraseña" required><br>
-                <a data-delay="0ms" id="btnconect" class="btn oneMusic-btn mt-50">Conectarse<i class="fa fa-angle-double-right"></i></a>
-                <a data-delay="0ms" id="regis" onclick="gotoregis()" class="btn oneMusic-btn mt-50">Registrarse<i class="fa fa-angle-double-right"></i></a>    
-            </form>
+            <div class="col-12">
+                <div class="hero-slides-content text-center">
+                    <div id="page">
+                        <div>
+                            <form>
+                                <h1 class="center">Login</h1>
+                                <br><label class="labelform">Nombre de Usuario</label><br>
+                                <input type="text" id="nombre" placeholder="Nombre de Usuario" required autofocus><br>
+                                <br><label class="labelform">Contraseña</label><br>
+                                <input type="password" id="pass" placeholder="Contraseña" required><br><br>
+                                <input type="button" id="btnconectarse" value="Conectarse">
+                                <input type="button" id="regis" value="Registrarse">
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-        </div>
-        </div>
-    <!-- ##### Hero Area End ##### -->
-
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-        <script src="../../node_modules/js/active.js"></script>
-    <script>if (window.module) module = window.module;</script>
-
+    </div>
 </body>
 
 </html>

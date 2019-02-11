@@ -1,17 +1,21 @@
 var mysql = require("mysql");
 var con
+var onlineUsers = [];
 
-function conexion(datos){
-  con = mysql.createConnection({
-    host: datos[0],
-    user: datos[1],
-    password: datos[2],
-    database: datos[3],
-    multipleStatements: datos[4]
-  });
+function conexion(datos) {
+    con = mysql.createConnection({
+        host: datos[0],
+        user: datos[1],
+        password: datos[2],
+        database: datos[3],
+        multipleStatements: datos[4]
+    });
 }
 
-var onlineUsers = [];
+ipc.on('amigosdb', function (event, arg) {
+    conexion(arg)
+    miraAmigosConectados();
+})
 
 ipc.on('iniciodb', function (event) {
     comprobarLol()
@@ -19,10 +23,6 @@ ipc.on('iniciodb', function (event) {
 
 ipc.on('iniciodb2', function (event) {
     addAmigo()
-})
-
-ipc.on('iniciodb4', function (event) {
-    checkOnline()
 })
 
 ipc.on('iniciodb5', function (event, arg) {
@@ -43,7 +43,7 @@ function comprobarLol() {
         "SELECT loluser FROM jugadores WHERE eliteuser LIKE '" +
         user.eliteuser + "'";
     con.query(sql, function (err, result) {
-        console.log(result);
+
         var r = result[0].loluser;
         if (err) throw err;
         else {
@@ -126,69 +126,42 @@ function addAmigo3(ida, idu) {
     });
 }
 
-//Meter los usuarios online en un array
-//Añadido en la función mostrarNombre de funciones.js
-function checkOnline() {
-    var aux = [];
-    sql = "SELECT id FROM gente_online";
-    con.query(sql, function (err, result) {
-        for (let i = 0; i < result.length; i++) {
-            onlineUsers[i] = result[i];
-        }
-        miraAC();
-        if (err) throw err;
-    });
-}
-
-//Función que te comprueba la lista de los amigos para luego llamar a la función que los muestra
-function miraAC() {
+//Función que te comprueba la lista de los amigos
+function miraAmigosConectados() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
     let id = user.idjugador;
-    let long1 = 0;
-    let long2 = 0;
-    sql = "SELECT id_p FROM amigos WHERE id_r= " + id + "";
+    let amigos = [];
+    sql = "SELECT eliteuser, idjugador FROM jugadores WHERE idjugador IN (SELECT id_p FROM amigos WHERE id_r= " + id + ")"
     con.query(sql, function (err, result) {
+        if (err) throw err;
         if (result.length == 0) {} else {
             for (let i = 0; i < result.length; i++) {
-                onlineUsers[i] = result[i].id_p;
-                long1 = result.length;
+                amigos.push(result[i].eliteuser+"-9-9-"+result[i].idjugador)
             }
-            if (err) throw err;
+            limit = result.length;
         }
-    });
-
-    sql2 = "SELECT id_r FROM amigos WHERE id_p= " + id + "";
-    con.query(sql2, function (err, result) {
-        if (result.length == 0) {} else {
-            for (let i = 0; i < result.length; i++) {
-                onlineUsers[i + long1] = result[i].id_r;
-                long2 = result.length + long1;
+        sql2 = "SELECT eliteuser, idjugador FROM jugadores WHERE idjugador IN (SELECT id_r FROM amigos WHERE id_p= " + id + ")"
+        con.query(sql2, function (err, result) {
+            if (err) throw err;
+            if (result.length == 0) {} else {
+                for (let i = 0; i < result.length; i++) {
+                    amigos.push(result[i].eliteuser+"-9-9-"+result[i].idjugador)
+                }
             }
-            mostrarA(onlineUsers, long2);
-            if (err) throw err;
-        }
-    });
-}
-
-//Función que se encarga de mostrar la lista de amigos conectados para el chat
-function mostrarA(lista, longitud) {
-    for (let i = 0; i < longitud; i++) {
-        sql = "SELECT eliteuser FROM jugadores WHERE idjugador=" + lista[i] + "";
-        con.query(sql, function (err, result) {
-            $(".chat-sidebar").append(function () {
-                return (
-                    '<div id="sidebar-user-box" class="' +
-                    lista[i] +
-                    '"><img id="img-icono" src="../img/elite.png"/>' +
-                    '<span id="slider-username">' +
-                    result[0].eliteuser +
-                    "</span></div>"
-                );
-            });
-
-            if (err) throw err;
+            amigos.sort();
+            let split
+            //Durante este bucle hago aparecer los amigos en la lista
+             for (let i = 0; i < amigos.length; i++) {
+                split = amigos[i].split("-9-9-");
+                $(".chat-sidebar").append(function () {
+                    return (
+                        '<div id="sidebar-user-box" class="' + split[1] + '"><img id="img-icono" src="../img/elite.png"/>' +
+                        '<span id="slider-username">' + split[0] + "</span></div>"
+                    );
+                });
+            }
         });
-    }
+    });
 }
 
 //Recibir mensajes del chatbox que abra

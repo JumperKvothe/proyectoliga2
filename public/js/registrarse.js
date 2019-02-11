@@ -4,21 +4,26 @@ require('../../db/db/registrarsedb');
 $(document).ready(function () {
 
     //Evento onload
-    //chargeDB()
+    //Ninguno
 
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
-    btnconect = document.getElementById('btnconect')    
+    btnregis = document.getElementById('registrarUsuario')    
 
     //Añadir los eventos
-    btnconect.addEventListener('click', register)
+    btnregis.addEventListener('click', register)
 })
 
+//Valido que los campos no estén vacíos y mando ejecutar el registrarse
 function register(){
-    console.log('regis')
-    ipc.send('registrarsejs')
-}
-
-function chargeDB(){
-    console.log('regisDB')
-    ipc.send('db')
+    if (document.getElementById('nombre').value == "") {
+        if (document.getElementById('pass').value == "") {
+            alert("Introduzca un nombre y una contraseña")
+        } else {
+            alert("Introduzca un nombre")
+        }
+    } else if (document.getElementById('pass').value == "") {
+        alert("Introduzca una contraseña")
+    } else {
+        ipc.send('registrarsejs-to-db')
+    }
 }
