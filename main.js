@@ -23,7 +23,8 @@ let win
 let iduserLogueado
 
 //Inicializar y crear la conexión de la BBDD de MySQL
-var conex = ["erionegro.salesianas.es", "erion_liga", "1234Mono!", "erionegro_ligaelite", true];
+//var conex = ["erionegro.salesianas.es", "erion_liga", "1234Mono!", "erionegro_ligaelite", true];
+var conex = ["copeik.ddns.net", "phpmyadmin", "1234", "ligaelite", true];
 var con = mysql.createConnection({
     host: conex[0],
     user: conex[1],
