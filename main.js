@@ -67,14 +67,19 @@ function createWindow() {
     win.on('close', (event) => {
         let obj = {
             conex,
-            iduserLogueado
+            iduserLogueado,
+            bool: true
         }
-        win.webContents.send('logoutdb', obj)
+        //Prevengo que se ejecute el evento de cerrar la ventana hasta que me asegure que se remueve al usuario de la gente_online
+        if(iduserLogueado != null){
+            event.preventDefault();
+            event.sender.send('logoutdb', obj)
+        }
     })
 
     win.on('closed', function () {
         //La forma de cerrar una ventana en la app
-        win = null
+        win = null;
     })
 
     //Parámetros de lanzamiento de interés
@@ -115,32 +120,27 @@ const templateMenu = [{
     }]
 }]
 
-//Eliminamos de la bbdd el usuario conectado al cerrar la aplicación (si hay alguno)
-/* function logout() {
-    if (iduserLogueado != null) {
-        sql = "DELETE FROM gente_online WHERE id = " + iduserLogueado;
-        con.query(sql, function (err, result) {
-            if (err) throw err;
-            iduserLogueado = null
-        })
-    }
-} */
-
-//Eventos IPC de esta página
+//EVENTOS IPC DE ESTA PÁGINA
+//Al loguear guardo la id del usuario en una variable y la compruebo al cerrar la aplicación para desconectarlo
 ipc.on('user-logueado', function (event, arg) {
     iduserLogueado = arg
 })
 
 ipc.on('user-deslogueado', function (event) {
-    //logout()
     let obj = {
         conex,
-        iduserLogueado
+        iduserLogueado,
+        bool: false
     }
     event.sender.send('logoutdb', obj)
 })
+ipc.on('desconectado',  function (event) {
+    //Recibo la confirmación de que el usuario se ha desconectado y permitimos cerrar la ventana
+    win.removeAllListeners('close');
+    win.close();
+})
 
-//Eventos IPC donde el main.js media
+//EVENTOS IPC DONDE EL MAIN.JS MEDIA
 ipc.on('loginjs-to-db', function (event) {
     event.sender.send('logindb', conex)
 })
@@ -150,19 +150,20 @@ ipc.on('registrarsejs-to-db', function (event) {
 ipc.on('iniciojs-amigos-to-db', function (event) {
     event.sender.send('amigosdb', conex)
 })
-
-
-
-
-
-ipc.on('iniciojs', function (event) {
-    event.sender.send('iniciodb')
+ipc.on('iniciojs-lol-to-db', function (event) {
+    event.sender.send('loldb', conex)
 })
+ipc.on('iniciodb-notlol-to-js', function (event) {
+    event.sender.send('notlol')
+})
+ipc.on('iniciodb-chatlisteners-to-js', function (event) {
+    event.sender.send('chatlisteners')
+})
+
+
+
 ipc.on('iniciojs2', function (event) {
     event.sender.send('iniciodb2')
-})
-ipc.on('iniciodb3', function (event) {
-    event.sender.send('iniciojs3')
 })
 ipc.on('iniciojs5', function (event, arg) {
     event.sender.send('iniciodb5', arg)
@@ -182,31 +183,3 @@ ipc.on('equiposjs', function (event) {
 ipc.on('equipos1js', function (event) {
     event.sender.send('equipos1db')
 })
-
-//Plain text encryption
-//Encrypt y Decrypt
-/* var CryptoJS = require("crypto-js");
-
-// Encrypt
-var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123').toString();
-
-// Decrypt
-var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
-var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-console.log(originalText); // 'my message' */
-
-//Object encryption
-/* Object encryption
-var CryptoJS = require("crypto-js");
-
-var data = [{id: 1}, {id: 2}]
-
-// Encrypt
-var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'secret key 123').toString();
-
-// Decrypt
-var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
-var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-
-console.log(decryptedData); // [{id: 1}, {id: 2}] */

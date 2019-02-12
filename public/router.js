@@ -17,3 +17,7 @@ function goToRegis() {
 function goToInicio(){
     window.location.href = "../html/inicio.html"
 }
+
+function goToLolIndex(){
+    window.location.href = "../html/lol-index.html"
+}

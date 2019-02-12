@@ -17,7 +17,8 @@ ipc.on('amigosdb', function (event, arg) {
     miraAmigosConectados();
 })
 
-ipc.on('iniciodb', function (event) {
+ipc.on('loldb', function (event, arg) {
+    conexion(arg)
     comprobarLol()
 })
 
@@ -47,12 +48,12 @@ function comprobarLol() {
         var r = result[0].loluser;
         if (err) throw err;
         else {
-            //No la tiene validada
             if (r == "" || r == null) {
-                ipc.send('iniciodb3')
-                //La tiene validada
+                //No la tiene validada
+                ipc.send('iniciodb-notlol-to-js')
             } else {
-                gotoindex();
+                //La tiene validada
+                goToLolIndex()
             }
         }
     });
@@ -136,7 +137,7 @@ function miraAmigosConectados() {
         if (err) throw err;
         if (result.length == 0) {} else {
             for (let i = 0; i < result.length; i++) {
-                amigos.push(result[i].eliteuser+"-9-9-"+result[i].idjugador)
+                amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador)
             }
             limit = result.length;
         }
@@ -145,13 +146,13 @@ function miraAmigosConectados() {
             if (err) throw err;
             if (result.length == 0) {} else {
                 for (let i = 0; i < result.length; i++) {
-                    amigos.push(result[i].eliteuser+"-9-9-"+result[i].idjugador)
+                    amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador)
                 }
             }
             amigos.sort();
             let split
             //Durante este bucle hago aparecer los amigos en la lista
-             for (let i = 0; i < amigos.length; i++) {
+            for (let i = 0; i < amigos.length; i++) {
                 split = amigos[i].split("-9-9-");
                 $(".chat-sidebar").append(function () {
                     return (
@@ -160,6 +161,10 @@ function miraAmigosConectados() {
                     );
                 });
             }
+            ipc.send('iniciodb-chatlisteners-to-js')
+            /* sidebar_user_box = document.getElementById('sidebar-user-box')
+            sidebar_user_box.addEventListener('click', f3)
+            console.log(sidebar_user_box) */
         });
     });
 }

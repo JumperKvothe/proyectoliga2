@@ -2,13 +2,19 @@ const ipc = require('electron').ipcRenderer;
 require('../../db/db/iniciodb');
 require('../../db/indexdb');
 
+//Variables globales para el chat
+var arr = []; // List of users 
+var interval = true
+var m, d
+var on = false
+
 $(document).ready(function () {
 
     //Eventos onload
     mostrarNombre()
     mostrarAmigos()
-    document.getElementById('popupSup').style.display = "none";
-    
+    document.getElementById('popupSup').style.display = "none"
+
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
     popup = document.getElementById('popup')
     verificar = document.getElementById('verificar')
@@ -18,15 +24,25 @@ $(document).ready(function () {
 
     //Añadir los eventos
     popup.addEventListener('click', div_hide)
-    verificar.addEventListener('click', sacarid)
-    lol.addEventListener('click', inicio)
-   /*  chat.addEventListener('mouseenter', function(){
+    //verificar.addEventListener('click', sacarid)
+    lol.addEventListener('click', function () {
+        ipc.send('iniciojs-lol-to-db')
+    })
+    chat.addEventListener('mouseenter', function () {
         showFriends(true)
     })
-    chat.addEventListener('mouseleave', function(){
+    chat.addEventListener('mouseleave', function () {
         showFriends(false)
-    }) */
+    })
     addAmigo.addEventListener('click', inicio2)
+})
+
+ipc.on('notlol', function (event) {
+    div_show()
+})
+
+ipc.on('chatlisteners', function (event) {
+    chatlisteners()
 })
 
 //Mostrar tu nombre de usuario en la pantalla
@@ -36,23 +52,23 @@ function mostrarNombre() {
 }
 
 //Ejecutar la función de mostrar tus amigos conectados en el chat
-function mostrarAmigos(){
+function mostrarAmigos() {
     ipc.send('iniciojs-amigos-to-db')
 }
 
-//Function to Hide Popup
+//Function to Hide Popup con la "X"
 function div_hide() {
     document.getElementById('popupSup').style.display = "none";
 }
 
-//Función para sacar el ID de invocador a partir del nombre de invocador introducido
+//Funciones de la API de RIOT (hay que renovarlas si están deprecated y ver si las quiero implementar)
+/* //Función para sacar el ID de invocador a partir del nombre de invocador introducido
 function sacarid() {
     loluser = document.getElementsByName("loluser")[0].value;
     leagueJs.Summoner
         .gettingByName(loluser)
         .then(data => {
             'use strict';
-            //Prueba de coger un dato (Funciona). Para probar todo usar ' node server.js '
             const id = data.id;
             verificarlol(id, loluser);
         })
@@ -62,36 +78,102 @@ function sacarid() {
             console.log(err);
         });
 }
+//Función que lleva a cabo la verificación de la cuenta mediante la opción del cliente del LOL
+//Hay que controlar si no introducen bien el texto en el LOL
+function verificarlol(id, loluser) {
+    leagueJs.ThirdPartyCode
+        .verifying('VivaElite', id, 'euw')
+        .then(data => {
+            'use strict';
+            if (data) {
+                var puntos;
+                /////////
+                leagueJs.League
+                    .gettingPositionsForSummonerId(data.id, 'euw')
+                    .then(data => {
+                        'use strict';
+                        console.log(data)
+                        if (data.length == 0) {
+                            console.log("unranked")
+                            elo = 0
+                        } else {
+                            console.log("ranked en alguna cola")
+                            let pos = 4;
+                            for (let i = 0; i < data.length; i++) {
+                                if (data[i].queueType.localeCompare("RANKED_SOLO_5x5") == 0) {
+                                    pos = i
+                                }
+                            }
+                            if (pos == 4) {
+                                elo = 500
+                            } else {
+                                switch (data[pos].tier) {
+                                    case "Bronze":
+                                        elo = 750
+                                        break;
+                                    case "Silver":
+                                        elo = 1000
+                                        break;
+                                    case "Gold":
+                                        elo = 1250
+                                        break;
+                                    case "Platinum":
+                                        elo = 1500
+                                        break;
+                                    case "Diamond":
+                                        elo = 1750
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        'use strict';
+                        console.log(err);
+                    });
+                console.log(elo)
+                addnom(loluser, elo);
+            }
+        })
+        .catch(err => {
+            'use strict';
+            alert("No se introdució el texto correcto en el cliente de lol")
+            console.log(err);
+        });
+} */
 
-//Mostrar/Ocultar lista amigos
-function showFriends(bool){
+//Mostrar/Ocultar lista amigos con eventos onmouseover/onmouseleave
+function showFriends(bool) {
     let elem = document.getElementById('chat-sidebar')
-    if(bool){
+    if (bool) {
         let value = window.getComputedStyle(elem)
         value = parseInt(value.getPropertyValue('right'));
         let id1 = setInterval(suma, 1);
-        function suma(){
-            if(value > -1){
+
+        function suma() {
+            if (value > -1) {
                 clearInterval(id1)
-            }else{
+            } else {
                 value += 2
                 elem.style.right = value + "px"
             }
         }
-    }else{
+    } else {
         let value2 = window.getComputedStyle(elem)
         value2 = parseInt(value2.getPropertyValue('right'));
         let id2 = setInterval(resta, 1);
-        function resta(){
-            if(value2 < -179){
+
+        function resta() {
+            if (value2 < -179) {
                 clearInterval(id2)
-            }else{
+            } else {
                 value2 -= 2
                 elem.style.right = value2 + "px"
             }
         }
     }
-    
 }
 
 //Función para mostrar cómo verificar la cuenta de lol desde el cliente
@@ -101,29 +183,29 @@ function div_show() {
     document.getElementById('eliteuser').style.display = "none";
 }
 
-//CHATBOX
-$(document).ready(function () {
+//FUNCIONES CHATBOX
 
-    var arr = []; // List of users 
+function chatlisteners() {
 
+    //Desliza abajo/arriba un chat presionando en su cabecera
     $(document).on('click', '.msg_head', function () {
         var chatbox = $(this).parents().attr("rel");
         $('[rel="' + chatbox + '"] .msg_wrap').slideToggle('slow');
         return false;
     });
 
-
+    //Cierra un chat presionando la X de la esquina
     $(document).on('click', '.close', function () {
         var chatbox = $(this).parents().parents().attr("rel");
-        $('[rel="' + chatbox + '"]').hide();
+        //$('[rel="' + chatbox + '"]').hide();
+        $('[rel="' + chatbox + '"]').remove();
         arr.splice($.inArray(chatbox, arr), 1);
         displayChatBox();
+        console.log($('[rel="' + chatbox + '"]'))
         return false;
     });
 
-    var interval = true
-    var m, d
-
+    //Crea un chat presionando el amigo en la barra lateral
     $(document).on('click', '#sidebar-user-box', function () {
 
         var userID = $(this).attr("class");
@@ -150,7 +232,7 @@ $(document).ready(function () {
         clearInterval(m)
         m = setInterval(recibir, 1000, d, userID)
 
-        function recibir(){
+        function recibir() {
             ipc.send('iniciojs7', d, userID)
         }
 
@@ -162,11 +244,11 @@ $(document).ready(function () {
         }else{
             console.log(i.isRunning() + "actívate")
             i.start()
-        } */
+        }*/
     });
 
     //Hay que descomentarlo para chatear
-    $(document).on('keypress', 'input', function (e) {
+    /* $(document).on('keypress', '.msg_input', function (e) {
         if (e.keyCode == 13) {
             var msg = $(this).val();
             $(this).val('');
@@ -178,10 +260,11 @@ $(document).ready(function () {
             ipc.send('iniciojs8', chatbox, msg)
             //mandarMensajes(chatbox, msg)
         }
-    });
+    }); */
 
+    //Ajusta el chat en la posición que toque (de derecha a izquierda)
     function displayChatBox() {
-        i = 270; // start position
+        i = 270; //start position
         j = 260; //next position
 
         $.each(arr, function (index, value) {
@@ -194,9 +277,8 @@ $(document).ready(function () {
             }
         });
     }
-
-});
-//FIN CHATBOX
+}
+//FIN FUNCIONES CHATBOX
 
 function mensaje(msg, chatbox, boolean) {
     if (boolean) {
@@ -207,8 +289,6 @@ function mensaje(msg, chatbox, boolean) {
         $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
     }
 }
-
-var on = false
 
 /* function Interval(fn, time, parameter) {
     var timer = false;
@@ -227,18 +307,10 @@ var on = false
     }; 
 }*/
 
-function inicio(){
-    ipc.send('iniciojs')
-}
-
-function inicio2(){
+function inicio2() {
     ipc.send('iniciojs2')
 }
 
-ipc.on('iniciojs3', function(event){
-    div_show()
-})
-
-ipc.on('iniciojs6', function(event, arg1, arg2, arg3){
+ipc.on('iniciojs6', function (event, arg1, arg2, arg3) {
     mensaje(arg1, arg2, arg3)
 })

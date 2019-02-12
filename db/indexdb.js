@@ -14,16 +14,20 @@ function conexion(datos) {
 ipc.on('logoutdb', function (event, arg) {
     conexion(arg.conex)
     iduserLogueado = arg.iduserLogueado
-    logoutdb()
+    logoutdb(arg.bool)
+    console.log('asd')
 })
 
-function logoutdb() {
+function logoutdb(bool) {
     if (iduserLogueado != null) {
         sql = "DELETE FROM gente_online WHERE id = " + iduserLogueado;
         con.query(sql, function (err, result) {
             con = null
             if (err) throw err;
             iduserLogueado = null
+            if(bool){
+                ipc.send('desconectado')
+            }
         })
     }
 }
@@ -39,3 +43,4 @@ function checkOnline() {
         }
     });
 }
+
