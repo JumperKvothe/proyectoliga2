@@ -15,7 +15,6 @@ ipc.on('logoutdb', function (event, arg) {
     conexion(arg.conex)
     iduserLogueado = arg.iduserLogueado
     logoutdb(arg.bool)
-    console.log('asd')
 })
 
 function logoutdb(bool) {

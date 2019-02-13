@@ -159,23 +159,23 @@ ipc.on('iniciodb-notlol-to-js', function (event) {
 ipc.on('iniciodb-chatlisteners-to-js', function (event) {
     event.sender.send('chatlisteners')
 })
+ipc.on('iniciojs-sendmessages-to-db', function (event, arg1, arg2) {
+    event.sender.send('sendmessages', conex, arg1, arg2)
+})
+ipc.on('iniciojs-loadmessages-to-db', function (event, arg) {
+    event.sender.send('loadmessages', conex, arg)
+})
+ipc.on('iniciodb-mensajes-to-js', function (event, arg1, arg2, arg3) {
+    event.sender.send('generatemessages', arg1, arg2, arg3)
+})
+ipc.on('iniciojs-actualizarmsg-to-db', function (event, arg1) {
+    event.sender.send('actualizarmsg', conex, arg1)
+})
 
 
 
 ipc.on('iniciojs2', function (event) {
     event.sender.send('iniciodb2')
-})
-ipc.on('iniciojs5', function (event, arg) {
-    event.sender.send('iniciodb5', arg)
-})
-ipc.on('iniciodb6', function (event, arg1, arg2, arg3) {
-    event.sender.send('iniciojs6', arg1, arg2, arg3)
-})
-ipc.on('iniciojs7', function (event, arg1, arg2) {
-    event.sender.send('iniciodb7', arg1, arg2)
-})
-ipc.on('iniciojs8', function (event, arg1, arg2) {
-    event.sender.send('iniciodb8', arg1, arg2)
 })
 ipc.on('equiposjs', function (event) {
     event.sender.send('equiposdb')

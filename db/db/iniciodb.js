@@ -1,9 +1,19 @@
 var mysql = require("mysql");
-var con
+var con, cone
 var onlineUsers = [];
 
 function conexion(datos) {
     con = mysql.createConnection({
+        host: datos[0],
+        user: datos[1],
+        password: datos[2],
+        database: datos[3],
+        multipleStatements: datos[4]
+    });
+}
+
+function conexion2(datos) {
+    con2 = mysql.createConnection({
         host: datos[0],
         user: datos[1],
         password: datos[2],
@@ -22,21 +32,25 @@ ipc.on('loldb', function (event, arg) {
     comprobarLol()
 })
 
-ipc.on('iniciodb2', function (event) {
-    addAmigo()
-})
-
-ipc.on('iniciodb5', function (event, arg) {
-    recibirMensajes(arg)
-})
-
-ipc.on('iniciodb7', function (event, arg1, arg2) {
-    recibirMensajes2(arg1, arg2)
-})
-
-ipc.on('iniciodb8', function (event, arg1, arg2) {
+ipc.on('sendmessages', function (event, arg0, arg1, arg2) {
+    conexion(arg0)
     mandarMensajes(arg1, arg2)
 })
+
+ipc.on('iniciodb2', function (event) {
+    //addAmigo()
+})
+
+ipc.on('loadmessages', function (event, arg1, arg2) {
+    conexion(arg1)
+    cargarMensajes(arg2)
+})
+
+ipc.on('actualizarmsg', function (event, arg1, arg2) {
+    conexion2(arg1)
+    actualizarMensajes(arg2)
+})
+
 //
 function comprobarLol() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
@@ -162,74 +176,74 @@ function miraAmigosConectados() {
                 });
             }
             ipc.send('iniciodb-chatlisteners-to-js')
-            /* sidebar_user_box = document.getElementById('sidebar-user-box')
-            sidebar_user_box.addEventListener('click', f3)
-            console.log(sidebar_user_box) */
         });
     });
 }
 
 //Recibir mensajes del chatbox que abra
-function recibirMensajes(username) {
+function cargarMensajes(username) {
     let miid = JSON.parse(localStorage.getItem("currentUser"));
     miid = miid.idjugador;
-    sql =
-        "SELECT mensaje, emisor FROM mensajes WHERE (emisor = " +
-        miid +
-        " AND receptor = " +
-        username +
-        ") OR (emisor = " +
-        username +
-        " AND receptor = " +
-        miid +
-        ")";
+    let idarray = []
+    let allid
+    sql = "SELECT id, mensaje, emisor FROM mensajes WHERE (emisor = " + miid + " AND receptor = " + username + ") OR (emisor = " +
+        username + " AND receptor = " + miid + ")";
     con.query(sql, function (err, result) {
         for (let i = 0; i < result.length; i++) {
+            idarray.push(result[i].id)
             if (result[i].emisor == miid) {
-                ipc.send('iniciodb6', result[i].mensaje, username, true)
+                ipc.send('iniciodb-mensajes-to-js', result[i].mensaje, username, true)
             } else {
-                ipc.send('iniciodb6', result[i].mensaje, username, false)
+                ipc.send('iniciodb-mensajes-to-js', result[i].mensaje, username, false)
             }
         }
-        if (err) throw err;
+        allid = idarray.join(",")
+        sql2 = "UPDATE mensajes SET leido = 1 WHERE receptor = " + miid + " && leido = 0 && id IN (" + allid + ")"
+        con.query(sql2, function (err, result) {
+            if (err) throw err;
+            con = null;
+        })
     });
 }
 
-function recibirMensajes2(time, username) {
+function actualizarMensajes(userid) {
     let miid = JSON.parse(localStorage.getItem("currentUser"));
     miid = miid.idjugador;
-    sql =
-        "SELECT mensaje, emisor FROM mensajes WHERE emisor = " +
-        username +
-        " AND receptor = " +
-        miid +
-        " AND hora > '" +
-        time +
-        "'";
-    con.query(sql, function (err, result) {
-        for (let i = 0; i < result.length; i++) {
-            mensaje(result[i].mensaje, username, false);
-            d = result[i].hora;
-            if (err) throw err;
+    let idarray = []
+    let allid
+    sql = "SELECT id, mensaje FROM mensajes WHERE emisor = " + userid + " AND receptor = " + miid + " AND leido = 0"
+    con2.query(sql, function (err, result) {
+        if (err) return
+        if (!err) {
+            for (let i = 0; i < result.length; i++) {
+                idarray.push(result[i].id)
+                ipc.send('iniciodb-mensajes-to-js', result[i].mensaje, userid, false)
+            }
+            if (idarray.length != 0) {
+                allid = idarray.join(",")
+                sql2 = "UPDATE mensajes SET leido = 1 WHERE id IN (" + allid + ")"
+                con2.query(sql2, function (err, result) {
+                    if (err) throw err;
+                    con2 = null;
+                })
+            }else{
+                con2 = null;
+            }
+            
         }
+
     });
 }
 
-//Mandar mensajes del chatbox que abra
+//Mandar mensajes cada vez que se de al intro en el input de un chat
 function mandarMensajes(userID, msg) {
+    console.log('12345')
     let user = JSON.parse(localStorage.getItem("currentUser"));
     let miid = user.idjugador;
-    sql =
-        "INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (" +
-        miid +
-        ", " +
-        userID +
-        ', "' +
-        msg +
-        '", NOW())';
-    if (msg != null) {
-        con.query(sql, function (err, result) {
-            if (err) throw err;
-        });
-    }
+    sql = "INSERT INTO mensajes (emisor, receptor, mensaje, hora) VALUES (" + miid + ", " + userID + ', "' + msg + '", NOW())';
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        con = null
+    });
+
 }

@@ -47,7 +47,7 @@ body {
 }
 
 .msg_body {
-  background: white;
+  background: #cececa;
   height: 200px;
   font-size: 12px;
   padding: 15px;
@@ -91,17 +91,18 @@ body {
 
 .msg-left {
   position: relative;
-  background: #e2e2e2;
+  background: #69cff4;
   padding: 5px;
   min-height: 10px;
   margin-bottom: 5px;
   margin-right: 10px;
   border-radius: 5px;
   word-break: break-all;
+  font-weight: bold;
 }
 
 .msg-right {
-  background: #d4e7fa;
+  background: #fc5a5a;
   padding: 5px;
   min-height: 15px;
   margin-bottom: 5px;

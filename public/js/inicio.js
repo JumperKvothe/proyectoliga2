@@ -45,6 +45,10 @@ ipc.on('chatlisteners', function (event) {
     chatlisteners()
 })
 
+ipc.on('generatemessages', function (event, arg1, arg2, arg3) {
+    generaMensajes(arg1, arg2, arg3)
+})
+
 //Mostrar tu nombre de usuario en la pantalla
 function mostrarNombre() {
     let user = JSON.parse(localStorage.getItem('currentUser'))
@@ -197,11 +201,9 @@ function chatlisteners() {
     //Cierra un chat presionando la X de la esquina
     $(document).on('click', '.close', function () {
         var chatbox = $(this).parents().parents().attr("rel");
-        //$('[rel="' + chatbox + '"]').hide();
         $('[rel="' + chatbox + '"]').remove();
         arr.splice($.inArray(chatbox, arr), 1);
         displayChatBox();
-        console.log($('[rel="' + chatbox + '"]'))
         return false;
     });
 
@@ -223,17 +225,16 @@ function chatlisteners() {
             '<div class="msg_footer"><input type="text" class="msg_input"></div></div></div>';
         $("body").append(chatPopup);
         displayChatBox();
-        ipc.send('iniciojs5', userID)
+        ipc.send('iniciojs-loadmessages-to-db', userID)
 
-        d = new Date()
+        /* d = new Date()
         d = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() +
-            " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-        console.log(d)
+            " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(); */
         clearInterval(m)
         m = setInterval(recibir, 1000, d, userID)
 
         function recibir() {
-            ipc.send('iniciojs7', d, userID)
+            ipc.send('iniciojs-actualizarmsg-to-db', userID)
         }
 
         /* let i = new Interval(recibirMensajes2, 1000, Date.now());
@@ -247,8 +248,8 @@ function chatlisteners() {
         }*/
     });
 
-    //Hay que descomentarlo para chatear
-    /* $(document).on('keypress', '.msg_input', function (e) {
+    //Crea los mensajes que mandas para que los veas aparecer y avisa a la función que los inserta en la bd
+    $(document).on('keypress', '.msg_input', function (e) {
         if (e.keyCode == 13) {
             var msg = $(this).val();
             $(this).val('');
@@ -256,11 +257,10 @@ function chatlisteners() {
                 var chatbox = $(this).parents().parents().parents().attr("rel");
                 $('<div class="msg-right">' + msg + '</div>').insertBefore('[rel="' + chatbox + '"] .msg_push');
                 $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+                ipc.send('iniciojs-sendmessages-to-db', chatbox, msg)
             }
-            ipc.send('iniciojs8', chatbox, msg)
-            //mandarMensajes(chatbox, msg)
         }
-    }); */
+    });
 
     //Ajusta el chat en la posición que toque (de derecha a izquierda)
     function displayChatBox() {
@@ -280,7 +280,8 @@ function chatlisteners() {
 }
 //FIN FUNCIONES CHATBOX
 
-function mensaje(msg, chatbox, boolean) {
+//Genera los mensajes del chat cargados
+function generaMensajes(msg, chatbox, boolean) {
     if (boolean) {
         $('<div class="msg-right">' + msg + '</div>').insertBefore('[rel="' + chatbox + '"] .msg_push');
         $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
@@ -310,7 +311,3 @@ function mensaje(msg, chatbox, boolean) {
 function inicio2() {
     ipc.send('iniciojs2')
 }
-
-ipc.on('iniciojs6', function (event, arg1, arg2, arg3) {
-    mensaje(arg1, arg2, arg3)
-})
