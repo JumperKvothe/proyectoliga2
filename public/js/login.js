@@ -22,7 +22,6 @@ $(document).ready(function () {
             login()
     })
     btncon.addEventListener('click', login)
-
 })
 
 //Valido que los campos no estén vacíos y mando ejecutar el login

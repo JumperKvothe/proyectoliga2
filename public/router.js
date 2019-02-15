@@ -4,6 +4,8 @@
 $(document).on('click', '#login', goToLogin);
 $(document).on('click', '#regis', goToRegis);
 $(document).on('click', '#inicio', goToInicio);
+$(document).on('click', '#clasif', goToClasi);
+$(document).on('click', '#perfil', goToPerfil);
 
 //Las funciones que hacen navegar entre los archivos html
 function goToLogin(){
@@ -20,4 +22,12 @@ function goToInicio(){
 
 function goToLolIndex(){
     window.location.href = "../html/lol-index.html"
+}
+
+function goToClasi(){
+    window.location.href = "../html/clasi.html"
+}
+
+function goToPerfil(){
+    window.location.href = "../html/perfil.html"
 }

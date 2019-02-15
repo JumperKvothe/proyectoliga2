@@ -13,25 +13,21 @@ const {
 
 const path = require('path')
 const url = require('url')
-
 const ipc = ipcMain
 
-const mysql = require('mysql');
-
 let win
-
 let iduserLogueado
 
 //Inicializar y crear la conexión de la BBDD de MySQL
 //var conex = ["erionegro.salesianas.es", "erion_liga", "1234Mono!", "erionegro_ligaelite", true];
-var conex = ["copeik.ddns.net", "phpmyadmin", "1234", "ligaelite", true];
+/* var conex = ["copeik.ddns.net", "phpmyadmin", "1234", "ligaelite", true];
 var con = mysql.createConnection({
     host: conex[0],
     user: conex[1],
     password: conex[2],
     database: conex[3],
     multipleStatements: conex[4]
-});
+}); */
 
 function createWindow() {
     //Crea la ventana desde electron
@@ -66,12 +62,11 @@ function createWindow() {
 
     win.on('close', (event) => {
         let obj = {
-            conex,
             iduserLogueado,
             bool: true
         }
         //Prevengo que se ejecute el evento de cerrar la ventana hasta que me asegure que se remueve al usuario de la gente_online
-        if(iduserLogueado != null){
+        if (iduserLogueado != null) {
             event.preventDefault();
             event.sender.send('logoutdb', obj)
         }
@@ -125,16 +120,14 @@ const templateMenu = [{
 ipc.on('user-logueado', function (event, arg) {
     iduserLogueado = arg
 })
-
 ipc.on('user-deslogueado', function (event) {
     let obj = {
-        conex,
         iduserLogueado,
         bool: false
     }
     event.sender.send('logoutdb', obj)
 })
-ipc.on('desconectado',  function (event) {
+ipc.on('desconectado', function (event) {
     //Recibo la confirmación de que el usuario se ha desconectado y permitimos cerrar la ventana
     win.removeAllListeners('close');
     win.close();
@@ -142,16 +135,16 @@ ipc.on('desconectado',  function (event) {
 
 //EVENTOS IPC DONDE EL MAIN.JS MEDIA
 ipc.on('loginjs-to-db', function (event) {
-    event.sender.send('logindb', conex)
+    event.sender.send('logindb')
 })
 ipc.on('registrarsejs-to-db', function (event) {
-    event.sender.send('registrardb', conex)
+    event.sender.send('registrardb')
 })
 ipc.on('iniciojs-amigos-to-db', function (event) {
-    event.sender.send('amigosdb', conex)
+    event.sender.send('amigosdb')
 })
 ipc.on('iniciojs-lol-to-db', function (event) {
-    event.sender.send('loldb', conex)
+    event.sender.send('loldb')
 })
 ipc.on('iniciodb-notlol-to-js', function (event) {
     event.sender.send('notlol')
@@ -160,16 +153,19 @@ ipc.on('iniciodb-chatlisteners-to-js', function (event) {
     event.sender.send('chatlisteners')
 })
 ipc.on('iniciojs-sendmessages-to-db', function (event, arg1, arg2) {
-    event.sender.send('sendmessages', conex, arg1, arg2)
+    event.sender.send('sendmessages', arg1, arg2)
 })
 ipc.on('iniciojs-loadmessages-to-db', function (event, arg) {
-    event.sender.send('loadmessages', conex, arg)
+    event.sender.send('loadmessages', arg)
 })
 ipc.on('iniciodb-mensajes-to-js', function (event, arg1, arg2, arg3) {
     event.sender.send('generatemessages', arg1, arg2, arg3)
 })
 ipc.on('iniciojs-actualizarmsg-to-db', function (event, arg1) {
-    event.sender.send('actualizarmsg', conex, arg1)
+    event.sender.send('actualizarmsg', arg1)
+})
+ipc.on('clasijs-load-to-db', function (event) {
+    event.sender.send('loadclasi')
 })
 
 

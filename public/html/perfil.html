@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Título -->
-    <title>Clasificación</title>
+    <title>Perfil</title>
 
     <!-- Icono web -->
     <link rel="icon" href="../img/core-img/icono.png">
@@ -19,7 +19,7 @@
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../router.js"></script>
-    <script src="../js/clasi.js"></script>
+    <!-- <script src="../js/perfil.js"></script> -->
     <script src="../index.js"></script>
     <script>if (window.module) module = window.module;</script>
 
@@ -41,7 +41,7 @@
                             <div class="classynav">
                                 <ul>
                                     <li><a id="inicio">Principal</a></li>
-                                    <li><a id="perfil">Perfil</a></li>
+                                    <li><a id="clasif">Clasificación</a></li>
                                     <li><a id="desconectarse">Desconectarse</a></li>
                                 </ul>
                             </div>
@@ -57,28 +57,31 @@
             <div class="col-12">
                 <div class="hero-slides-content text-center">
                     <div id="page">
-                        <table id="clasi">
-                            <thead>
-                                <td colspan="4">Clasificación de jugadores de la Liga Élite</td>
-                                <tr>
-                                    <th scope="col">Posición</th>
-                                    <th scope="col">Jugadores</th>
-                                    <th scope="col">Puntos</th>
-                                    <th scope="col">Centros</th>
-                                    <input type="text" id="tablita" value="1" hidden="hidden">
-                                </tr>
-                            </thead>
-                            <tbody class="clas">
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th id="flecha_izq">&lt</th>
-                                    <th id="flecha_der">&gt</th>
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="profile-img">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                    <div class="file btn btn-lg btn-primary">
+                                        Cambiar Foto
+                                        <input type="file" name="file"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="profile-head">
+                                            <h5>
+                                                Kshiti Ghelani
+                                            </h5>
+                                            <h6>
+                                                Web Developer and Designer
+                                            </h6>
+                                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

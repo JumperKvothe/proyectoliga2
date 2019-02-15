@@ -227,25 +227,12 @@ function chatlisteners() {
         displayChatBox();
         ipc.send('iniciojs-loadmessages-to-db', userID)
 
-        /* d = new Date()
-        d = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() +
-            " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(); */
         clearInterval(m)
-        m = setInterval(recibir, 1000, d, userID)
+        m = setInterval(recibir, 1000, userID)
 
         function recibir() {
             ipc.send('iniciojs-actualizarmsg-to-db', userID)
         }
-
-        /* let i = new Interval(recibirMensajes2, 1000, Date.now());
-        if (i.isRunning()){
-            console.log(i.isRunning() + "off y on")
-            i.stop()
-            i.start()
-        }else{
-            console.log(i.isRunning() + "actívate")
-            i.start()
-        }*/
     });
 
     //Crea los mensajes que mandas para que los veas aparecer y avisa a la función que los inserta en la bd

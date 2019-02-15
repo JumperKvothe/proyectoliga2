@@ -1,0 +1,7 @@
+{
+    "host": "copeik.ddns.net",
+    "user": "phpmyadmin",
+    "password": "1234",
+    "database": "ligaelite",
+    "multipleStatements": true
+}

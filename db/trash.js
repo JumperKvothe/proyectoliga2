@@ -31,7 +31,7 @@ function funcionesdb(num) {
       break;
     //Escoger a los jugadores con más puntos para ponerlos en la clasificación
     case 3:
-      clasificacion();
+      /* clasificacion(); */
       break;
     //Comprobar si al pulsar la imagen del lol el usuario está verificado o no
     case 4:
@@ -116,7 +116,7 @@ function matchMakingInd() {
   }
 }
 
-//Escoger a los jugadores con más puntos para ponerlos en la clasificación
+/* //Escoger a los jugadores con más puntos para ponerlos en la clasificación
 function clasificacion() {
   let pag = parseInt(document.getElementById("tablita").value);
   let njug, pts, jug, centro, maxpag;
@@ -175,7 +175,7 @@ function clasificacion() {
       if (err) throw err;
     });
   }
-}
+} */
 
 //Revisar
 //Comprobar si el usuario actual ha validado su cuenta de lol
