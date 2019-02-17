@@ -14,16 +14,16 @@
     <link rel="icon" href="../img/core-img/icono.png">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../router.js"></script>
-    <!-- <script src="../js/perfil.js"></script> -->
+    <script src="../js/perfil.js"></script>
     <script src="../index.js"></script>
     <script>if (window.module) module = window.module;</script>
 
-</head>
+</head></br>
 
 <body>
     <!-- ##### Header Area Start ##### -->
@@ -60,26 +60,41 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile-img">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                    <img id="img" src="" alt="" />
                                     <div class="file btn btn-lg btn-primary">
                                         Cambiar Foto
-                                        <input type="file" name="file"/>
+                                        <input type="file" id="fileimg" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="profile-head">
-                                            <h5>
-                                                Kshiti Ghelani
-                                            </h5>
-                                            <h6>
-                                                Web Developer and Designer
-                                            </h6>
-                                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                                    <h5 id="eliteuser"></h5>
+                                    <form>
+                                        <br><label id="l1" class="labelform">Antigua Contraseña</label></br>
+                                        <input id="oldpass" type="hidden"></br>
+                                        <br><label id="l2" class="labelform">Nueva Contraseña</label></br>
+                                        <input id="newpass1" type="hidden"></br>
+                                        <br><label id="l3" class="labelform">Confirmar Nueva Contraseña</label></br>
+                                        <input id="newpass2" type="hidden"></br></br>
+                                        <select id="centro" class="center" placeholder="Centro">
+                                            <option value="1">Elite Sevilla
+                                            <option value="2">Elite Madrid / Atocha
+                                            <option value="3">Elite Barcelona
+                                            <option value="4">Elite Valencia
+                                            <option value="5">Elite Granada
+                                            <option value="6">Elite Malaga
+                                            <option value="7">Elite Mallorca
+                                            <option value="8">Elite Zaragoza
+                                            <option value="9">Elite Bilbao
+                                        </select></br>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                                <button id="btneditar" class="center">Editar Perfil</button></br></br></br></br>
+                                <button id="changepass" class="center">Cambiar Pass</button></br>
+                                <button id="changecentro" class="center">Cambiar Centro</button>
                             </div>
                         </div>
                     </div>

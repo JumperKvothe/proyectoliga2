@@ -124,37 +124,45 @@ function addAmigo3(ida, idu) {
 }
 
 //Función que te comprueba la lista de los amigos
+//
+//
+//
 function miraAmigosConectados() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
     let id = user.idjugador;
     let amigos = [];
-    sql = "SELECT eliteuser, idjugador FROM jugadores WHERE idjugador IN (SELECT id_p FROM amigos WHERE id_r= " + id + ")"
+    sql = "SELECT eliteuser, idjugador, img FROM jugadores WHERE idjugador IN (SELECT id_p FROM amigos WHERE id_r= " + id + ")"
     mysqlcon.getConnection(function (err, con) {
         con.query(sql, function (err, result) {
             if (err) throw err;
             if (result.length == 0) {} else {
                 for (let i = 0; i < result.length; i++) {
-                    amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador)
+                    amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador + "_1_" + result[i].img)
                 }
                 limit = result.length;
             }
-            sql2 = "SELECT eliteuser, idjugador FROM jugadores WHERE idjugador IN (SELECT id_r FROM amigos WHERE id_p= " + id + ")"
+            sql2 = "SELECT eliteuser, idjugador, img FROM jugadores WHERE idjugador IN (SELECT id_r FROM amigos WHERE id_p= " + id + ")"
             mysqlcon.getConnection(function (err, con) {
                 con.query(sql2, function (err, result) {
                     if (err) throw err;
                     if (result.length == 0) {} else {
                         for (let i = 0; i < result.length; i++) {
-                            amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador)
+                            amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador + "_1_" + result[i].img)
                         }
                     }
                     amigos.sort();
-                    let split
+                    let split, split2
                     //Durante este bucle hago aparecer los amigos en la lista
+                    //Con split separo los 3 elementos de los strings de mi array amigos
                     for (let i = 0; i < amigos.length; i++) {
                         split = amigos[i].split("-9-9-");
+                        split2 = split[1].split("_1_");
+                        //Cargo la imagen de perfil del usuario para su icono de chat
+                        if (err) throw err;
                         $(".chat-sidebar").append(function () {
                             return (
-                                '<div id="sidebar-user-box" class="' + split[1] + '"><img id="img-icono" src="../img/elite.png"/>' +
+                                '<div id="sidebar-user-box" class="' + split2[0] +
+                                '"><img id="img-icono" src="' + split2[1] + '"/>' +
                                 '<span id="slider-username">' + split[0] + "</span></div>"
                             );
                         });

@@ -167,6 +167,15 @@ ipc.on('iniciojs-actualizarmsg-to-db', function (event, arg1) {
 ipc.on('clasijs-load-to-db', function (event) {
     event.sender.send('loadclasi')
 })
+ipc.on('perfiljs-pass-to-db', function (event) {
+    event.sender.send('changepass')
+})
+ipc.on('perfiljs-centro-to-db', function(event){
+    event.sender.send('changecentro')
+})
+ipc.on('perfiljs-imagen-to-db', function(event){
+    event.sender.send('cambiarimagen')
+})
 
 
 
