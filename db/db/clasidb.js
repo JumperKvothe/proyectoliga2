@@ -50,7 +50,7 @@ function ordenarClasi(pag, njug) {
                         "</td><td>" +
                         pts +
                         "</td><td>" +
-                        result[0].nombre +
+                        result[i].nombre +
                         "</td></tr>"
                     );
                 });

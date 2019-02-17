@@ -24,6 +24,10 @@ ipc.on('actualizarmsg', function (event, arg) {
     actualizarMensajes(arg)
 })
 
+ipc.on('mostrarPanel', function (event) {
+    mostrarPanel()
+})
+
 //Comprueba si el usuario tiene cuenta de lol para mostrar el popup para insertarla o ir al lolindex
 function comprobarLol() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
@@ -131,23 +135,25 @@ function miraAmigosConectados() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
     let id = user.idjugador;
     let amigos = [];
-    sql = "SELECT eliteuser, idjugador, img FROM jugadores WHERE idjugador IN (SELECT id_p FROM amigos WHERE id_r= " + id + ")"
+    let sql = "SELECT eliteuser, idjugador, img FROM jugadores WHERE idjugador IN (SELECT id_p FROM amigos WHERE id_r= " + id + ")"
     mysqlcon.getConnection(function (err, con) {
         con.query(sql, function (err, result) {
             if (err) throw err;
             if (result.length == 0) {} else {
                 for (let i = 0; i < result.length; i++) {
+                    console.log(result.length)
                     amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador + "_1_" + result[i].img)
                 }
                 limit = result.length;
             }
-            sql2 = "SELECT eliteuser, idjugador, img FROM jugadores WHERE idjugador IN (SELECT id_r FROM amigos WHERE id_p= " + id + ")"
+            let sql2 = "SELECT eliteuser, idjugador, img FROM jugadores WHERE idjugador IN (SELECT id_r FROM amigos WHERE id_p= "
+             + id + ")"
             mysqlcon.getConnection(function (err, con) {
-                con.query(sql2, function (err, result) {
+                con.query(sql2, function (err, result2) {
                     if (err) throw err;
-                    if (result.length == 0) {} else {
-                        for (let i = 0; i < result.length; i++) {
-                            amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador + "_1_" + result[i].img)
+                    if (result2.length == 0) {} else {
+                        for (let i = 0; i < result2.length; i++) {
+                            amigos.push(result2[i].eliteuser + "-9-9-" + result2[i].idjugador + "_1_" + result2[i].img)
                         }
                     }
                     amigos.sort();
@@ -250,6 +256,25 @@ function mandarMensajes(userID, msg) {
     mysqlcon.getConnection(function (err, con) {
         con.query(sql, function (err, result) {
             if (err) throw err;
+        });
+        con.release();
+    });
+}
+
+//Si el usuario logueado es admin le aparecerá el botón en la barra de navegación para ir a la página panel.html
+function mostrarPanel() {
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    let miid = user.idjugador;
+    sql = "SELECT * FROM jugadores WHERE idjugador = " + miid + " AND admin = 1"
+    mysqlcon.getConnection(function (err, con) {
+        con.query(sql, function (err, result) {
+            if (err) throw err;
+            if (result.length == 1) {
+                $('#ulnav').prepend('<li><a id="panel">Panel</a></li>')
+                $(document).on('click', '#panel', function(){
+                    window.location.href = "../html/panel.html"
+                });
+            }
         });
         con.release();
     });

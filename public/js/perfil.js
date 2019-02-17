@@ -25,7 +25,7 @@ $(document).ready(function () {
     //Añadir los eventos
     btneditar.addEventListener('click', mostrarEle)
     changepass.addEventListener('click', cambiarPass)
-    changecentro.addEventListener('click', function(){
+    changecentro.addEventListener('click', function () {
         ipc.send('perfiljs-centro-to-db')
     })
     fileimg.addEventListener('change', cambiarImagen)
@@ -65,18 +65,18 @@ function mostrarNombre() {
     $('#eliteuser').html(user.eliteuser)
 }
 
-function cambiarPass(){
-    if (document.getElementById('oldpass').value == "" || 
-    document.getElementById('newpass1').value == "" || 
-    document.getElementById('newpass2').value == "") {
+function cambiarPass() {
+    if (document.getElementById('oldpass').value == "" ||
+        document.getElementById('newpass1').value == "" ||
+        document.getElementById('newpass2').value == "") {
         alert("Rellene los campos de contraseña")
     } else {
-        if(document.getElementById('oldpass').value == document.getElementById('newpass1').value){
+        if (document.getElementById('oldpass').value == document.getElementById('newpass1').value) {
             alert('La nueva contraseña es igual a la antigua')
-        }else{
-            if(document.getElementById('newpass1').value == document.getElementById('newpass2').value){
+        } else {
+            if (document.getElementById('newpass1').value == document.getElementById('newpass2').value) {
                 ipc.send('perfiljs-pass-to-db')
-            }else{
+            } else {
                 alert('No coinciden las contraseñas')
             }
         }
@@ -85,6 +85,7 @@ function cambiarPass(){
 
 //Cambiar la imagen de perfil
 //Falta acabar
-function cambiarImagen(){
+function cambiarImagen() {
+    console.log('onchange imagen')
     
 }

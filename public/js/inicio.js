@@ -13,6 +13,7 @@ $(document).ready(function () {
     //Eventos onload
     mostrarNombre()
     mostrarAmigos()
+    ipc.send('iniciojs-panel-to-db')
     document.getElementById('popupSup').style.display = "none"
 
     //Declaración de variables de los elementos de html en los cuáles añadir un evento

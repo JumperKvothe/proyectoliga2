@@ -176,7 +176,12 @@ ipc.on('perfiljs-centro-to-db', function(event){
 ipc.on('perfiljs-imagen-to-db', function(event){
     event.sender.send('cambiarimagen')
 })
-
+ipc.on('iniciojs-panel-to-db', function(event){
+    event.sender.send('mostrarPanel')
+})
+ipc.on('paneljs-show-to-db', function(event){
+    event.sender.send('showPage')
+})
 
 
 ipc.on('iniciojs2', function (event) {
