@@ -13,7 +13,7 @@ $(document).ready(function () {
     //Eventos onload
     mostrarNombre()
     mostrarAmigos()
-    ipc.send('iniciojs-panel-to-db')
+    ipc.send('panel-to-indexdb')
     document.getElementById('popupSup').style.display = "none"
 
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
@@ -21,7 +21,6 @@ $(document).ready(function () {
     verificar = document.getElementById('verificar')
     lol = document.getElementById('lol')
     chat = document.getElementById('chat-sidebar')
-    addAmigo = document.getElementById('addAmigo')
 
     //Añadir los eventos
     popup.addEventListener('click', div_hide)
@@ -35,7 +34,6 @@ $(document).ready(function () {
     chat.addEventListener('mouseleave', function () {
         showFriends(false)
     })
-    addAmigo.addEventListener('click', inicio2)
 })
 
 ipc.on('notlol', function (event) {
@@ -65,89 +63,6 @@ function mostrarAmigos() {
 function div_hide() {
     document.getElementById('popupSup').style.display = "none";
 }
-
-//Funciones de la API de RIOT (hay que renovarlas si están deprecated y ver si las quiero implementar)
-/* //Función para sacar el ID de invocador a partir del nombre de invocador introducido
-function sacarid() {
-    loluser = document.getElementsByName("loluser")[0].value;
-    leagueJs.Summoner
-        .gettingByName(loluser)
-        .then(data => {
-            'use strict';
-            const id = data.id;
-            verificarlol(id, loluser);
-        })
-        .catch(err => {
-            'use strict';
-            alert("El nombre introducido no existe");
-            console.log(err);
-        });
-}
-//Función que lleva a cabo la verificación de la cuenta mediante la opción del cliente del LOL
-//Hay que controlar si no introducen bien el texto en el LOL
-function verificarlol(id, loluser) {
-    leagueJs.ThirdPartyCode
-        .verifying('VivaElite', id, 'euw')
-        .then(data => {
-            'use strict';
-            if (data) {
-                var puntos;
-                /////////
-                leagueJs.League
-                    .gettingPositionsForSummonerId(data.id, 'euw')
-                    .then(data => {
-                        'use strict';
-                        console.log(data)
-                        if (data.length == 0) {
-                            console.log("unranked")
-                            elo = 0
-                        } else {
-                            console.log("ranked en alguna cola")
-                            let pos = 4;
-                            for (let i = 0; i < data.length; i++) {
-                                if (data[i].queueType.localeCompare("RANKED_SOLO_5x5") == 0) {
-                                    pos = i
-                                }
-                            }
-                            if (pos == 4) {
-                                elo = 500
-                            } else {
-                                switch (data[pos].tier) {
-                                    case "Bronze":
-                                        elo = 750
-                                        break;
-                                    case "Silver":
-                                        elo = 1000
-                                        break;
-                                    case "Gold":
-                                        elo = 1250
-                                        break;
-                                    case "Platinum":
-                                        elo = 1500
-                                        break;
-                                    case "Diamond":
-                                        elo = 1750
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
-                    })
-                    .catch(err => {
-                        'use strict';
-                        console.log(err);
-                    });
-                console.log(elo)
-                addnom(loluser, elo);
-            }
-        })
-        .catch(err => {
-            'use strict';
-            alert("No se introdució el texto correcto en el cliente de lol")
-            console.log(err);
-        });
-} */
 
 //Mostrar/Ocultar lista amigos con eventos onmouseover/onmouseleave
 function showFriends(bool) {
@@ -277,25 +192,4 @@ function generaMensajes(msg, chatbox, boolean) {
         $('<div class="msg-left">' + msg + '</div>').insertBefore('[rel="' + chatbox + '"] .msg_push');
         $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
     }
-}
-
-/* function Interval(fn, time, parameter) {
-    var timer = false;
-    this.start = function () {
-        timer = setInterval(fn, time, parameter);
-        on = true
-        console.log(on + "onfire")
-    };
-    this.stop = function () {
-        clearInterval(timer);
-        on = false;
-    };
-    this.isRunning = function () {
-        console.log(on + "r")
-        return on
-    }; 
-}*/
-
-function inicio2() {
-    ipc.send('iniciojs2')
 }

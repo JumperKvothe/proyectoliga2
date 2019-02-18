@@ -12,7 +12,7 @@ ipc.on('sendmessages', function (event, arg1, arg2) {
     mandarMensajes(arg1, arg2)
 })
 
-ipc.on('iniciodb2', function (event) {
+ipc.on('addamigo', function (event) {
     addAmigo()
 })
 
@@ -22,10 +22,6 @@ ipc.on('loadmessages', function (event, arg) {
 
 ipc.on('actualizarmsg', function (event, arg) {
     actualizarMensajes(arg)
-})
-
-ipc.on('mostrarPanel', function (event) {
-    mostrarPanel()
 })
 
 //Comprueba si el usuario tiene cuenta de lol para mostrar el popup para insertarla o ir al lolindex
@@ -50,87 +46,101 @@ function comprobarLol() {
     });
 }
 
-//Funciones para buscar un jugador y añadirlo a tus amigos
-//Esta comprueba si el
+//Miro si el jugador escrito existe para añadirlo a amigos
 function addAmigo() {
-    let nomAmigo = document.getElementById("search").value;
-    sql = "SELECT idjugador FROM jugadores WHERE eliteuser='" + nomAmigo + "'";
-    mysqlcon.getConnection(function (err, con) {
-        con.query(sql, function (err, result) {
-            if (result.length == 0) {
-                alert(
-                    "El nombre de usuario no existe o quizás no se haya registrado en la app"
-                );
-            } else {
-                //addAmigo2(result[0].idjugador);
-            }
-
-            if (err) throw err;
-        });
-        con.release();
-    });
-}
-
-//Función para comprobar que no es ya tu amigo
-function addAmigo2(idj) {
-    idamigo = idj;
     let user = JSON.parse(localStorage.getItem("currentUser"));
     let id = user.idjugador;
-    sql = "SELECT id FROM amigos WHERE (id_p= " + idamigo + " AND id_r= " + id + ") OR (id_r= " + idamigo +
-        " AND id_p= " + id + ")";
+    let nomAmigo = document.getElementById("search").value;
+    if(nomAmigo == user.eliteuser){
+        alert('No te puedes agregar a ti mismo')
+        return
+    }
+    let sql = "SELECT idjugador FROM jugadores WHERE eliteuser='" + nomAmigo + "'";
     mysqlcon.getConnection(function (err, con) {
         con.query(sql, function (err, result) {
-            if (result.length > 0) {
-                alert("El usuario ya es tu amigo");
-            } else {
-                //addAmigo3(idamigo, id);
-            }
             if (err) throw err;
+            if (result.length == 0) {
+                alert("El nombre de usuario no existe");
+            } else {
+                //Compruebo si ya son amigos
+                let sql2 = `SELECT idjugador FROM jugadores WHERE idjugador IN 
+                (select id_p from amigos where id_p=` + result[0].idjugador + ` && id_r=` + id + ` && estado=1)
+                 OR idjugador IN (select id_r from amigos where id_r=` + result[0].idjugador + ` && id_p=` + id + ` && estado=1)`
+                mysqlcon.getConnection(function (err, con) {
+                    con.query(sql2, function (err, result2) {
+                        if (err) throw err;
+                        if (result2.length == 0) {
+                            //Inserto que ya son amigos
+                            let sql3 = "INSERT INTO amigos (id_p, id_r, estado) VALUES (" + id + ", " +
+                                result[0].idjugador + ", 1)"
+                            mysqlcon.getConnection(function (err, con) {
+                                con.query(sql3, function (err, result3) {
+                                    if (err) throw err;
+                                    $(".chat-sidebar").empty()
+                                    miraAmigosConectados()
+                                });
+                                con.release();
+                            });
+                        } else {
+                            alert('Error, ya sois amigos')
+                        }
+                    });
+                    con.release();
+                });
+            }
         });
         con.release();
     });
-
-    /* sql2 =
-      "SELECT id FROM amigos WHERE id_r= " + idamigo + " AND id_p= " + id + "";
-    con.query(sql2, function(err, result) {
-      if (result.length > 0) {
-        console.log(result);
-        console.log("adfsf");
-        cont++;
-      } else {
-      }
-      if (err) throw err;
-    });
-    console.log(cont)
-    if (cont > 0) {
-      alert("El usuario ya es tu amigo");
-    } else {
-      addAmigo3(idamigo, id);
-    } */
 }
 
-//Último función de addAmigo para insertar la fila en la tabla amigos
-function addAmigo3(ida, idu) {
-    idamigo = ida;
-    iduser = idu;
-    sql =
-        "INSERT INTO amigos (id_p, id_r, estado) VALUES (" +
-        iduser +
-        ", " +
-        idamigo +
-        ", 1)";
+//Miro si el jugador escrito existe para borrarlo de amigos
+function borrarAmigo() {
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    let id = user.idjugador;
+    let nomAmigo = document.getElementById("search2").value;
+    if(nomAmigo == user.eliteuser){
+        alert('No te puedes borrar a ti mismo')
+        return
+    }
+    let sql = "SELECT idjugador FROM jugadores WHERE eliteuser='" + nomAmigo + "'";
     mysqlcon.getConnection(function (err, con) {
         con.query(sql, function (err, result) {
             if (err) throw err;
+            if (result.length == 0) {
+                alert("El nombre de usuario no existe");
+            } else {
+                //Compruebo si ya son amigos
+                let sql2 = `SELECT idjugador FROM jugadores WHERE idjugador IN 
+                (select id_p from amigos where id_p=` + result[0].idjugador + ` && id_r=` + id + ` && estado=1)
+                 OR idjugador IN (select id_r from amigos where id_r=` + result[0].idjugador + ` && id_p=` + id + ` && estado=1)`
+                mysqlcon.getConnection(function (err, con) {
+                    con.query(sql2, function (err, result2) {
+                        if (err) throw err;
+                        if (result2.length == 1) {
+                            //Borro de la columna amigos esa amistad
+                            let sql3 = `DELETE FROM amigos WHERE (id_r = ` + result[0].idjugador + ` && id_p = ` +
+                                id + `) OR (id_p = ` + result[0].idjugador + ` && id_r = ` + id + `)`
+                            mysqlcon.getConnection(function (err, con) {
+                                con.query(sql3, function (err, result3) {
+                                    if (err) throw err;
+                                    $(".chat-sidebar").empty()
+                                    miraAmigosConectados()
+                                });
+                                con.release();
+                            });
+                        } else {
+                            alert('Error, no sois amigos')
+                        }
+                    });
+                    con.release();
+                });
+            }
         });
         con.release();
     });
 }
 
 //Función que te comprueba la lista de los amigos
-//
-//
-//
 function miraAmigosConectados() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
     let id = user.idjugador;
@@ -141,13 +151,12 @@ function miraAmigosConectados() {
             if (err) throw err;
             if (result.length == 0) {} else {
                 for (let i = 0; i < result.length; i++) {
-                    console.log(result.length)
                     amigos.push(result[i].eliteuser + "-9-9-" + result[i].idjugador + "_1_" + result[i].img)
                 }
                 limit = result.length;
             }
-            let sql2 = "SELECT eliteuser, idjugador, img FROM jugadores WHERE idjugador IN (SELECT id_r FROM amigos WHERE id_p= "
-             + id + ")"
+            let sql2 = "SELECT eliteuser, idjugador, img FROM jugadores WHERE idjugador IN (SELECT id_r FROM amigos WHERE id_p= " +
+                id + ")"
             mysqlcon.getConnection(function (err, con) {
                 con.query(sql2, function (err, result2) {
                     if (err) throw err;
@@ -160,6 +169,12 @@ function miraAmigosConectados() {
                     let split, split2
                     //Durante este bucle hago aparecer los amigos en la lista
                     //Con split separo los 3 elementos de los strings de mi array amigos
+                    $(".chat-sidebar").append(
+                        `<input type="text" id="search" placeholder="Añadir amigo" style="width: 80%">
+                        <button id="amigos" style="width:25px">&#10004</button>`
+                    )
+                    let btnamigos = document.getElementById('amigos')
+                    btnamigos.addEventListener('click', addAmigo)
                     for (let i = 0; i < amigos.length; i++) {
                         split = amigos[i].split("-9-9-");
                         split2 = split[1].split("_1_");
@@ -169,10 +184,17 @@ function miraAmigosConectados() {
                             return (
                                 '<div id="sidebar-user-box" class="' + split2[0] +
                                 '"><img id="img-icono" src="' + split2[1] + '"/>' +
-                                '<span id="slider-username">' + split[0] + "</span></div>"
+                                '<span id="slider-username">' + split[0] +
+                                '</span></div>'
                             );
                         });
                     }
+                    $(".chat-sidebar").append(
+                        `<input type="text" id="search2" placeholder="Eliminar amigo" style="width: 80%">
+                        <button id="delete" style="width:25px">X</button>`
+                    )
+                    let btndelete = document.getElementById('delete')
+                    btndelete.addEventListener('click', borrarAmigo)
                     ipc.send('iniciodb-chatlisteners-to-js')
                 });
                 con.release();
@@ -256,25 +278,6 @@ function mandarMensajes(userID, msg) {
     mysqlcon.getConnection(function (err, con) {
         con.query(sql, function (err, result) {
             if (err) throw err;
-        });
-        con.release();
-    });
-}
-
-//Si el usuario logueado es admin le aparecerá el botón en la barra de navegación para ir a la página panel.html
-function mostrarPanel() {
-    let user = JSON.parse(localStorage.getItem("currentUser"));
-    let miid = user.idjugador;
-    sql = "SELECT * FROM jugadores WHERE idjugador = " + miid + " AND admin = 1"
-    mysqlcon.getConnection(function (err, con) {
-        con.query(sql, function (err, result) {
-            if (err) throw err;
-            if (result.length == 1) {
-                $('#ulnav').prepend('<li><a id="panel">Panel</a></li>')
-                $(document).on('click', '#panel', function(){
-                    window.location.href = "../html/panel.html"
-                });
-            }
         });
         con.release();
     });

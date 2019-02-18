@@ -11,6 +11,7 @@ function clasificacion() {
     let sql = "SELECT * FROM jugadores";
     mysqlcon.getConnection(function (err, con) {
         con.query(sql, function (err, result) {
+            if (err) throw err;
             njug = result.length;
             maxpag = njug / 7;
             if (njug % 7 != 0) {
@@ -22,7 +23,6 @@ function clasificacion() {
                 document.getElementById("tablita").value =
                     parseInt(document.getElementById("tablita").value) - 1;
             }
-            if (err) throw err;
         });
         con.release();
     });

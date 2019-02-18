@@ -1,8 +1,0 @@
-directories:
-  output: dist
-  buildResources: build
-appId: 'true'
-win:
-  target: NSIS
-  icon: build/icon.ico
-electronVersion: 3.0.9

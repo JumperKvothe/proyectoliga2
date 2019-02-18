@@ -1,10 +1,12 @@
 const ipc = require('electron').ipcRenderer;
 require('../../db/db/clasidb');
+require('../../db/indexdb');
 
 $(document).ready(function () {
 
     //Evento onload
     ipc.send('clasijs-load-to-db')
+    ipc.send('panel-to-indexdb')
 
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
     izq = document.getElementById('flecha_izq')

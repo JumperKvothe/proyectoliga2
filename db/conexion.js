@@ -12,16 +12,6 @@ exports.getConnection = function (callback) {
     if (err) {
       return callback(err);
     }
-    //if (conn) conn.release()
     callback(err, conn);
   });
 };
-
-/* exports.releaseCon = function (callback) {
-  pool.releaseCon(function (err) {
-    pool.getConnection(function (err, conn){
-      if (err) throw err;
-      conn.release()
-    })
-  });
-} */

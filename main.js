@@ -18,17 +18,6 @@ const ipc = ipcMain
 let win
 let iduserLogueado
 
-//Inicializar y crear la conexión de la BBDD de MySQL
-//var conex = ["erionegro.salesianas.es", "erion_liga", "1234Mono!", "erionegro_ligaelite", true];
-/* var conex = ["copeik.ddns.net", "phpmyadmin", "1234", "ligaelite", true];
-var con = mysql.createConnection({
-    host: conex[0],
-    user: conex[1],
-    password: conex[2],
-    database: conex[3],
-    multipleStatements: conex[4]
-}); */
-
 function createWindow() {
     //Crea la ventana desde electron
     win = new BrowserWindow({
@@ -76,13 +65,7 @@ function createWindow() {
         //La forma de cerrar una ventana en la app
         win = null;
     })
-
-    //Parámetros de lanzamiento de interés
-    //win.setResizable(false);
-    //win.setFullScreenable(false);
-    //win.setMaximizable(true);
-    //win.setMinimizable(false);
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 }
 
 //Cuando la aplicación esté lista para ejecutarse se crea la ventana que va a renderizarse
@@ -176,20 +159,13 @@ ipc.on('perfiljs-centro-to-db', function(event){
 ipc.on('perfiljs-imagen-to-db', function(event){
     event.sender.send('cambiarimagen')
 })
-ipc.on('iniciojs-panel-to-db', function(event){
+ipc.on('panel-to-indexdb', function(event){
     event.sender.send('mostrarPanel')
 })
 ipc.on('paneljs-show-to-db', function(event){
     event.sender.send('showPage')
 })
 
-
-ipc.on('iniciojs2', function (event) {
-    event.sender.send('iniciodb2')
-})
-ipc.on('equiposjs', function (event) {
-    event.sender.send('equiposdb')
-})
-ipc.on('equipos1js', function (event) {
-    event.sender.send('equipos1db')
+ipc.on('iniciojs-addfriend-to-db', function (event) {
+    event.sender.send('addamigo')
 })

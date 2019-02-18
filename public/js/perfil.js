@@ -8,6 +8,7 @@ $(document).ready(function () {
     mostrarNombre()
     ocultarEle()
     ipc.send('perfiljs-imagen-to-db')
+    ipc.send('panel-to-indexdb')
 
     //Declaración de variables de los elementos de html en los cuáles añadir un evento
     oldpass = document.getElementById('oldpass')

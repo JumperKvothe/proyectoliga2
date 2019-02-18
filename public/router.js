@@ -20,10 +20,6 @@ function goToInicio(){
     window.location.href = "../html/inicio.html"
 }
 
-function goToLolIndex(){
-    window.location.href = "../html/lol-index.html"
-}
-
 function goToClasi(){
     window.location.href = "../html/clasi.html"
 }

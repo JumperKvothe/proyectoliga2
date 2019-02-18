@@ -15,7 +15,7 @@ function showPage() {
             if (result.length == 1) {
                 //Saco todos los usuarios menos el actual para meterlos en una tabla
                 sql2 = "SELECT J.*, nombre FROM jugadores J JOIN centros C ON J.centro = C.id WHERE NOT idjugador = " +
-                    miid + " ORDER BY admin, J.eliteuser"
+                    miid + " ORDER BY admin DESC, J.eliteuser"
                 let s1, s2 = "",
                     s3, admin
                 mysqlcon.getConnection(function (err, con) {
@@ -38,8 +38,8 @@ function showPage() {
                             <td>` + result[i].puntos + `</td>
                             <td>` + result[i].nombre + `</td>
                             <td>` + admin + `</td>
-                            <td><button id=c` + result[i].idjugador + ` style="width:100%; height:100%">Cambiar</button</td>
-                            <td><button id=x` + result[i].idjugador + ` style="width:100%; height:100%">X</button</td>
+                            <td><button id=c` + result[i].idjugador + ` style="width:100%; height:100%">Cambiar</button></td>
+                            <td><button id=x` + result[i].idjugador + ` style="width:100%; height:100%">X</button></td>
                             </tr>`
                         }
                         s3 = `</table></div>`
@@ -49,9 +49,9 @@ function showPage() {
                         for (i = 0; i < bns.length; i++) {
                             bns[i].addEventListener("click", function () {
                                 //var res = str.substring(0, 1);
-                                if(this.id.substring(0,1) == "c"){
+                                if (this.id.substring(0, 1) == "c") {
                                     modificarAdmin(this.id.substring(1))
-                                }else if(this.id.substring(0,1) == "x"){
+                                } else if (this.id.substring(0, 1) == "x") {
                                     borrarUsuario(this.id.substring(1))
                                 }
                             });
@@ -66,11 +66,53 @@ function showPage() {
 }
 
 //Si es admin, le quito el admin. Si no lo es se lo asigno
-function modificarAdmin(id){
-    console.log("modificar"+id)
+function modificarAdmin(id) {
+    let sql = "SELECT admin FROM jugadores WHERE idjugador = " + id;
+    let a
+    mysqlcon.getConnection(function (err, con) {
+        con.query(sql, function (err, result) {
+            if (err) throw err;
+            if (result[0].admin == 0) {
+                a = 1;
+            } else {
+                a = 0;
+            }
+            let sql = "UPDATE jugadores SET admin = " + a + " WHERE idjugador = " + id;
+            mysqlcon.getConnection(function (err, con) {
+                con.query(sql, function (err, result) {
+                    if (err) throw err;
+                    if (a == 1) {
+                        alert('Admin puesto correctamente')
+                    } else {
+                        alert('Admin quitado correctamente')
+                    }
+                    $("#tablapanel").remove();
+                    showPage();
+                });
+                con.release();
+            });
+        });
+        con.release();
+    });
 }
 
 //Borro el usuario
-function borrarUsuario(id){
-    console.log("borrar"+id)
+function borrarUsuario(id) {
+    let sql = "DELETE FROM jugadores WHERE idjugador = " + id;
+    mysqlcon.getConnection(function (err, con) {
+        con.query(sql, function (err, result) {
+            if (err) throw err;
+            let sql = "DELETE FROM amigos WHERE id_p = " + id + " OR id_r = " + id;
+            mysqlcon.getConnection(function (err, con) {
+                con.query(sql, function (err, result) {
+                    if (err) throw err;;
+                });
+                con.release();
+            });
+            alert('Usuario borrado con éxito')
+            $("#tablapanel").remove();
+            showPage();
+        });
+        con.release();
+    });
 }
